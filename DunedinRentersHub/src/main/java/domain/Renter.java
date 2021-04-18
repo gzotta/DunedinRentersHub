@@ -18,8 +18,8 @@ public class Renter {
     private String renterPassword;
     private String username;
     private Date dateOfBirth;
-    private String renterPhone;
-    private String renterEmail;
+    private String phone;
+    private String email;
     private String references;
     private ArrayList<Property> properties;
 
