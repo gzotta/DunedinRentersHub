@@ -55,6 +55,46 @@ public class Renter {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public Integer getRenterId() {
+        return renterId;
+    }
+
+    public void setRenterId(Integer renterId) {
+        this.renterId = renterId;
+    }
+
+    public String getRenterPassword() {
+        return renterPassword;
+    }
+
+    public void setRenterPassword(String renterPassword) {
+        this.renterPassword = renterPassword;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getReferences() {
+        return references;
+    }
+
+    public void setReferences(String references) {
+        this.references = references;
+    }
+
+    public ArrayList<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(ArrayList<Property> properties) {
+        this.properties = properties;
+    }
     
     
     
