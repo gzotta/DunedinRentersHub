@@ -5,15 +5,23 @@
  */
 package domain;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author zotta
  */
 public class Renter {
     
+    private Integer renterId;
+    private String renterPassword;
     private String username;
-    private String email;
-    private String phone;
+    private Date dateOfBirth;
+    private String renterPhone;
+    private String renterEmail;
+    private String references;
+    private ArrayList<Property> properties;
 
     public Renter() {
     }
