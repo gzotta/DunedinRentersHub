@@ -1,0 +1,66 @@
+@startuml
+' ======= Style / Layout Tweaks =======
+
+hide empty members
+
+skinparam {
+  Style StrictUML
+
+  ' use characters instead of icons for showing visibility
+  ClassAttributeIconSize 0
+
+  ' make the stereotypes less ugly
+  ClassStereotypeFont {
+    Size 10
+    Style plain
+  }
+
+  ' vertical spacing (make room for labels)
+  RankSep 100
+
+  ' horizontal spacing (make room for labels)
+  NodeSep 100
+}
+
+
+' ======= Classes =======
+class "Renter" as renter <<domain>>{
+-renterId: Integer <<unique>>
+-renterPassword: String
+-userName: String
+-dateOfBirth: Date
+-renterPhone: String
+-renterEmail: String
+-references: String
+-wishList: ArrayList<<Property>>
+--
+}
+
+class "Lanlord" as landlord <<domain>>{
+-landlordId: Integer <<unique>>
+-lanlordPassword: String
+-userName: String
+-landlordPhone: String
+-landlordEmail: String
+'-properties: <Property>Properties
+--
+}
+
+class "Property" as property <<domain>>{
+-propertyId: Integer<<unique>>
+-landlordId: Integer
+-renterId: Integer
+-address: String<<unique>>
+-status: String
+--
+}
+
+
+
+
+' ======= Relationships =======
+title <b>Dunedin Renters Hub Class Diagram</b>
+
+landlord -> "-properties\n1..*" property
+renter -->"-property\n1" property
+@enduml

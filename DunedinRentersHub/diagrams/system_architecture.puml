@@ -1,0 +1,65 @@
+@startuml
+left to right direction 
+' ======= Style / Layout Tweaks =======
+skinparam guillemet false
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam style strictuml
+
+skinparam activity {
+  hide empty description
+}
+
+
+
+
+' ======= System Architecture Diagram Code =======
+
+
+
+'----------Presentation Tier------------
+package "PresentationTier" as presentation{
+package "web" #lightyellow{
+label "Web Application"
+}
+}
+'----------------------------------------
+
+
+'----------Business Tier------------
+package "Business Tier" as business{
+package "domain" #lightyellow{
+label "Domain classes"
+}
+
+package "dao" #lightyellow{
+label "Data access classes"
+}
+}
+'------------------------------------
+
+
+
+'----------Persistence Tier--------------
+package "Persistence Tier" as persistence{
+database "Database"
+}
+'----------------------------------------
+
+
+
+
+
+' ======= Relationships =======
+
+title <b>Dunedin Renters Hub System Architecture</b>
+
+presentation ----> "interacts with\t\t\t\t\t" business
+business ----> "interacts with\t\t\t" persistence
+
+
+
+
+
+
+@enduml
