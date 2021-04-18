@@ -20,7 +20,7 @@ skinparam activity {
 '----------Presentation Tier------------
 package "PresentationTier" as presentation{
 package "web" #lightyellow{
-label "Web Application"
+(Web Application)
 }
 }
 '----------------------------------------
@@ -29,11 +29,11 @@ label "Web Application"
 '----------Business Tier------------
 package "Business Tier" as business{
 package "domain" #lightyellow{
-label "Domain classes"
+(Domain classes)
 }
 
 package "dao" #lightyellow{
-label "Data access classes"
+(Data access classes)
 }
 }
 '------------------------------------
