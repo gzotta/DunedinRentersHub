@@ -5,7 +5,7 @@
  */
 package domain;
 
-import com.google.j2objc.annotations.Property;
+
 import java.util.ArrayList;
 import java.util.Date;
 
