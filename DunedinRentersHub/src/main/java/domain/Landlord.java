@@ -1,6 +1,5 @@
 package domain;
 
-
 import java.util.ArrayList;
 
 /*
@@ -8,18 +7,21 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author sarahaverill
  */
 public class Landlord {
-  
+
     private Integer landlordId;
     private String landlordPassword;
     private String userName;
     private String landlordPhone;
     private String landlordEmail;
+
+    public Landlord() {
+
+    }
 
     public Landlord(Integer landlordId, String landlordPassword, String username, String landlordPhone, String landlordEmail, ArrayList<Property> properties) {
         this.landlordId = landlordId;
@@ -27,10 +29,6 @@ public class Landlord {
         this.userName = username;
         this.landlordPhone = landlordPhone;
         this.landlordEmail = landlordEmail;
-    }
-    
-    public Landlord (){
-        
     }
 
     public Integer getLandlordId() {
@@ -73,5 +71,4 @@ public class Landlord {
         this.landlordEmail = landlordEmail;
     }
 
-    
 }

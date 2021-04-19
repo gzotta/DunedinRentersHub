@@ -1,7 +1,6 @@
 package domain;
 
 
-import domain.Renter;
 import java.util.Date;
 
 /*
