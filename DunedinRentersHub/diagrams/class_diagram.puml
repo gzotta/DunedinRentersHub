@@ -55,12 +55,21 @@ class "Property" as property <<domain>>{
 --
 }
 
+class "Booking" as booking <<domain>>{
+-bookingId: Integer<<unique>>
+-date: Date
+--
+}
+
 
 
 
 ' ======= Relationships =======
 title <b>Dunedin Renters Hub Class Diagram</b>
 
-landlord -> "-properties\n1..*" property
-renter -->"-property\n1" property
+booking --> "\t-renter\n1" renter
+booking --> "-lanlord\n1" landlord
+booking --> "-property\n1" property
+
+
 @enduml
