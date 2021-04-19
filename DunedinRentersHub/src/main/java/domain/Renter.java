@@ -27,10 +27,16 @@ public class Renter {
     public Renter() {
     }
 
-    public Renter(String username, String email, String phone) {
-        this.userName = username;
-        this.renterEmail = email;
-        this.renterPhone = phone;
+
+    public Renter(Integer renterId, String renterPassword, String userName, Date dateOfBirth, String renterPhone, String renterEmail, String references, ArrayList<Property> wishList) {
+        this.renterId = renterId;
+        this.renterPassword = renterPassword;
+        this.userName = userName;
+        this.dateOfBirth = dateOfBirth;
+        this.renterPhone = renterPhone;
+        this.renterEmail = renterEmail;
+        this.references = references;
+        this.wishList = wishList;
     }
 
     public String getUsername() {
@@ -43,6 +49,38 @@ public class Renter {
 
     public String getEmail() {
         return renterEmail;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getRenterPhone() {
+        return renterPhone;
+    }
+
+    public void setRenterPhone(String renterPhone) {
+        this.renterPhone = renterPhone;
+    }
+
+    public String getRenterEmail() {
+        return renterEmail;
+    }
+
+    public void setRenterEmail(String renterEmail) {
+        this.renterEmail = renterEmail;
+    }
+
+    public ArrayList<Property> getWishList() {
+        return wishList;
+    }
+
+    public void setWishList(ArrayList<Property> wishList) {
+        this.wishList = wishList;
     }
 
     public void setEmail(String email) {
