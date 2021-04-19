@@ -5,6 +5,7 @@
  */
 package domain;
 
+import com.google.j2objc.annotations.Property;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,47 +17,75 @@ public class Renter {
     
     private Integer renterId;
     private String renterPassword;
-    private String username;
+    private String userName;
     private Date dateOfBirth;
-    private String phone;
-    private String email;
+    private String renterPhone;
+    private String renterEmail;
     private String references;
-    private ArrayList<Property> properties;
+    private ArrayList<Property> wishList;
 
     public Renter() {
     }
 
     public Renter(String username, String email, String phone) {
-        this.username = username;
-        this.email = email;
-        this.phone = phone;
+        this.userName = username;
+        this.renterEmail = email;
+        this.renterPhone = phone;
     }
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
 
     public String getEmail() {
-        return email;
+        return renterEmail;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.renterEmail = email;
     }
 
     public String getPhone() {
-        return phone;
+        return renterPhone;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.renterPhone = phone;
     }
-    
-    
-    
-    
+
+    public Integer getRenterId() {
+        return renterId;
+    }
+
+    public void setRenterId(Integer renterId) {
+        this.renterId = renterId;
+    }
+
+    public String getRenterPassword() {
+        return renterPassword;
+    }
+
+    public void setRenterPassword(String renterPassword) {
+        this.renterPassword = renterPassword;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getReferences() {
+        return references;
+    }
+
+    public void setReferences(String references) {
+        this.references = references;
+    }    
 }
