@@ -55,7 +55,8 @@ public class Property {
     }
 
     public String getAddress() {
-     address = property.getAddress();
+     address = this.address;
+     return address;
     }
 
   

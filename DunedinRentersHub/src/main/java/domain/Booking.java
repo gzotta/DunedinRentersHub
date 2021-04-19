@@ -25,9 +25,15 @@ public class Booking {
     public Booking() {
     }
 
-    public Booking(Integer bookingId, Date bookingDate) {
+
+    
+
+    public Booking(Integer bookingId, Date date, Landlord landlord, Property property, Renter renter) {
         this.bookingId = bookingId;
-        this.date = bookingDate;
+        this.date = date;
+        this.landlord = landlord;
+        this.property = property;
+        this.renter = renter;
     }
 
     public Integer getBookingId() {
