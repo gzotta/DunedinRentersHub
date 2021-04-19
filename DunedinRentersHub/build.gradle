@@ -1,28 +1,60 @@
 
 plugins {
+    id 'java'
     id 'application'
     id 'jacoco'
 }
 
 repositories {
- jcenter()
+    jcenter()
 }
 
 
 dependencies {
-    def junitVer = '5.6.2'
+    
+    //Jooby dependency
+    def joobyVer =  '1.6.8'
+    /*Jooby does not provide its own web server so needs to be run on top of 
+     *another server. In this case we are using Netty as the server. 
+     *Netty provides a high-performance Java-based web server.
+     */
+    compile group: 'org.jooby', name: 'jooby-netty', version: joobyVer
+    //The Gson dependency allows Jooby to convert domain objects to and from JSON.
+    compile group: 'org.jooby', name: 'jooby-gson', version: joobyVer 
+    
+    
+    //JUnit dependecy for testing.
+    def junitVer = '5.7.+'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: junitVer
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitVer
     testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+    
+    
+    //Guava dependecy for creating multimaps.
     implementation group: 'com.google.guava', name: 'guava', version: '29.0-jre'
+    
+    
+    //H2 database library
     implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+    
+    
+    //Validation framework for  java objects.
     compile group: 'net.sf.oval', name: 'oval', version: '2.1.6'
+    
+    
+    //Library for mocking DAO
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.+'
-    testImplementation group: 'org.assertj', name: 'assertj-swing-junit', version: '3.+'
-    def joobyVer = '1.6.8'
-    implementation group: 'org.jooby', name: 'jooby-netty', version: joobyVer
-    implementation group: 'org.jooby', name: 'jooby-gson', version: joobyVer
+    
+    
+    //Sending email dependency
     implementation group: 'org.apache.commons', name: 'commons-email', version: '1.5'
+    
+    
+    //Helper for hashing passwords with Scrypt
+    implementation group:'org.bouncycastle', name:'bcprov-jdk15on', version:'1.66'
+    
+    
+    
 }
 
 test {
@@ -37,43 +69,43 @@ mainClassName = 'Main'
 
 
 task createMissingSourceDirs {
-   group = "Source Directories"
-   description = "Create all of the missing source directories for this project."
-   doFirst {
-      sourceSets.each { def sourceRoot ->
-         sourceRoot.allSource.srcDirTrees.each { def sourceDir ->
-            if(!sourceDir.dir.exists()) {
-               println "Creating ${sourceDir}"
-               mkdir sourceDir.dir
+    group = "Source Directories"
+    description = "Create all of the missing source directories for this project."
+    doFirst {
+        sourceSets.each { def sourceRoot ->
+            sourceRoot.allSource.srcDirTrees.each { def sourceDir ->
+                if(!sourceDir.dir.exists()) {
+                    println "Creating ${sourceDir}"
+                    mkdir sourceDir.dir
+                }
             }
-         }
-      }
-   }
+        }
+    }
 }
  
 task deleteEmptySourceDirs {
-   group = "Source Directories"
-   description = "Delete all empty source directories."
-   doFirst {
-      sourceSets.each { def sourceRoot ->
-         sourceRoot.allSource.srcDirTrees.each { def sourceDir ->
-            if(sourceDir.dir.exists() && sourceDir.dir.isDirectory() && sourceDir.dir.list().length == 0) {
-               println "Removing empty ${sourceDir}"
-               sourceDir.dir.delete()
+    group = "Source Directories"
+    description = "Delete all empty source directories."
+    doFirst {
+        sourceSets.each { def sourceRoot ->
+            sourceRoot.allSource.srcDirTrees.each { def sourceDir ->
+                if(sourceDir.dir.exists() && sourceDir.dir.isDirectory() && sourceDir.dir.list().length == 0) {
+                    println "Removing empty ${sourceDir}"
+                    sourceDir.dir.delete()
+                }
             }
-         }
-      }
-   }
+        }
+    }
 }
 
 
 sourceSets {
-   web {
-      resources {
-         srcDirs = ['public']
-      }
-      java {
-         srcDirs = []
-      }
-   }
+    web {
+        resources {
+            srcDirs = ['public']
+        }
+        java {
+            srcDirs = []
+        }
+    }
 }
