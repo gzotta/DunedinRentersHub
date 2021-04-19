@@ -1,3 +1,5 @@
+package domain;
+
 
 import java.util.ArrayList;
 
@@ -15,18 +17,16 @@ public class Landlord {
   
     private Integer landlordId;
     private String landlordPassword;
-    private String username;
+    private String userName;
     private String landlordPhone;
     private String landlordEmail;
-    private ArrayList<Property> properties;
 
     public Landlord(Integer landlordId, String landlordPassword, String username, String landlordPhone, String landlordEmail, ArrayList<Property> properties) {
         this.landlordId = landlordId;
         this.landlordPassword = landlordPassword;
-        this.username = username;
+        this.userName = username;
         this.landlordPhone = landlordPhone;
         this.landlordEmail = landlordEmail;
-        this.properties = properties;
     }
     
     public Landlord (){
@@ -50,11 +50,11 @@ public class Landlord {
     }
 
     public String getUsername() {
-        return username;
+        return userName;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.userName = username;
     }
 
     public String getLandlordPhone() {
@@ -73,12 +73,5 @@ public class Landlord {
         this.landlordEmail = landlordEmail;
     }
 
-    public ArrayList<Property> getProperties() {
-        return properties;
-    }
-
-    public void setProperties(ArrayList<Property> properties) {
-        this.properties = properties;
-    }
     
 }

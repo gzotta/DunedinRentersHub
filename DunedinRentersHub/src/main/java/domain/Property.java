@@ -1,6 +1,4 @@
-
-import java.util.ArrayList;
-import java.util.Date;
+package domain;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,24 +10,24 @@ import java.util.Date;
  *
  * @author sarahaverill
  */
-public class Booking {
+public class Property {
+    
 
     private Integer propertyId;
     private Integer landlordId;
     private Integer renterId;
-    private String address; 
-    private Date bookinDate;
+    private String address;
+    private String status;
 
-    public Booking() {
+    public Property() {
     }
- 
- 
-    public Booking(Integer propertyId, Integer landlordId, Integer renterId, String address, Date bookinDate) {
+
+    public Property(Integer propertyId, Integer landlordId, Integer renterId, String address, String status) {
         this.propertyId = propertyId;
         this.landlordId = landlordId;
         this.renterId = renterId;
         this.address = address;
-        this.bookinDate = bookinDate;
+        this.status = status;
     }
 
     public Integer getPropertyId() {
@@ -57,22 +55,17 @@ public class Booking {
     }
 
     public String getAddress() {
-        return address;
+     address = property.getAddress();
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+  
+    public String getStatus() {
+        return status;
     }
 
-    public Date getBookinDate() {
-        return bookinDate;
-    }
-
-    public void setBookinDate(Date bookinDate) {
-        this.bookinDate = bookinDate;
+    public void setStatus(String status) {
+        this.status = status;
     }
     
- 
-
-
+    
 }
