@@ -1,5 +1,6 @@
+package dao;
 
-import dao.DAOException;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import org.h2.jdbcx.JdbcConnectionPool;
@@ -28,7 +29,7 @@ public class DbConnection {
       try {
          return pool.getConnection();
       } catch (SQLException ex) {
-         throw new DAOException("error connecting to database",ex);
+         throw new DAOException(ex.getMessage(),ex);
       }
    }
 
