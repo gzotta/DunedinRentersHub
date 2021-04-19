@@ -98,7 +98,10 @@ task deleteEmptySourceDirs {
     }
 }
 
-
+/*
+Jooby looks for its assets in a resource folder with the name public so 
+we need to add this to our project.
+*/
 sourceSets {
     web {
         resources {
