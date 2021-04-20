@@ -1,6 +1,6 @@
 package dao;
 
-import domain.Landlord;
+import domain.Services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,34 +10,35 @@ import java.sql.SQLException;
  *
  * @author jake
  */
-public class LandlordJdbcDAO {
+public class ServicesJdbcDAO {
  
     private String databaseURI = DbConnection.getDefaultConnectionUri();
  
     // default construcot
-    public LandlordJdbcDAO() {
+    public ServicesJdbcDAO() {
     }
  
     // constructor that intialises the URI
-    public LandlordJdbcDAO(String databaseURI) {
+    public ServicesJdbcDAO(String databaseURI) {
         this.databaseURI = databaseURI;
     }
  
-    // method to add landlord
-    public void saveLandlord(Landlord l) {
-        String sql = "insert into Landlord (landlordId, landlordPassword, userName, landlordPhone, landlordEmail) values (?,?,?,?,?)";
+    // method to add service
+    public void saveService(Service s) {
+        String sql = "insert into Service (serviceType, serviceID, servicePassword, username, servicePhone, serviceEmail) values (?,?,?,?,?,?)";
  
         try (
             // get connection to database
             Connection dbCon = DbConnection.getConnection(databaseURI);
             // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-                // copy the data from the landlord domain object into the SQL parameters
-                stmt.setInt(1, r.getLandlordId());
-                stmt.setString(2, r.getLandlordPassword());
+                // copy the data from the service domain object into the SQL parameters
+                stmt.setString(1, r.getServiceType());
+                stmt.setInt(1, r.getServiceId());
+                stmt.setString(2, r.getServicePassword());
                 stmt.setString(3, r.getUsername());
-                stmt.setString(4, r.getLandlordPhone());
-                stmt.setString(5, r.getLandlordEmail());
+                stmt.setString(4, r.getServicePhone());
+                stmt.setString(5, r.getServiceEmail());
 
                 stmt.executeUpdate(); // execute the statement
  
@@ -47,10 +48,10 @@ public class LandlordJdbcDAO {
             }
     }
  
-    // method to get landlord by id
+    // method to get service by id
     // support method only - used by validateCredentials() below
-    public Landlord getgetLandlord(int givenId) {
-        String sql = "select * from Landlord where landlordId = ?";
+    public Service getgetService(int givenId) {
+        String sql = "select * from Service where serviceId = ?";
         
         try (
             // get a connection to the database
@@ -64,16 +65,17 @@ public class LandlordJdbcDAO {
                 
                 if (rs.next()){
                     // get the data out of the query
-                    int landlordId = rs.getInt("landlordId");
-                    String landlordPassword  = rs.getString("landlordPassword");
-                    String userName = rs.getString("userName");
-                    String landlordPhone = rs.getString("landlordPhone");
-                    String landlordEmail = rs.getString("landlordEmail");
+                    String serviceType = rs.getString("serviceType");
+                    int serviceId = rs.getInt("serviceId");
+                    String servicePassword  = rs.getString("servicePassword");
+                    String username = rs.getString("username");
+                    String servicePhone = rs.getString("servicePhone");
+                    String serviceEmail = rs.getString("serviceEmail");
 
-                    // use the data to create a landlord object
-                    Landlord l = new Landlord(landlordId, landlordPassword, userName, landlordPhone, landlordEmail);
+                    // use the data to create a service object
+                    Service s = new Service(serviceType, serviceId, servicePassword, username, servicePhone, serviceEmail);
 
-                    return l;
+                    return s;
                 }
                 return null;
 
@@ -84,9 +86,9 @@ public class LandlordJdbcDAO {
     }
 
     // method to sign users in
-    // accesses getLandlord() above
+    // accesses getService() above
     public Boolean validateCredentials(String username, String password) {
-        Landlord l = getLandlord(username);
+        Service s = getService(username);
         if ((l != null) && (l.getPassword().equals(password))) return true;
         else return false;
     }
