@@ -11,4 +11,16 @@ package dao;
  */
 public class ProperyJdbcDAO {
     
+    private String databaseURI = DbConnection.getDefaultConnectionUri();
+    
+    //default construcot
+
+    public ProperyJdbcDAO() {
+    }
+    
+    //constructor that intialises the URI
+    public ProperyJdbcDAO(String databaseURI) {
+        this.databaseURI = databaseURI;
+    }
+    
 }
