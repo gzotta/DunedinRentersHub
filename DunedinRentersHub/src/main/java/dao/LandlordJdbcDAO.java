@@ -1,6 +1,6 @@
 package dao;
 
-import domain.Renter;
+import domain.Landlord;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,37 +10,34 @@ import java.sql.SQLException;
  *
  * @author jake
  */
-public class RenterJdbcDAO {
+public class LandlordJdbcDAO {
  
     private String databaseURI = DbConnection.getDefaultConnectionUri();
  
     // default construcot
-    public RenterJdbcDAO() {
+    public LandlordJdbcDAO() {
     }
  
     // constructor that intialises the URI
-    public RenterJdbcDAO(String databaseURI) {
+    public LandlordJdbcDAO(String databaseURI) {
         this.databaseURI = databaseURI;
     }
  
-    // method to add renter
-    public void saveRenter(Renter r) {
-        String sql = "insert into Renter (renterId, renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references, wishList) values (?,?,?,?,?,?,?,?)";
+    // method to add landlord
+    public void saveLandlord(Landlord l) {
+        String sql = "insert into Landlord (landlordId, landlordPassword, userName, landlordPhone, landlordEmail) values (?,?,?,?,?)";
  
         try (
             // get connection to database
             Connection dbCon = DbConnection.getConnection(databaseURI);
             // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-                // copy the data from the renter domain object into the SQL parameters
-                stmt.setInt(1, r.getRenterId());
-                stmt.setString(2, r.getRenterPassword());
+                // copy the data from the landlord domain object into the SQL parameters
+                stmt.setInt(1, r.getLandlordId());
+                stmt.setString(2, r.getLandlordPassword());
                 stmt.setString(3, r.getUsername());
-                stmt.setDate(4, r.getDateOfBirth());
-                stmt.setString(5, r.getPhone());
-                stmt.setString(6, r.getRenterEmail());
-                stmt.setString(7, r.getReferences());
-                stmt.setString(8, r.getWishlist(i));
+                stmt.setString(4, r.getLandlordPhone());
+                stmt.setString(5, r.getLandlordEmail());
 
                 stmt.executeUpdate(); // execute the statement
  
@@ -50,10 +47,10 @@ public class RenterJdbcDAO {
             }
     }
  
-    // method to get renter by id
+    // method to get landlord by id
     // support method only - used by validateCredentials() below
-    public Renter getRenter(int givenId) {
-        String sql = "select * from Renter where renterId = ?";
+    public Landlord getgetLandlord(int givenId) {
+        String sql = "select * from Landlord where landlordId = ?";
         
         try (
             // get a connection to the database
@@ -67,19 +64,16 @@ public class RenterJdbcDAO {
                 
                 if (rs.next()){
                     // get the data out of the query
-                    int renterId = rs.getInt("renterId");
-                    String renterPassword  = rs.getString("renterPassword");
+                    int landlordId = rs.getInt("landlordId");
+                    String landlordPassword  = rs.getString("landlordPassword");
                     String userName = rs.getString("userName");
-                    Date dateOfBirth = rs.getDate("dateOfBirth");
-                    String renterPhone = rs.getString("renterPhone");
-                    String renterEmail = rs.getString("renterEmail");
-                    String references = rs.getString("references");
-                    ArrayList<Property> wishList = rs.getString("wishList");
+                    String landlordPhone = rs.getString("landlordPhone");
+                    String landlordEmail = rs.getString("landlordEmail");
 
                     // use the data to create a renter object
-                    Renter r = new Renter(renterId, renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references, wishList);
+                    Landlord l = new Landlord(landlordId, landlordPassword, userName, dateOfBirth, landlordPhone, landlordEmail, references, wishList);
 
-                    return r;
+                    return l;
                 }
                 return null;
 
@@ -90,10 +84,10 @@ public class RenterJdbcDAO {
     }
 
     // method to sign users in
-    // accesses getRenter() above
+    // accesses getLandlord() above
     public Boolean validateCredentials(String username, String password) {
-        Renter r = getRenter(username);
-        if ((r != null) && (r.getPassword().equals(password))) return true;
+        Landlord l = getLandlord(username);
+        if ((l != null) && (l.getPassword().equals(password))) return true;
         else return false;
     }
 }
