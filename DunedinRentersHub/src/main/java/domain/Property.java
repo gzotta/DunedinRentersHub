@@ -15,17 +15,17 @@ public class Property {
 
     private Integer propertyId;
     private Integer landlordId;
-    private Integer renterId;
+    private Integer bedrooms;
     private String address;
     private String status;
 
     public Property() {
     }
 
-    public Property(Integer propertyId, Integer landlordId, Integer renterId, String address, String status) {
+    public Property(Integer propertyId, Integer landlordId, Integer bedrooms, String address, String status) {
         this.propertyId = propertyId;
         this.landlordId = landlordId;
-        this.renterId = renterId;
+        this.bedrooms = bedrooms;
         this.address = address;
         this.status = status;
     }
@@ -46,19 +46,21 @@ public class Property {
         this.landlordId = landlordId;
     }
 
-    public Integer getRenterId() {
-        return renterId;
+    public Integer getBedrooms() {
+        return bedrooms;
     }
 
-    public void setRenterId(Integer renterId) {
-        this.renterId = renterId;
+    public void setBedrooms(Integer bedrooms) {
+        this.bedrooms = bedrooms;
     }
 
     public String getAddress() {
-     address = this.address;
-     return address;
+        return address;
     }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
   
     public String getStatus() {
         return status;
