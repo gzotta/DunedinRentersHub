@@ -174,4 +174,27 @@ public class ProperyJdbcDAO {
         }
     }
 
+    public void saveProperty(Property p) {
+        String sql = "insert into Product (propertyId, landlordId, bedrooms, address, status) values (?,?,?,?,?)";
+
+        try (
+                // get connection to database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // copy the data from the property domain object into the SQL parameters
+            stmt.setInt(1, p.getPropertyId());
+            stmt.setInt(2, p.getLandlordId());
+            stmt.setInt(3, p.getBedrooms());
+            stmt.setString(4, p.getAddress());
+            stmt.setString(5, p.getStatus());
+
+            stmt.executeUpdate(); // execute the statement
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+
 }
