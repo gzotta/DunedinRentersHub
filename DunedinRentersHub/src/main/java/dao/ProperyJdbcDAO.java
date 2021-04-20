@@ -83,4 +83,49 @@ public class ProperyJdbcDAO {
         }
     }
 
+    //public Collection<Product> getAllProducts()
+    public Collection<Property> getAllProperties() {
+        String sql = "select * from Property order by propertyId";
+
+        try (
+                // get a connection to the database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // execute the query
+            ResultSet rs = stmt.executeQuery();
+
+            // Using a List to preserve the order in which the data was returned from the query.
+            List<Property> properties = new ArrayList<>();
+
+            // iterate through the query results
+            while (rs.next()) {
+
+                // get the data out of the query
+                Integer propertyId = rs.getInt("propertyId");
+                Integer landlordId = rs.getInt("landlordId");
+                Integer bedrooms = rs.getInt("bedrooms");
+                String address = rs.getString("address");
+                String status = rs.getString("status");
+
+                // use the data to create a property object
+                Property p = new Property();
+                p.setPropertyId(propertyId);
+                p.setLandlordId(landlordId);
+                p.setBedrooms(bedrooms);
+                p.setAddress(address);
+                p.setStatus(status);
+
+                // and put it in the collection
+                properties.add(p);
+            }
+
+            return properties;
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+
 }
