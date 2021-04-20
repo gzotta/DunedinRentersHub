@@ -83,7 +83,6 @@ public class ProperyJdbcDAO {
         }
     }
 
-    
     public Collection<Property> getAllProperties() {
         String sql = "select * from Property order by propertyId";
 
@@ -127,34 +126,52 @@ public class ProperyJdbcDAO {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
-    
-    
+
     public Collection<Integer> getBedrooms() {
-		String sql = "select distinct bedrooms from Property";
+        String sql = "select distinct bedrooms from Property";
 
-		try (
-				  // get a connection to the database
-				  Connection dbCon = DbConnection.getConnection(databaseURI);
-				  // create the statement
-				  PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-			// execute the query
-			ResultSet rs = stmt.executeQuery();
+        try (
+                // get a connection to the database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // execute the query
+            ResultSet rs = stmt.executeQuery();
 
-			// Using a List to preserve the order in which the data was returned from the query.
-			List<Integer> bedrooms = new ArrayList<>();
+            // Using a List to preserve the order in which the data was returned from the query.
+            List<Integer> bedrooms = new ArrayList<>();
 
-			// iterate through the query results
-			while (rs.next()) {
-				//add the number of bedrooms to the collection
-				bedrooms.add(rs.getInt("bedrooms"));
-			}
+            // iterate through the query results
+            while (rs.next()) {
+                //add the number of bedrooms to the collection
+                bedrooms.add(rs.getInt("bedrooms"));
+            }
 
-			return bedrooms;
+            return bedrooms;
 
-		} catch (SQLException ex) {  // we are forced to catch SQLException
-			// don't let the SQLException leak from our DAO encapsulation
-			throw new DAOException(ex.getMessage(), ex);
-		}
-	}
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+
+    public void removeProperty(Property p) {
+        String sql = "delete Property where propertyId = ?";
+
+        try (
+                // get connection to database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // copy the data from the property domain object into the SQL parameters
+            stmt.setInt(1, p.getPropertyId());
+
+            stmt.executeUpdate(); // execute the statement
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
 
 }
