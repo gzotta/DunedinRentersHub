@@ -24,7 +24,7 @@ public class LandlordJdbcDAO {
     }
  
     // method to add landlord
-    public void saveLandlord(Landlord l) {
+    public void saveLandlord(Landlord la) {
         String sql = "insert into Landlord (landlordId, landlordPassword, userName, landlordPhone, landlordEmail) values (?,?,?,?,?)";
  
         try (
