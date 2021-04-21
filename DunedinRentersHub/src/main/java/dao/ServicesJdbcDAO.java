@@ -24,7 +24,7 @@ public class ServicesJdbcDAO {
     }
  
     // method to add service
-    public void saveService(Service s) {
+    public void saveService(Services s) {
         String sql = "insert into Service (serviceType, serviceID, servicePassword, username, servicePhone, serviceEmail) values (?,?,?,?,?,?)";
  
         try (
@@ -33,12 +33,12 @@ public class ServicesJdbcDAO {
             // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);) {
                 // copy the data from the service domain object into the SQL parameters
-                stmt.setString(1, r.getServiceType());
-                stmt.setInt(1, r.getServiceId());
-                stmt.setString(2, r.getServicePassword());
-                stmt.setString(3, r.getUsername());
-                stmt.setString(4, r.getServicePhone());
-                stmt.setString(5, r.getServiceEmail());
+                stmt.setString(1, s.getServiceType());
+                stmt.setInt(1, s.getServiceId());
+                stmt.setString(2, s.getServicePassword());
+                stmt.setString(3, s.getUsername());
+                stmt.setString(4, s.getServicePhone());
+                stmt.setString(5, s.getServiceEmail());
 
                 stmt.executeUpdate(); // execute the statement
  
@@ -48,18 +48,18 @@ public class ServicesJdbcDAO {
             }
     }
  
-    // method to get service by id
+    // method to get service by username
     // support method only - used by validateCredentials() below
-    public Service getgetService(int givenId) {
+    public Services getServices(String givenUsername) {
         String sql = "select * from Service where serviceId = ?";
         
         try (
             // get a connection to the database
-            Connection dbCon = DbConnection.getConnection(url);
+            Connection dbCon = DbConnection.getConnection(databaseURI);
             // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);) {
                 // copy the data from the customer domain object into the SQL parameters
-                stmt.setInt(1, givenId);
+                stmt.setString(1, givenUsername);
                 // execute the query
                 ResultSet rs = stmt.executeQuery();
                 
@@ -73,7 +73,7 @@ public class ServicesJdbcDAO {
                     String serviceEmail = rs.getString("serviceEmail");
 
                     // use the data to create a service object
-                    Service s = new Service(serviceType, serviceId, servicePassword, username, servicePhone, serviceEmail);
+                    Services s = new Services(serviceType, serviceId, servicePassword, username, servicePhone, serviceEmail);
 
                     return s;
                 }
@@ -88,8 +88,8 @@ public class ServicesJdbcDAO {
     // method to sign users in
     // accesses getService() above
     public Boolean validateCredentials(String username, String password) {
-        Service s = getService(username);
-        if ((l != null) && (l.getPassword().equals(password))) return true;
+        Services s = getServices(username);
+        if ((s != null) && (s.getServicePassword().equals(password))) return true;
         else return false;
     }
 }
