@@ -40,7 +40,7 @@ public class RenterJdbcDAO {
                 stmt.setString(5, r.getPhone());
                 stmt.setString(6, r.getRenterEmail());
                 stmt.setString(7, r.getReferences());
-                stmt.setString(8, r.getWishlist(i));
+                stmt.setString(8, r.getWishlist());
 
                 stmt.executeUpdate(); // execute the statement
  
@@ -50,18 +50,18 @@ public class RenterJdbcDAO {
             }
     }
  
-    // method to get renter by id
+    // method to get renter by username
     // support method only - used by validateCredentials() below
-    public Renter getRenter(int givenId) {
-        String sql = "select * from Renter where renterId = ?";
+    public Renter getRenter(String givenUsername) {
+        String sql = "select * from Renter where renterUsername = ?";
         
         try (
             // get a connection to the database
-            Connection dbCon = DbConnection.getConnection(url);
+            Connection dbCon = DbConnection.getConnection(databaseURI);
             // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);) {
                 // copy the data from the customer domain object into the SQL parameters
-                stmt.setInt(1, givenId);
+                stmt.setString(1, givenUsername);
                 // execute the query
                 ResultSet rs = stmt.executeQuery();
                 
@@ -93,7 +93,7 @@ public class RenterJdbcDAO {
     // accesses getRenter() above
     public Boolean validateCredentials(String username, String password) {
         Renter r = getRenter(username);
-        if ((r != null) && (r.getPassword().equals(password))) return true;
+        if ((r != null) && (r.getRenterPassword().equals(password))) return true;
         else return false;
     }
 }
