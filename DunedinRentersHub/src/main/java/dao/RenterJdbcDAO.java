@@ -2,6 +2,7 @@ package dao;
 
 import domain.Renter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,11 +37,11 @@ public class RenterJdbcDAO {
                 stmt.setInt(1, r.getRenterId());
                 stmt.setString(2, r.getRenterPassword());
                 stmt.setString(3, r.getUsername());
-                stmt.setDate(4, r.getDateOfBirth());
+                stmt.setDate(4, (Date) r.getDateOfBirth());
                 stmt.setString(5, r.getPhone());
                 stmt.setString(6, r.getRenterEmail());
                 stmt.setString(7, r.getReferences());
-                stmt.setString(8, r.getWishlist());
+                stmt.setString(8, r.getWishList());
 
                 stmt.executeUpdate(); // execute the statement
  

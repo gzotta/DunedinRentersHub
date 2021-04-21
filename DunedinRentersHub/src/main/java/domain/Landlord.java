@@ -18,6 +18,7 @@ public class Landlord {
     private String userName;
     private String landlordPhone;
     private String landlordEmail;
+    private ArrayList<Property> properties;
 
     public Landlord() {
 
@@ -29,6 +30,7 @@ public class Landlord {
         this.userName = username;
         this.landlordPhone = landlordPhone;
         this.landlordEmail = landlordEmail;
+        this.properties = properties;
     }
 
     public Integer getLandlordId() {
@@ -47,11 +49,11 @@ public class Landlord {
         this.landlordPassword = landlordPassword;
     }
 
-    public String getUsername() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setUsername(String username) {
+    public void setUserName(String username) {
         this.userName = username;
     }
 
@@ -69,6 +71,14 @@ public class Landlord {
 
     public void setLandlordEmail(String landlordEmail) {
         this.landlordEmail = landlordEmail;
+    }
+
+    public ArrayList<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(ArrayList<Property> properties) {
+        this.properties = properties;
     }
 
 }
