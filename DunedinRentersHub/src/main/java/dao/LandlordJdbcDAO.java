@@ -1,10 +1,12 @@
 package dao;
 
 import domain.Landlord;
+import domain.Property;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
  
 /**
  *
@@ -37,7 +39,6 @@ public class LandlordJdbcDAO {
                 stmt.setString(2, l.getLandlordPassword());
                 stmt.setString(3, l.getUserName());
                 stmt.setString(4, l.getLandlordPhone());
-                stmt.setString(5, l.getLandlordEmail());
                 stmt.setString(5, l.getLandlordEmail());
                 stmt.setString(6, l.getProperties());
 
