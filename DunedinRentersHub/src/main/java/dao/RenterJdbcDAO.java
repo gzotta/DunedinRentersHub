@@ -26,7 +26,7 @@ public class RenterJdbcDAO {
  
     // method to add renter
     public void saveRenter(Renter r) {
-        String sql = "insert into Renter (renterId, renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references, wishList) values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into Renter (renterId, renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references) values (?,?,?,?,?,?,?)";
  
         try (
             // get connection to database
@@ -41,7 +41,6 @@ public class RenterJdbcDAO {
                 stmt.setString(5, r.getPhone());
                 stmt.setString(6, r.getRenterEmail());
                 stmt.setString(7, r.getReferences());
-                stmt.setString(8, r.getWishList());
 
                 stmt.executeUpdate(); // execute the statement
  
@@ -75,10 +74,10 @@ public class RenterJdbcDAO {
                     String renterPhone = rs.getString("renterPhone");
                     String renterEmail = rs.getString("renterEmail");
                     String references = rs.getString("references");
-                    ArrayList<Property> wishList = rs.getString("wishList");
+                  //  ArrayList<Property> wishList = rs.getString("wishList");    // implement wishlist later
 
                     // use the data to create a renter object
-                    Renter r = new Renter(renterId, renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references, wishList);
+                    Renter r = new Renter(renterId, renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references);
 
                     return r;
                 }

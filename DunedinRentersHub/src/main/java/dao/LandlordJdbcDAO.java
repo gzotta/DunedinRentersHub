@@ -27,7 +27,7 @@ public class LandlordJdbcDAO {
  
     // method to add landlord
     public void saveLandlord(Landlord l) {
-        String sql = "insert into Landlord (landlordId, landlordPassword, userName, landlordPhone, landlordEmail, properties) values (?,?,?,?,?,?)";
+        String sql = "insert into Landlord (landlordId, landlordPassword, userName, landlordPhone, landlordEmail) values (?,?,?,?,?)";
  
         try (
             // get connection to database
@@ -40,7 +40,6 @@ public class LandlordJdbcDAO {
                 stmt.setString(3, l.getUserName());
                 stmt.setString(4, l.getLandlordPhone());
                 stmt.setString(5, l.getLandlordEmail());
-                stmt.setString(6, l.getProperties());
 
                 stmt.executeUpdate(); // execute the statement
  
@@ -72,10 +71,15 @@ public class LandlordJdbcDAO {
                     String userName = rs.getString("userName");
                     String landlordPhone = rs.getString("landlordPhone");
                     String landlordEmail = rs.getString("landlordEmail");
-                    ArrayList<Property> properties = rs.getString("properties");
 
                     // use the data to create a landlord object
-                    Landlord l = new Landlord(landlordId, landlordPassword, userName, landlordPhone, landlordEmail, properties);
+                    Landlord l = new Landlord();
+                    l.setLandlordId(landlordId);
+                    l.setLandlordPassword(landlordPassword);
+                    l.setUserName(userName);
+                    l.setLandlordPhone(landlordPhone);
+                    l.setLandlordEmail(landlordEmail);
+                   // landlordId, landlordPassword, userName, landlordPhone, landlordEmail, properties);
 
                     return l;
                 }
