@@ -27,6 +27,17 @@ public class Renter {
     public Renter() {
     }
 
+    //only temporarily added until dao is fixed for get renter
+    public Renter(Integer renterId, String renterPassword, String userName, Date dateOfBirth, String renterPhone, String renterEmail, String references) {
+        this.renterId = renterId;
+        this.renterPassword = renterPassword;
+        this.userName = userName;
+        this.dateOfBirth = dateOfBirth;
+        this.renterPhone = renterPhone;
+        this.renterEmail = renterEmail;
+        this.references = references;
+    }
+
 
     public Renter(Integer renterId, String renterPassword, String userName, Date dateOfBirth, String renterPhone, String renterEmail, String references, ArrayList<Property> wishList) {
         this.renterId = renterId;
@@ -79,8 +90,8 @@ public class Renter {
         return wishList;
     }
 
-    public void setWishList(ArrayList<Property> wishList) {
-        this.wishList = wishList;
+    public void addToWishList(Property p) {
+        wishList.add(p);
     }
 
     public void setEmail(String email) {

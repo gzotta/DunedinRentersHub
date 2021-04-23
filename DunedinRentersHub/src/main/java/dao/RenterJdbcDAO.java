@@ -2,6 +2,7 @@ package dao;
 
 import domain.Renter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class RenterJdbcDAO {
  
     // method to add renter
     public void saveRenter(Renter r) {
-        String sql = "insert into Renter (renterId, renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references, wishList) values (?,?,?,?,?,?,?,?)";
+        String sql = "insert into Renter (renterId, renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references) values (?,?,?,?,?,?,?)";
  
         try (
             // get connection to database
@@ -36,11 +37,10 @@ public class RenterJdbcDAO {
                 stmt.setInt(1, r.getRenterId());
                 stmt.setString(2, r.getRenterPassword());
                 stmt.setString(3, r.getUsername());
-                stmt.setDate(4, r.getDateOfBirth());
+                stmt.setDate(4, (Date) r.getDateOfBirth());
                 stmt.setString(5, r.getPhone());
                 stmt.setString(6, r.getRenterEmail());
                 stmt.setString(7, r.getReferences());
-                stmt.setString(8, r.getWishlist(i));
 
                 stmt.executeUpdate(); // execute the statement
  
@@ -50,18 +50,18 @@ public class RenterJdbcDAO {
             }
     }
  
-    // method to get renter by id
+    // method to get renter by username
     // support method only - used by validateCredentials() below
-    public Renter getRenter(int givenId) {
-        String sql = "select * from Renter where renterId = ?";
+    public Renter getRenter(String givenUsername) {
+        String sql = "select * from Renter where renterUsername = ?";
         
         try (
             // get a connection to the database
-            Connection dbCon = DbConnection.getConnection(url);
+            Connection dbCon = DbConnection.getConnection(databaseURI);
             // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);) {
                 // copy the data from the customer domain object into the SQL parameters
-                stmt.setInt(1, givenId);
+                stmt.setString(1, givenUsername);
                 // execute the query
                 ResultSet rs = stmt.executeQuery();
                 
@@ -74,10 +74,10 @@ public class RenterJdbcDAO {
                     String renterPhone = rs.getString("renterPhone");
                     String renterEmail = rs.getString("renterEmail");
                     String references = rs.getString("references");
-                    ArrayList<Property> wishList = rs.getString("wishList");
+                  //  ArrayList<Property> wishList = rs.getString("wishList");    // implement wishlist later
 
                     // use the data to create a renter object
-                    Renter r = new Renter(renterId, renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references, wishList);
+                    Renter r = new Renter(renterId, renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references);
 
                     return r;
                 }
@@ -93,7 +93,7 @@ public class RenterJdbcDAO {
     // accesses getRenter() above
     public Boolean validateCredentials(String username, String password) {
         Renter r = getRenter(username);
-        if ((r != null) && (r.getPassword().equals(password))) return true;
+        if ((r != null) && (r.getRenterPassword().equals(password))) return true;
         else return false;
     }
 }
