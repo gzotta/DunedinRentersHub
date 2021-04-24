@@ -48,5 +48,13 @@ create table Property (
     constraint Property_Landlord foreign key (landlordId) references Landlord
 );
 
+create table Wishlist (
+    renterId int,
+    propertyId int,
+    constraint Wishlist_PK primary key (renterId, propertyId),
+    constraint Wishlist_Renter foreign key (renterId) references Renter,
+    constraint Wishlist_Property foreign key (propertyId) references Property
+);
+
 
     
