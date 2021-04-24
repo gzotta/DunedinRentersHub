@@ -196,7 +196,7 @@ public class ProperyJdbcDAO {
     }
     
     public void addToWishList(Renter r, Property p) {
-        String sql = "insert into Wishlist (renterId, landlordId) values (?,?)";
+        String sql = "insert into Wishlist (renterId, propertyId) values (?,?)";
  
         try (
             // get connection to database
