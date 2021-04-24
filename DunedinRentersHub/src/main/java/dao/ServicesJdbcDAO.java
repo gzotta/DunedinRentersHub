@@ -54,8 +54,8 @@ public class ServicesJdbcDAO {
 
     // method to get service by username
     // support method only - used by validateCredentials() below
-    public Services getServices(String serviceId) {
-        String sql = "select * from Service where serviceId = ?";
+    public Services getServices(String username) {
+        String sql = "select * from Service where username = ?";
 
         try (
                 // get a connection to the database
@@ -63,7 +63,7 @@ public class ServicesJdbcDAO {
                 // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             // copy the data from the customer domain object into the SQL parameters
-            stmt.setString(1, serviceId);
+            stmt.setString(1, username);
             // execute the query
             ResultSet rs = stmt.executeQuery();
 
@@ -72,7 +72,6 @@ public class ServicesJdbcDAO {
                 int serviceId1 = rs.getInt("serviceId");
                 String serviceType = rs.getString("serviceType");
                 String servicePassword = rs.getString("servicePassword");
-                String username = rs.getString("username");
                 String servicePhone = rs.getString("servicePhone");
                 String serviceEmail = rs.getString("serviceEmail");
 

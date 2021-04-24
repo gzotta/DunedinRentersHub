@@ -81,6 +81,7 @@ public class ProperyJdbcDAO {
         }
     }
 
+    //method to return all properteis
     public Collection<Property> getAllProperties() {
         String sql = "select * from Property order by propertyId";
 
@@ -125,6 +126,7 @@ public class ProperyJdbcDAO {
         }
     }
 
+    //method to return all properties filtered by bedrooms
     public Collection<Integer> getBedrooms() {
         String sql = "select distinct bedrooms from Property";
 
@@ -153,6 +155,7 @@ public class ProperyJdbcDAO {
         }
     }
 
+    //method to delete a property listing
     public void removeProperty(Property p) {
         String sql = "delete Property where propertyId = ?";
 
@@ -172,6 +175,7 @@ public class ProperyJdbcDAO {
         }
     }
 
+    //method to add a property
     public void saveProperty(Property p) {
         String sql = "insert into Product (propertyId, landlordId, bedrooms, address, status) values (?,?,?,?,?)";
 
@@ -195,6 +199,7 @@ public class ProperyJdbcDAO {
         }
     }
     
+    //method to add a property to a renters wishlist
     public void addToWishList(Renter r, Property p) {
         String sql = "insert into Wishlist (renterId, propertyId) values (?,?)";
  

@@ -57,7 +57,7 @@ public class RenterJdbcDAO {
  
     // method to get renter by username
     // support method only - used by validateCredentials() below
-    public Renter getRenter(String renterId) {
+    public Renter getRenter(String username) {
         String sql = "select * from Renter where renterUsername = ?";
         
         try (
@@ -66,7 +66,7 @@ public class RenterJdbcDAO {
             // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);) {
                 // copy the data from the customer domain object into the SQL parameters
-                stmt.setString(1, renterId);
+                stmt.setString(1, username);
                 // execute the query
                 ResultSet rs = stmt.executeQuery();
                 

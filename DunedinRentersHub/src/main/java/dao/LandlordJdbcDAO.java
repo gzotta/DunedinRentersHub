@@ -25,7 +25,7 @@ public class LandlordJdbcDAO {
         this.databaseURI = databaseURI;
     }
  
-    // method to add landlord
+    // method to save landlord
     public void saveLandlord(Landlord l) {
         String sql = "insert into Landlord (landlordId, landlordPassword, userName, landlordPhone, landlordEmail) values (?,?,?,?,?)";
  
@@ -51,8 +51,8 @@ public class LandlordJdbcDAO {
  
     // method to get landlord by username
     // support method only - used by validateCredentials() below
-    public Landlord getLandlord(String landlordId) {
-        String sql = "select * from Landlord where landlordId = ?";
+    public Landlord getLandlord(String username) {
+        String sql = "select * from Landlord where username = ?";
         
         try (
             // get a connection to the database
@@ -60,7 +60,7 @@ public class LandlordJdbcDAO {
             // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);) {
                 // copy the data from the customer domain object into the SQL parameters
-                stmt.setString(1, landlordId);
+                stmt.setString(1, username);
                 // execute the query
                 ResultSet rs = stmt.executeQuery();
                 
