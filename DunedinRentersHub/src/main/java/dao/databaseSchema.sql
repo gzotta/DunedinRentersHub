@@ -19,3 +19,12 @@ create table Renter (
     constraint Renter_PK primary key (renterId)
 );
 
+create table Landlord (
+    landlordId int auto_increment (1000),
+    landlordPassword varchar not null,
+    userName varchar not null unique,
+    landlordPhone varchar not null,
+    landlordEmail varchar not null,
+    constraint Landlord_PK primary key (landlordId)
+);
+
