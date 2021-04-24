@@ -51,7 +51,7 @@ public class LandlordJdbcDAO {
  
     // method to get landlord by username
     // support method only - used by validateCredentials() below
-    public Landlord getLandlord(String givenUsername) {
+    public Landlord getLandlord(String landlordId) {
         String sql = "select * from Landlord where landlordId = ?";
         
         try (
@@ -60,13 +60,13 @@ public class LandlordJdbcDAO {
             // create the statement
             PreparedStatement stmt = dbCon.prepareStatement(sql);) {
                 // copy the data from the customer domain object into the SQL parameters
-                stmt.setString(1, givenUsername);
+                stmt.setString(1, landlordId);
                 // execute the query
                 ResultSet rs = stmt.executeQuery();
                 
                 if (rs.next()){
                     // get the data out of the query
-                    int landlordId = rs.getInt("landlordId");
+                    int landlordId1 = rs.getInt("landlordId");
                     String landlordPassword  = rs.getString("landlordPassword");
                     String userName = rs.getString("userName");
                     String landlordPhone = rs.getString("landlordPhone");
@@ -74,7 +74,7 @@ public class LandlordJdbcDAO {
 
                     // use the data to create a landlord object
                     Landlord l = new Landlord();
-                    l.setLandlordId(landlordId);
+                    l.setLandlordId(landlordId1);
                     l.setLandlordPassword(landlordPassword);
                     l.setUserName(userName);
                     l.setLandlordPhone(landlordPhone);
