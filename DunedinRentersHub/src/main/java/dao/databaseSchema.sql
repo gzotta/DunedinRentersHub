@@ -38,5 +38,15 @@ create table Services (
     constraint Services_PK primary key (serviceId)
 );
 
+create table Property (
+    propertyId int auto_increment (1000),
+    landlordId int,
+    bedrooms varchar not null,
+    address varchar not null,
+    status varchar not null,
+    constraint Property_PK primary key (propertyId),
+    constraint Property_Landlord foreign key (landlordId) references Landlord
+);
+
 
     
