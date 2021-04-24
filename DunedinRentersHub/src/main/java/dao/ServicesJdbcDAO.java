@@ -29,7 +29,7 @@ public class ServicesJdbcDAO {
 
     // method to add service
     public void saveService(Services s) {
-        String sql = "insert into Service (serviceId, serviceType, servicePassword, username, servicePhone, serviceEmail) values (?,?,?,?,?,?)";
+        String sql = "insert into Services (serviceId, serviceType, servicePassword, username, servicePhone, serviceEmail) values (?,?,?,?,?,?)";
 
         try (
                 // get connection to database
