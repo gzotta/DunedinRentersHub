@@ -6,6 +6,7 @@
 package dao;
 
 import domain.Property;
+import domain.Renter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -80,6 +81,7 @@ public class ProperyJdbcDAO {
         }
     }
 
+    //method to return all properteis
     public Collection<Property> getAllProperties() {
         String sql = "select * from Property order by propertyId";
 
@@ -124,6 +126,7 @@ public class ProperyJdbcDAO {
         }
     }
 
+    //method to return all properties filtered by bedrooms
     public Collection<Integer> getBedrooms() {
         String sql = "select distinct bedrooms from Property";
 
@@ -152,6 +155,7 @@ public class ProperyJdbcDAO {
         }
     }
 
+    //method to delete a property listing
     public void removeProperty(Property p) {
         String sql = "delete Property where propertyId = ?";
 
@@ -171,6 +175,7 @@ public class ProperyJdbcDAO {
         }
     }
 
+    //method to add a property
     public void saveProperty(Property p) {
         String sql = "insert into Product (propertyId, landlordId, bedrooms, address, status) values (?,?,?,?,?)";
 
@@ -192,6 +197,27 @@ public class ProperyJdbcDAO {
             // don't let the SQLException leak from our DAO encapsulation
             throw new DAOException(ex.getMessage(), ex);
         }
+    }
+    
+    //method to add a property to a renters wishlist
+    public void addToWishList(Renter r, Property p) {
+        String sql = "insert into Wishlist (renterId, propertyId) values (?,?)";
+ 
+        try (
+            // get connection to database
+            Connection dbCon = DbConnection.getConnection(databaseURI);
+            // create the statement
+            PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+                // copy the data from the renter domain object into the SQL parameters
+                stmt.setInt(1, r.getRenterId());
+                stmt.setInt(2, p.getPropertyId());
+
+                stmt.executeUpdate(); // execute the statement
+ 
+            } catch (SQLException ex) {  // we are forced to catch SQLException
+                // don't let the SQLException leak from our DAO encapsulation
+                throw new DAOException(ex.getMessage(), ex);
+            }
     }
 
 }
