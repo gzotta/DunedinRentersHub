@@ -23,7 +23,7 @@ public class Landlord {
 
     }
 
-    public Landlord(Integer landlordId, String landlordPassword, String username, String landlordPhone, String landlordEmail, ArrayList<Property> properties) {
+    public Landlord(Integer landlordId, String landlordPassword, String username, String landlordPhone, String landlordEmail) {
         this.landlordId = landlordId;
         this.landlordPassword = landlordPassword;
         this.userName = username;
@@ -47,11 +47,11 @@ public class Landlord {
         this.landlordPassword = landlordPassword;
     }
 
-    public String getUsername() {
+    public String getUserName() {
         return userName;
     }
 
-    public void setUsername(String username) {
+    public void setUserName(String username) {
         this.userName = username;
     }
 

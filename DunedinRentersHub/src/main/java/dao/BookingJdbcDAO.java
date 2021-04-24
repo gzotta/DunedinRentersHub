@@ -27,6 +27,7 @@ public class BookingJdbcDAO {
 
     private final String url = DbConnection.getDefaultConnectionUri();
 
+    //method to save a booking
     public void save(Booking booking) {
         String sqlSaveBookingStmt = "insert into Booking (date, landlordId, propertyId, renterId) values (?,?,?,?)";
         String sqlUpdatePropertyStmt = "UPDATE Property SET status = ? WHERE propertyId = ?";

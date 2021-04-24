@@ -1,8 +1,5 @@
 package domain;
 
-
-import java.util.ArrayList;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,8 +12,8 @@ import java.util.ArrayList;
  */
 public class Services {
     
-    private String serviceType;
     private Integer serviceId;
+    private String serviceType;
     private String servicePassword;
     private String username;
     private String servicePhone;
@@ -25,9 +22,9 @@ public class Services {
     public Services() {
     }
 
-    public Services(String serviceType, Integer serviceId, String servicePassword, String username, String servicePhone, String serviceEmail) {
-        this.serviceType = serviceType;
+    public Services(Integer serviceId, String serviceType, String servicePassword, String username, String servicePhone, String serviceEmail) {
         this.serviceId = serviceId;
+        this.serviceType = serviceType;
         this.servicePassword = servicePassword;
         this.username = username;
         this.servicePhone = servicePhone;
