@@ -22,7 +22,7 @@ public class Renter {
     private String renterPhone;
     private String renterEmail;
     private String references;
-    private ArrayList<Property> wishList;
+    private ArrayList<Wishlist> wishList;
 
     public Renter() {
     }
@@ -39,7 +39,7 @@ public class Renter {
     }
 
 
-    public Renter(Integer renterId, String renterPassword, String userName, Date dateOfBirth, String renterPhone, String renterEmail, String references, ArrayList<Property> wishList) {
+    public Renter(Integer renterId, String renterPassword, String userName, Date dateOfBirth, String renterPhone, String renterEmail, String references, ArrayList<Wishlist> wishList) {
         this.renterId = renterId;
         this.renterPassword = renterPassword;
         this.userName = userName;
@@ -86,12 +86,12 @@ public class Renter {
         this.renterEmail = renterEmail;
     }
 
-    public ArrayList<Property> getWishList() {
+    public ArrayList<Wishlist> getWishList() {
         return wishList;
     }
 
-    public void addToWishList(Property p) {
-        wishList.add(p);
+    public void addToWishList(Wishlist w) {
+        wishList.add(w);
     }
 
     public void setEmail(String email) {
