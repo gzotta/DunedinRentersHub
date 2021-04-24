@@ -12,9 +12,9 @@ package domain;
 public class Wishlist {
     Renter renter;
     Landlord landlord;
-
+    
     public Wishlist() {
-    }
+}
 
     public Wishlist(Renter renter, Landlord landlord) {
         this.renter = renter;
