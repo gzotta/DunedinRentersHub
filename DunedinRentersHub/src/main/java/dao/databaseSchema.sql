@@ -28,3 +28,15 @@ create table Landlord (
     constraint Landlord_PK primary key (landlordId)
 );
 
+create table Services (
+    serviceId int auto_increment (1000),
+    serviceType varchar not null,
+    servicePassword varchar not null,
+    username varchar not null unique,
+    servicePhone varchar not null,
+    serviceEmail varchar not null,
+    constraint Services_PK primary key (serviceId)
+);
+
+
+    
