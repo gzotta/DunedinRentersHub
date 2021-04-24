@@ -12,7 +12,7 @@ create table Renter (
     renterId int auto_increment (1000),
     renterPassword varchar not null,
     username varchar not null unique,
-    dateOfBirth varchar not null,
+    dateOfBirth Date not null,
     renterPhone varchar not null,
     renterEmail varchar not null,
     references varchar not null,
@@ -55,6 +55,28 @@ create table Wishlist (
     constraint Wishlist_Renter foreign key (renterId) references Renter,
     constraint Wishlist_Property foreign key (propertyId) references Property
 );
+
+create table Booking (
+    bookingId int auto_increment (1000),
+    date DATE not null,
+    landlordId int,
+    propertyId int,
+    renterId int,
+    constraint Booking_PK primary key (bookingId),
+    constraint Booking_Landlord foreign key (landlordId) references Landlord,
+    constraint Booking_Property foreign key (propertyId) references Property,
+    constraint Booking_Renter foreign key (renterId) references Renter
+);
+
+/* drop table statements 
+drop table booking;
+drop table wishlist;
+drop table property;
+drop table landlord;
+drop table services;
+drop table renter;
+*/
+
 
 
     
