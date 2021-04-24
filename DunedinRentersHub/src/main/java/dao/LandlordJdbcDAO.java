@@ -79,7 +79,6 @@ public class LandlordJdbcDAO {
                     l.setUserName(userName);
                     l.setLandlordPhone(landlordPhone);
                     l.setLandlordEmail(landlordEmail);
-                   // landlordId, landlordPassword, userName, landlordPhone, landlordEmail, properties);
 
                     return l;
                 }
