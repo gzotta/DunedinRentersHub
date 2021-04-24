@@ -27,7 +27,7 @@ public class Renter {
     public Renter() {
     }
 
-    //only temporarily added until dao is fixed for get renter
+    //doesn't coontain wishlist as there wouldnt be a wishlist when renter is initially created
     public Renter(Integer renterId, String renterPassword, String userName, Date dateOfBirth, String renterPhone, String renterEmail, String references) {
         this.renterId = renterId;
         this.renterPassword = renterPassword;
@@ -36,18 +36,6 @@ public class Renter {
         this.renterPhone = renterPhone;
         this.renterEmail = renterEmail;
         this.references = references;
-    }
-
-
-    public Renter(Integer renterId, String renterPassword, String userName, Date dateOfBirth, String renterPhone, String renterEmail, String references, ArrayList<Wishlist> wishList) {
-        this.renterId = renterId;
-        this.renterPassword = renterPassword;
-        this.userName = userName;
-        this.dateOfBirth = dateOfBirth;
-        this.renterPhone = renterPhone;
-        this.renterEmail = renterEmail;
-        this.references = references;
-        this.wishList = wishList;
     }
 
     public String getUsername() {
@@ -90,9 +78,10 @@ public class Renter {
         return wishList;
     }
 
-    public void addToWishList(Wishlist w) {
-        wishList.add(w);
-    }
+    //don't think this is needed here as it will be done via the dao
+//    public void addToWishList(Wishlist w) {
+//        wishList.add(w);
+//    }
 
     public void setEmail(String email) {
         this.renterEmail = email;
