@@ -25,14 +25,24 @@ import java.util.logging.Logger;
  */
 public class BookingJdbcDAO {
 
-    private final String url = DbConnection.getDefaultConnectionUri();
+    private String databaseURI = DbConnection.getDefaultConnectionUri();
+    
+        // default construcot
+    public BookingJdbcDAO() {
+    }
+
+    // constructor that intialises the URI
+    public BookingJdbcDAO(String databaseURI) {
+        this.databaseURI = databaseURI;
+    }
+    
 
     //method to save a booking
     public void save(Booking booking) {
         String sqlSaveBookingStmt = "insert into Booking (date, landlordId, propertyId, renterId) values (?,?,?,?)";
         String sqlUpdatePropertyStmt = "UPDATE Property SET status = ? WHERE propertyId = ?";
 
-        Connection con = DbConnection.getConnection(url);
+        Connection con = DbConnection.getConnection(databaseURI);
 
         try {
             try (
