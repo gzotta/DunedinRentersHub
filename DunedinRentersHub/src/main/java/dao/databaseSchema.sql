@@ -9,7 +9,7 @@
  */
 
 create table Renter (
-    renterId int auto_increment (1000),
+    renterId bigint auto_increment (1000),
     renterPassword varchar not null,
     username varchar not null unique,
     dateOfBirth Date not null,
@@ -20,7 +20,7 @@ create table Renter (
 );
 
 create table Landlord (
-    landlordId int auto_increment (1000),
+    landlordId bigint auto_increment (1000),
     landlordPassword varchar not null,
     userName varchar not null unique,
     landlordPhone varchar not null,
@@ -29,7 +29,7 @@ create table Landlord (
 );
 
 create table Services (
-    serviceId int auto_increment (1000),
+    serviceId bigint auto_increment (1000),
     serviceType varchar not null,
     servicePassword varchar not null,
     username varchar not null unique,
@@ -39,8 +39,8 @@ create table Services (
 );
 
 create table Property (
-    propertyId int auto_increment (1000),
-    landlordId int,
+    propertyId bigint auto_increment (1000),
+    landlordId bigint,
     bedrooms varchar not null,
     address varchar not null,
     status varchar not null,
@@ -49,19 +49,19 @@ create table Property (
 );
 
 create table Wishlist (
-    renterId int,
-    propertyId int,
+    renterId bigint,
+    propertyId bigint,
     constraint Wishlist_PK primary key (renterId, propertyId),
     constraint Wishlist_Renter foreign key (renterId) references Renter,
     constraint Wishlist_Property foreign key (propertyId) references Property
 );
 
 create table Booking (
-    bookingId int auto_increment (1000),
+    bookingId bigint auto_increment (1000),
     date DATE not null,
-    landlordId int,
-    propertyId int,
-    renterId int,
+    landlordId bigint,
+    propertyId bigint,
+    renterId bigint,
     constraint Booking_PK primary key (bookingId),
     constraint Booking_Landlord foreign key (landlordId) references Landlord,
     constraint Booking_Property foreign key (propertyId) references Property,
