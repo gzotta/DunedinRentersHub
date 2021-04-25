@@ -69,7 +69,7 @@ public class ServicesJdbcDAO {
 
             if (rs.next()) {
                 // get the data out of the query
-                int serviceId1 = rs.getInt("serviceId");
+                Integer serviceId1 = rs.getInt("serviceId");
                 String serviceType = rs.getString("serviceType");
                 String servicePassword = rs.getString("servicePassword");
                 String servicePhone = rs.getString("servicePhone");
@@ -110,7 +110,7 @@ public class ServicesJdbcDAO {
             while (rs.next()) {
 
                 // get the data out of the query
-                int serviceId = rs.getInt("serviceId");
+                Integer serviceId = rs.getInt("serviceId");
                 String serviceType1 = rs.getString("serviceType");
                 String servicePassword = rs.getString("servicePassword");
                 String username = rs.getString("username");
