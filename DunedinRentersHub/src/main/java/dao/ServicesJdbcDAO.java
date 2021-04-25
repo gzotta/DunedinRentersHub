@@ -79,9 +79,9 @@ public class ServicesJdbcDAO {
                 Services s = new Services(serviceId1, serviceType, servicePassword, username, servicePhone, serviceEmail);
 
                 return s;
+            } else {
+                return null;
             }
-            return null;
-
         } catch (SQLException ex) {  // we are forced to catch SQLException
             // don't let the SQLException leak from our DAO encapsulation
             throw new DAOException(ex.getMessage(), ex);
