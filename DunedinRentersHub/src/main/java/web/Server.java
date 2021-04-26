@@ -5,6 +5,11 @@
  */
 package web;
 
+import dao.BookingJdbcDAO;
+import dao.LandlordJdbcDAO;
+import dao.PropertyJdbcDAO;
+import dao.RenterJdbcDAO;
+import dao.ServicesJdbcDAO;
 import java.util.concurrent.CompletableFuture;
 import org.jooby.Jooby;
 
@@ -14,10 +19,17 @@ import org.jooby.Jooby;
  */
 public class Server extends Jooby {
     
+    BookingJdbcDAO bookingDao = new BookingJdbcDAO();
+    LandlordJdbcDAO landlordDao = new LandlordJdbcDAO();
+    PropertyJdbcDAO propertyDao = new PropertyJdbcDAO();
+    RenterJdbcDAO renterDao = new RenterJdbcDAO();
+    ServicesJdbcDAO servicesDao = new ServicesJdbcDAO();
+    
+    
     
     public Server(){
         port(8080);
-        get("/", () -> "Hello World");
+        get("/api/properties", () -> propertyDao.getAllProperties());
     }
 
     public static void main(String[] args) throws Exception {
