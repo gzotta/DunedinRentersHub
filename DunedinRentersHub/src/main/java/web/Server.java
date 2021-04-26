@@ -12,24 +12,25 @@ import dao.RenterJdbcDAO;
 import dao.ServicesJdbcDAO;
 import java.util.concurrent.CompletableFuture;
 import org.jooby.Jooby;
+import org.jooby.json.Gzon;
 
 /**
  *
  * @author zotta
  */
 public class Server extends Jooby {
-    
+
     BookingJdbcDAO bookingDao = new BookingJdbcDAO();
     LandlordJdbcDAO landlordDao = new LandlordJdbcDAO();
     PropertyJdbcDAO propertyDao = new PropertyJdbcDAO();
     RenterJdbcDAO renterDao = new RenterJdbcDAO();
     ServicesJdbcDAO servicesDao = new ServicesJdbcDAO();
-    
-    
-    
-    public Server(){
+
+    public Server() {
         port(8080);
-        get("/api/properties", () -> propertyDao.getAllProperties());
+        use(new Gzon());
+        use(new BookingModule(bookingDao));
+        use(new LandlordModule(landlordDao));
     }
 
     public static void main(String[] args) throws Exception {
