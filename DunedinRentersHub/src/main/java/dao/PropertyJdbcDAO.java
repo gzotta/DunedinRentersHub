@@ -23,7 +23,7 @@ public class PropertyJdbcDAO {
 
     private String databaseURI = DbConnection.getDefaultConnectionUri();
 
-    //default construcot
+    //default constructor
     public PropertyJdbcDAO() {
     }
 
@@ -42,7 +42,7 @@ public class PropertyJdbcDAO {
                 Connection dbCon = DbConnection.getConnection(databaseURI);
                 // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-            // copy the data from the product domain object into the SQL parameters
+            // copy the data from the property domain object into the SQL parameters
             stmt.setInt(1, bedrooms);
             // execute the query
             ResultSet rs = stmt.executeQuery();
@@ -126,6 +126,52 @@ public class PropertyJdbcDAO {
         }
     }
 
+    //method to return property by ID.
+    public Property getPropertyById(Integer id) {
+        String sql = "select * from Property where propertyId = ?";
+
+        try (
+                // get a connection to the database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+
+            //copy the data from the property domain object into the SQL parameters
+            stmt.setInt(1, id);
+
+            // execute the query
+            ResultSet rs = stmt.executeQuery();
+
+            // Create the Property object.
+            //Property property = new Property();
+            // iterate through the query results
+            if (rs.next()) {
+
+                // get the data out of the query
+                Integer propertyId = rs.getInt("propertyId");
+                Integer landlordId = rs.getInt("landlordId");
+                Integer bedrooms = rs.getInt("bedrooms");
+                String address = rs.getString("address");
+                String status = rs.getString("status");
+
+                // use the data to create a property object
+                Property property = new Property();
+                property.setPropertyId(propertyId);
+                property.setLandlordId(landlordId);
+                property.setBedrooms(bedrooms);
+                property.setAddress(address);
+                property.setStatus(status);
+
+                return property;
+            } else {
+                return null;
+            }
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+
     //method to return all properties filtered by bedrooms
     public Collection<Integer> getBedrooms() {
         String sql = "select distinct bedrooms from Property";
@@ -198,26 +244,26 @@ public class PropertyJdbcDAO {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
-    
+
     //method to add a property to a renters wishlist
     public void addToWishList(Renter r, Property p) {
         String sql = "insert into Wishlist (renterId, propertyId) values (?,?)";
- 
-        try (
-            // get connection to database
-            Connection dbCon = DbConnection.getConnection(databaseURI);
-            // create the statement
-            PreparedStatement stmt = dbCon.prepareStatement(sql);) {
-                // copy the data from the renter domain object into the SQL parameters
-                stmt.setInt(1, r.getRenterId());
-                stmt.setInt(2, p.getPropertyId());
 
-                stmt.executeUpdate(); // execute the statement
- 
-            } catch (SQLException ex) {  // we are forced to catch SQLException
-                // don't let the SQLException leak from our DAO encapsulation
-                throw new DAOException(ex.getMessage(), ex);
-            }
+        try (
+                // get connection to database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // copy the data from the renter domain object into the SQL parameters
+            stmt.setInt(1, r.getRenterId());
+            stmt.setInt(2, p.getPropertyId());
+
+            stmt.executeUpdate(); // execute the statement
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
     }
 
 }
