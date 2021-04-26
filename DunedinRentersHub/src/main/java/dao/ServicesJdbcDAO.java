@@ -89,7 +89,7 @@ public class ServicesJdbcDAO {
     }
 
     //method to return services filtered by the type of service
-    public Collection<Services> filterByType(Integer serviceType) {
+    public Collection<Services> filterByType(String serviceType) {
 
         String sql = "select * from Services where serviceType = ? order by serviceId";
 
@@ -99,7 +99,7 @@ public class ServicesJdbcDAO {
                 // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             // copy the data from the product domain object into the SQL parameters
-            stmt.setInt(1, serviceType);
+            stmt.setString(1, serviceType);
             // execute the query
             ResultSet rs = stmt.executeQuery();
 
