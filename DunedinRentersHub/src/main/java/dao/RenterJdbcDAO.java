@@ -1,6 +1,6 @@
 package dao;
 
-import domain.Landlord;
+
 import domain.Property;
 import domain.Renter;
 import java.sql.Connection;

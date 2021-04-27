@@ -31,7 +31,7 @@ public class BookingJdbcDAOTest {
     }
   
     @Test
-    public void testSaveProduct() {
+    public void testSave() {
         
         }
     
