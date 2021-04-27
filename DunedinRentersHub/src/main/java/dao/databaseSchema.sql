@@ -10,40 +10,40 @@
 
 create table Renter (
     renterId bigint auto_increment (1000),
-    renterPassword varchar not null,
-    username varchar not null unique,
+    renterPassword varchar(50) not null,
+    username varchar (50) null unique,
     dateOfBirth Date not null,
-    renterPhone varchar not null,
-    renterEmail varchar not null,
-    references varchar not null,
+    renterPhone varchar(50) not null,
+    renterEmail varchar(50) not null,
+    references varchar(80) not null,
     constraint Renter_PK primary key (renterId)
 );
 
 create table Landlord (
     landlordId bigint auto_increment (1000),
-    landlordPassword varchar not null,
-    userName varchar not null unique,
-    landlordPhone varchar not null,
-    landlordEmail varchar not null,
+    landlordPassword varchar(50) not null,
+    userName varchar (50) not null unique,
+    landlordPhone varchar(50) not null,
+    landlordEmail varchar (80) not null,
     constraint Landlord_PK primary key (landlordId)
 );
 
 create table Services (
     serviceId bigint auto_increment (1000),
-    serviceType varchar not null,
-    servicePassword varchar not null,
-    username varchar not null unique,
-    servicePhone varchar not null,
-    serviceEmail varchar not null,
+    serviceType varchar(50) not null,
+    servicePassword varchar(50) not null,
+    username varchar (50)not null unique,
+    servicePhone varchar (50)not null,
+    serviceEmail varchar(80) not null,
     constraint Services_PK primary key (serviceId)
 );
 
 create table Property (
     propertyId bigint auto_increment (1000),
     landlordId bigint,
-    bedrooms varchar not null,
-    address varchar not null,
-    status varchar not null,
+    bedrooms varchar (50)not null,
+    address varchar(80) not null,
+    status varchar (50)not null,
     constraint Property_PK primary key (propertyId),
     constraint Property_Landlord foreign key (landlordId) references Landlord
 );

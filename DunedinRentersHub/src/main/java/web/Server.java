@@ -31,6 +31,9 @@ public class Server extends Jooby {
         use(new Gzon());
         use(new BookingModule(bookingDao));
         use(new LandlordModule(landlordDao));
+        use(new PropertyModule(propertyDao));
+        use(new RenterModule(renterDao));
+        use(new ServicesModule(servicesDao));
     }
 
     public static void main(String[] args) throws Exception {
