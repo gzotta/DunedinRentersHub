@@ -223,7 +223,7 @@ public class PropertyJdbcDAO {
 
     //method to add a property
     public void saveProperty(Property p) {
-        String sql = "insert into Product (propertyId, landlordId, bedrooms, address, status) values (?,?,?,?,?)";
+        String sql = "insert into Product (landlordId, bedrooms, address, status) values (?,?,?,?)";
 
         try (
                 // get connection to database
@@ -231,11 +231,11 @@ public class PropertyJdbcDAO {
                 // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             // copy the data from the property domain object into the SQL parameters
-            stmt.setInt(1, p.getPropertyId());
-            stmt.setInt(2, p.getLandlordId());
-            stmt.setInt(3, p.getBedrooms());
-            stmt.setString(4, p.getAddress());
-            stmt.setString(5, p.getStatus());
+      
+            stmt.setInt(1, p.getLandlordId());
+            stmt.setInt(2, p.getBedrooms());
+            stmt.setString(3, p.getAddress());
+            stmt.setString(4, p.getStatus());
 
             stmt.executeUpdate(); // execute the statement
 
