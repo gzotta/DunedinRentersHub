@@ -34,6 +34,7 @@ public class Server extends Jooby {
         use(new PropertyModule(propertyDao));
         use(new RenterModule(renterDao));
         use(new ServicesModule(servicesDao));
+        use(new AssetModule());
     }
 
     public static void main(String[] args) throws Exception {
