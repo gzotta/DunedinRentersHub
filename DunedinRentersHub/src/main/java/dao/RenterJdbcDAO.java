@@ -31,7 +31,7 @@ public class RenterJdbcDAO {
 
     // method to add renter
     public void saveRenter(Renter r) {
-        String sql = "insert into Renter (renterId, renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references) values (?,?,?,?,?,?,?)";
+        String sql = "insert into Renter (renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references) values (?,?,?,?,?,?)";
 
         try (
                 // get connection to database
@@ -39,13 +39,13 @@ public class RenterJdbcDAO {
                 // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             // copy the data from the renter domain object into the SQL parameters
-            stmt.setInt(1, r.getRenterId());
-            stmt.setString(2, r.getRenterPassword());
-            stmt.setString(3, r.getUsername());
-            stmt.setDate(4, (Date) r.getDateOfBirth());
-            stmt.setString(5, r.getPhone());
-            stmt.setString(6, r.getRenterEmail());
-            stmt.setString(7, r.getReferences());
+         
+            stmt.setString(1, r.getRenterPassword());
+            stmt.setString(2, r.getUsername());
+            stmt.setDate(3, (Date) r.getDateOfBirth());
+            stmt.setString(4, r.getPhone());
+            stmt.setString(5, r.getRenterEmail());
+            stmt.setString(6, r.getReferences());
 
             stmt.executeUpdate(); // execute the statement
 

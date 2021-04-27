@@ -30,7 +30,7 @@ public class LandlordModule extends Jooby {
         });
 
         //Save (POST) a Landlord.
-        post("/api/register", (req, rsp) -> {
+        post("/api/registerLandlord", (req, rsp) -> {
             Landlord landlord = req.body().to(Landlord.class);
             landlordDao.saveLandlord(landlord);
             rsp.status(Status.CREATED);

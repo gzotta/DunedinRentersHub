@@ -21,7 +21,7 @@ public class RenterModule extends Jooby {
     public RenterModule(RenterJdbcDAO renterDao) {
 
         //Save (POST) a Landlord.
-        post("/api/register", (req, rsp) -> {
+        post("/api/registerRenter", (req, rsp) -> {
             Renter renter = req.body().to(Renter.class);
             renterDao.saveRenter(renter);
             rsp.status(Status.CREATED);
