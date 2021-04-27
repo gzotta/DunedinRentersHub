@@ -58,7 +58,7 @@ public class RenterJdbcDAO {
     // method to get renter by username
     // support method only - used by validateCredentials() below
     public Renter getRenter(String username) {
-        String sql = "select * from Renter where renterUsername = ?";
+        String sql = "select * from Renter where username = ?";
 
         try (
                 // get a connection to the database
