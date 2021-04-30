@@ -9,21 +9,21 @@ import domain.Property;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
  *
  * @author sarahaverill
  */
-public class ProperyJdbcDAOTest {
+public class PropertyJdbcDAOTest {
     
-    ProperyJdbcDAO property = new ProperyJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'");
+    PropertyJdbcDAO property = new PropertyJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'");
    
    private Property property1;
    private Property property2;
    private Property property3;
     
-    public ProperyJdbcDAOTest() {
+    public PropertyJdbcDAOTest() {
     }
     
     @BeforeEach
