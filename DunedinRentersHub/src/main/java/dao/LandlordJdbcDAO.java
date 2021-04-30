@@ -26,7 +26,7 @@ public class LandlordJdbcDAO {
 
     // method to save landlord
     public void saveLandlord(Landlord l) {
-        String sql = "insert into Landlord (landlordId, landlordPassword, userName, landlordPhone, landlordEmail) values (?,?,?,?,?)";
+        String sql = "insert into Landlord (landlordPassword, userName, landlordPhone, landlordEmail) values (?,?,?,?)";
 
         try (
                 // get connection to database
@@ -34,11 +34,11 @@ public class LandlordJdbcDAO {
                 // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             // copy the data from the landlord domain object into the SQL parameters
-            stmt.setInt(1, l.getLandlordId());
-            stmt.setString(2, l.getLandlordPassword());
-            stmt.setString(3, l.getUserName());
-            stmt.setString(4, l.getLandlordPhone());
-            stmt.setString(5, l.getLandlordEmail());
+    
+            stmt.setString(1, l.getLandlordPassword());
+            stmt.setString(2, l.getUserName());
+            stmt.setString(3, l.getLandlordPhone());
+            stmt.setString(4, l.getLandlordEmail());
 
             stmt.executeUpdate(); // execute the statement
 

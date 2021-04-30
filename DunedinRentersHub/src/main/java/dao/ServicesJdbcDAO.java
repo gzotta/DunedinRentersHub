@@ -29,7 +29,7 @@ public class ServicesJdbcDAO {
 
     // method to add service
     public void saveService(Services s) {
-        String sql = "insert into Services (serviceId, serviceType, servicePassword, username, servicePhone, serviceEmail) values (?,?,?,?,?,?)";
+        String sql = "insert into Services (serviceType, servicePassword, username, servicePhone, serviceEmail) values (?,?,?,?,?)";
 
         try (
                 // get connection to database
@@ -37,12 +37,12 @@ public class ServicesJdbcDAO {
                 // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             // copy the data from the service domain object into the SQL parameters
-            stmt.setInt(1, s.getServiceId());
-            stmt.setString(2, s.getServiceType());
-            stmt.setString(3, s.getServicePassword());
-            stmt.setString(4, s.getUsername());
-            stmt.setString(5, s.getServicePhone());
-            stmt.setString(6, s.getServiceEmail());
+   
+            stmt.setString(1, s.getServiceType());
+            stmt.setString(2, s.getServicePassword());
+            stmt.setString(3, s.getUsername());
+            stmt.setString(4, s.getServicePhone());
+            stmt.setString(5, s.getServiceEmail());
 
             stmt.executeUpdate(); // execute the statement
 
@@ -89,7 +89,7 @@ public class ServicesJdbcDAO {
     }
 
     //method to return services filtered by the type of service
-    public Collection<Services> filterByType(Integer serviceType) {
+    public Collection<Services> filterByType(String serviceType) {
 
         String sql = "select * from Services where serviceType = ? order by serviceId";
 
@@ -99,7 +99,7 @@ public class ServicesJdbcDAO {
                 // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             // copy the data from the product domain object into the SQL parameters
-            stmt.setInt(1, serviceType);
+            stmt.setString(1, serviceType);
             // execute the query
             ResultSet rs = stmt.executeQuery();
 
