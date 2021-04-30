@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Tests;
+package dao;
 
-import dao.RenterJdbcDAO;
 import domain.Renter;
-
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -23,35 +24,31 @@ public class RenterJdbcDAOTest {
    private Renter renter3;
     
     
+    public RenterJdbcDAOTest() {
+    }
+    
     @BeforeEach
     public void setUp() {
-     
     }
     
     @AfterEach
-    public void save() {
+    public void tearDown() {
     }
-  
+
     @Test
     public void testSaveRenter() {
-        
-        }
-    
-      @Test
-    public void testGetRenter() {
-        
-        }
-    
-     @Test
-    public void testGetRenterWishlist() {
-        
-        }
-    
-     @Test
-    public void testValidateCredentials() {
-        
-        }
     }
-  
+
+    @Test
+    public void testGetRenter() {
+    }
+
+    @Test
+    public void testGetRenterWishlist() {
+    }
+
+    @Test
+    public void testValidateCredentials() {
+    }
     
-    
+}
