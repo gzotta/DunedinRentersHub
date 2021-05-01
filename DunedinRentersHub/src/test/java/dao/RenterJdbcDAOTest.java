@@ -9,7 +9,6 @@ import domain.Renter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  *
@@ -17,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class RenterJdbcDAOTest {
     
-   RenterJdbcDAO renter = new RenterJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/schema.sql'");
+   RenterJdbcDAO renter = new RenterJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/databaseSchema.sql'");
    
    private Renter renter1;
    private Renter renter2;

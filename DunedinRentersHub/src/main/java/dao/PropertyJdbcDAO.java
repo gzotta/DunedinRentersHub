@@ -223,7 +223,7 @@ public class PropertyJdbcDAO {
 
     //method to add a property
     public void saveProperty(Property p) {
-        String sql = "insert into Product (landlordId, bedrooms, address, status) values (?,?,?,?)";
+        String sql = "insert into Property (landlordId, bedrooms, address, status) values (?,?,?,?)";
 
         try (
                 // get connection to database
