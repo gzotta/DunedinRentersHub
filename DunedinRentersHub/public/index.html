@@ -1,25 +1,83 @@
 <!DOCTYPE html>
 
-<html><!-- ng -->
+<html>
     <head>
-        <!-- scripts -->
         <title>Dunedin Renters Hub</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Alatsi&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <div id="wrapper">
-            <div id="nav">
-                <div></div><!-- ng -->
-            </div>
             <div id="header">
-                <h1>Dunedin Renters Hub</h1>
+                <h1>dunedin renter's hub.</h1>
+                <div id="nav">
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                </div>
             </div>
-            <image src="images/flat.jpeg" alt="photo of a flat">
-        </div>
-        <div id="footer">
-            <h2>A centralised system for renting in Dunedin</h2>
+            
+            <div id="container">
+                <div id="searchBar">
+                    <div id="roomFilter">
+                        <h2>Filter by the number of rooms</h2>
+                        <form action="/action_page.php">
+                            <select name="cars">
+                              <option value="1">One room</option>
+                              <option value="2">Two rooms</option>
+                              <option value="3">Three rooms</option>
+                              <option value="4">Four rooms</option>
+                              <option value="5">Five rooms</option>
+                              <option value="6">Six rooms</option>
+                              <option value="7+">Seven or more rooms</option>
+                            </select>
+                            <br><br>
+                            <input type="submit" value="Search" class="buttons">
+                        </form>
+                    </div>
+                </div>
+                <div id="listedFlats">
+                    <div class="flatListing">
+                        <div class="flatListingInfo">
+                            <h3>Debacle</h3>
+                            <h4>844B Cumberland Street</h4>
+                            <h4>Cutler's Properties</h4>
+                            <button type="button" class="buttons">Add to watchlist</button>
+                        </div>
+                        <div class="flatListingPhoto">
+                            <img src="images/Debacle.jpeg">
+                        </div>
+                    </div>
+                    <div class="flatListing">
+                        <div class="flatListingInfo">
+                            <h3>The Six60 Flat</h3>
+                            <h4>660A Castle Street</h4>
+                            <h4>Harlene Hayne</h4>
+                            <button type="button" class="buttons">Add to watchlist</button>
+                        </div>
+                        <div class="flatListingPhoto">
+                            <img src="images/TheSix60Flat.jpeg">
+                        </div>
+                    </div>
+                    <div class="flatListing">
+                        <div class="flatListingInfo">
+                            <h3>Thirsty Boys</h3>
+                            <h4>631 Castle Street</h4>
+                            <h4>Cutler's Properties</h4>
+                            <button type="button" class="buttons">Add to watchlist</button>
+                        </div>
+                        <div class="flatListingPhoto">
+                            <img src="images/ThirstyBoys.jpeg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="footer">
+                <h1 style="font-size: 45px">drh.</h1>
+                <h1 style="position: relative; text-align: right; top:-70px; font-size: 25px;">log in</h1>
+            </div>
         </div>
     </body>
 </html>

@@ -1,37 +1,138 @@
 #wrapper{
     margin: auto;
-    text-align: center;
     width: 100%;
 }
 
 /********************************** HEADER **********************************/
 #header{
-    background-color: blue;
-    border-top: black solid 4px;
-    border-bottom: black solid 4px;
-    color: white;
+    background-color: #8600b3;
     font-size: 20px;
-    height: 90px;
+    height: 80px;
+    text-align: left;
+    padding: 15px 20px;
+}
+
+#nav{
+    height: 60px;
+    position: absolute;
+    width: 60px;
+    top: 33px;
+    right: 50px;
+}
+
+.navLine{
+    background-color: white;
+    height: 20%;
+    width: 100%;
 }
 
 /******************************** CONTAINER ********************************/
+#container{
+    background-color: white;
+    height: 690px;
+}
 
-
-/********************************** FOOTER **********************************/
-#footer{
-    font-size: 15px;
+#searchBar{
+    height: 100%;
+    width: 24%;
+    float: left;
+    border-right: #bfbfbf solid 2px;
     text-align: center;
 }
 
-/********************************** TEXT **********************************/
+#roomFilter{
+    height: 200px;
+    width: 80%;
+    margin: 100px 20px;
+}
 
+#listedFlats{
+    height: 100%;
+    width: 75%;
+    float: right;
+}
+
+.flatListing{
+    height: 200px;
+    width: 90%;
+    margin: 20px 5%;
+    border: 2px solid #8600b3;
+    border-radius: 5px;
+}
+
+.flatListingInfo{
+    height: 90%;
+    width: 350px;
+    margin: -10px 15px;
+    float: left;
+    
+}
+
+.flatListingPhoto{
+    height: 100%;
+    width:200px;
+    float: right;
+    background-color: #bfbfbf;
+    overflow: hidden;
+}
+
+/********************************** FOOTER **********************************/
+#footer{
+    background-color: #8600b3;
+    padding: 10px 20px;
+    height: 40px;
+}
+
+/********************************** TEXT **********************************/
+h1{
+    font-family: 'Alatsi', sans-serif;
+    margin-top: -10px;
+    font-size: 75px;
+    color: #fff;
+}
+
+h2{
+    font-family: 'Alatsi', sans-serif;
+    margin-top: -10px;
+    font-size: 30px;
+    color: #8600b3;
+}
+
+h3{
+    font-family: 'Alatsi', sans-serif;
+    font-size: 25px;
+    color: #8600b3;
+}
+
+h4{
+    font-family: 'Alatsi', sans-serif;
+    font-size: 15px;
+    margin-top: -10px;
+    color: #bfbfbf;
+}
 
 /********************************** EXTRAS **********************************/
-img{
-    height: 300px;
+.buttons{
+    height: 30px;
+    border: 2px solid #8600b3;
+    border-radius: 5px;
+    background-color: #fff;
+    font-family: 'Alatsi', sans-serif;
+    font-size: 15px;
+    color: #8600b3;
+}
+
+.buttons:hover {
+    height: 34px;
+    border: 2px solid #8600b3;
+    border-radius: 5px;
+    background-color: #fff;
+    font-family: 'Alatsi', sans-serif;
+    font-size: 20px;
+    color: #8600b3;
 }
 
 /********************************** NOTES **********************************/
 /*
-
+    header purple: #8600b3;
 */
