@@ -40,19 +40,19 @@
     text-align: center;
 }
 
-#roomFilter{
+#searchFilter{
     height: 200px;
     width: 80%;
     margin: 100px 20px;
 }
 
-#listedFlats{
+#listings{
     height: 100%;
     width: 75%;
     float: right;
 }
 
-.flatListing{
+.listing{
     height: 200px;
     width: 90%;
     margin: 20px 5%;
@@ -60,7 +60,7 @@
     border-radius: 5px;
 }
 
-.flatListingInfo{
+.listingInfo{
     height: 90%;
     width: 350px;
     margin: -10px 15px;
@@ -68,7 +68,7 @@
     
 }
 
-.flatListingPhoto{
+.listingPhoto{
     height: 100%;
     width:200px;
     float: right;
