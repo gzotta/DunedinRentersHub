@@ -1,5 +1,6 @@
 package dao;
 
+import domain.Landlord;
 import domain.Property;
 import domain.Services;
 import java.sql.Connection;
@@ -55,7 +56,7 @@ public class ServicesJdbcDAO {
     // method to get service by username
     // support method only - used by validateCredentials() below
     public Services getServices(String username) {
-        String sql = "select * from Service where username = ?";
+        String sql = "select * from Services where username = ?";
 
         try (
                 // get a connection to the database
@@ -149,4 +150,24 @@ public class ServicesJdbcDAO {
             return false;
         }
     }
+    
+  
+     public void removeServices(Services s) {
+        String sql = "delete Services where username = ?";
+
+        try (
+                // get connection to database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // copy the data from the property domain object into the SQL parameters
+            stmt.setString(1, s.getUsername());
+
+            stmt.executeUpdate(); // execute the statement
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+}
 }

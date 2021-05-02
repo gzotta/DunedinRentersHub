@@ -1,6 +1,7 @@
 package dao;
 
 import domain.Landlord;
+import domain.Property;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -99,4 +100,25 @@ public class LandlordJdbcDAO {
             return false;
         }
     }
+    
+     public void removeLandlord(Landlord l) {
+        String sql = "delete Landlord where username = ?";
+
+        try (
+                // get connection to database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // copy the data from the property domain object into the SQL parameters
+            stmt.setString(1, l.getUserName());
+
+            stmt.executeUpdate(); // execute the statement
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+    
+    
 }
