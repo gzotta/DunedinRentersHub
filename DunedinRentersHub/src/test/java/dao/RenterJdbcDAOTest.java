@@ -5,7 +5,12 @@
  */
 package dao;
 
+import domain.Property;
 import domain.Renter;
+import java.sql.Date;
+import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,11 +21,11 @@ import org.junit.jupiter.api.Test;
  */
 public class RenterJdbcDAOTest {
     
-   RenterJdbcDAO renter = new RenterJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/databaseSchema.sql'");
+   RenterJdbcDAO r = new RenterJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/databaseSchema.sql'");
    
-   private Renter renter1;
-   private Renter renter2;
-   private Renter renter3;
+   private Renter r1;
+   private Renter r2;
+   private Renter r3;
     
     
     public RenterJdbcDAOTest() {
@@ -28,6 +33,33 @@ public class RenterJdbcDAOTest {
     
     @BeforeEach
     public void setUp() {
+      r1 = new Renter();
+      r2 = new Renter();
+      r3 = new Renter();
+      
+      r1.setRenterPassword("Pass1");
+      r1.setUsername("User1");
+      r1.setDateOfBirth(new Date(2/5/21));
+      r1.setPhone("Phone1");
+      r1.setRenterEmail("Email1");
+      r1.setReferences("Refernce1");
+      
+      r2.setRenterPassword("Pass2");
+      r2.setUsername("User2");
+      r2.setDateOfBirth(new Date(2/5/21));
+      r2.setPhone("Phone2");
+      r2.setRenterEmail("Email2");
+      r2.setReferences("Refernce2");
+      
+      r3.setRenterPassword("Pass3");
+      r3.setUsername("User3");
+      r3.setDateOfBirth(new Date(2/5/21));
+      r3.setPhone("Phone3");
+      r3.setRenterEmail("Email3");
+      r3.setReferences("Refernce3");
+      
+      r.saveRenter(r1);
+      r.saveRenter(r2);
     }
     
     @AfterEach
@@ -40,6 +72,8 @@ public class RenterJdbcDAOTest {
 
     @Test
     public void testGetRenter() {
+     r.getRenter("User1");
+     assertThat( r.getRenter("User1"), samePropertyValuesAs(r1, "landlordId"));
     }
 
     @Test

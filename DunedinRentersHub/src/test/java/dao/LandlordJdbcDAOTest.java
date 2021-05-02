@@ -6,10 +6,8 @@
 package dao;
 
 import domain.Landlord;
-import java.math.BigDecimal;
-import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.samePropertyValuesAs;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,16 +59,15 @@ public class LandlordJdbcDAOTest {
     @Test
     public void testSaveLandlord() {
      l.saveLandlord(l3);
-     
-    //  assertThat(l.getLandlord(), hasItem(l1));
-     // assertThat(l.getLandlord(), hasItem(l2));
-   //  assertThat(l.getLandlord(), hasItem(l3));
+      l.saveLandlord(l3);
+
     }
 
     @Test
     public void testGetLandlord() {
-   //     assertThat(l.getLandlord(),hasItem(l1) );
-   //     assertThat(l.getLandlord(),hasItem(l2) );
+     l.getLandlord("User1");
+     assertThat( l.getLandlord("User1"), samePropertyValuesAs(l1, "landlordId"));
+
     }
 
     @Test

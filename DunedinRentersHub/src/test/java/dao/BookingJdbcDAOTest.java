@@ -36,6 +36,7 @@ public class BookingJdbcDAOTest {
       booking2 = new Booking();
       booking3 = new Booking();
       
+      
     Landlord land1 = new Landlord(1234, "lpass1", "luse1", "lphone1", "lemail1");
     Property prop1 = new Property(5678, 4321, 3, "add1", "status1");
     Renter rent1 =new Renter(5647, "rpass1", "ruse1", new Date(4/5/2000), "rphone1", "remail1", "rref1");
