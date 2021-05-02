@@ -72,7 +72,31 @@
     height: 100%;
     width:200px;
     float: right;
-    background-color: #bfbfbf;
+    overflow: hidden;
+}
+
+#flatInfo{
+    width: 50%;
+    float: left;
+    margin: 1%;
+    text-align: left;
+    padding: 5%;
+}
+
+#flatMedia{
+    text-align: center;
+    width: 35%;
+    margin: 1%;
+    float: right;
+}
+
+#flatPhotos{
+    height: 200px;
+    overflow: hidden;
+}
+
+#flatMap{
+    height: 200px;
     overflow: hidden;
 }
 
@@ -108,7 +132,22 @@ h4{
     font-family: 'Open Sans', sans-serif;
     font-size: 15px;
     margin-top: -10px;
-    color: #bfbfbf;
+    color: #a6a6a6;
+}
+
+h5{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    margin: 0 -10px;
+    color: #a6a6a6;
+}
+
+p{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    margin: 0 -10px;
+    color: #a6a6a6;
+    text-align: justify;
 }
 
 /********************************** EXTRAS **********************************/
@@ -130,6 +169,10 @@ h4{
     font-family: 'Alatsi', sans-serif;
     font-size: 20px;
     color: #8600b3;
+}
+
+img{
+    height: 100%;
 }
 
 /********************************** NOTES **********************************/
