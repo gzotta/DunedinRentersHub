@@ -75,7 +75,7 @@
     overflow: hidden;
 }
 
-#flatInfo{
+#infoView{
     width: 50%;
     float: left;
     margin: 1%;
@@ -83,7 +83,7 @@
     padding: 5%;
 }
 
-#flatMedia{
+#mediaView{
     text-align: center;
     width: 35%;
     margin: 1%;
@@ -97,6 +97,11 @@
 
 #flatMap{
     height: 200px;
+    overflow: hidden;
+}
+
+#renterPhoto{
+    height: 650px;
     overflow: hidden;
 }
 
@@ -172,7 +177,7 @@ p{
 }
 
 img{
-    height: 100%;
+    width: 100%;
 }
 
 /********************************** NOTES **********************************/
