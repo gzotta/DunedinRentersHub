@@ -71,7 +71,7 @@ public class PropertyJdbcDAOTest {
         p1.setStatus("D1");
         p1.setPropertyId(12345);
 
-        p2.setBedrooms(3);
+        p2.setBedrooms(2);
         p2.setLandlordId(l.getLandlord("username2").getLandlordId());
         p2.setAddress("A2");
         p2.setStatus("D2");
@@ -92,31 +92,35 @@ public class PropertyJdbcDAOTest {
     public void tearDown() {
         p.removeProperty(p1);
         p.removeProperty(p2);
+        p.removeProperty(p3);
+        l.removeLandlord(l1);
+        l.removeLandlord(l2);
+        l.removeLandlord(l3);
     }
 
-//    @Test
-//    public void testFilterByBedroom() {
-//        assertThat(p.filterByBedroom(p1.getBedrooms()), hasItem(p1));
-//        assertThat(p.filterByBedroom(p1.getBedrooms()), not(hasItem(p2)));
-//    }
-//    @Test
-//    public void testGetAllProperties() {
-//        assertThat(p.getAllProperties(), hasItem(p1));
-//        assertThat(p.getAllProperties(), hasItem(p2));
-//    }
-//
-//    @Test
-//    public void testGetBedrooms() {
-//        assertThat(p.getBedrooms(), hasItem(p1.getBedrooms()));
-//        assertThat(p.getBedrooms(), hasItem(p2.getBedrooms()));
-//    }
-//
-//    @Test
-//    public void testRemoveProperty() {
-//        p.removeProperty(p1);
-//        assertThat(p.getAllProperties(), hasSize(1));
-//        assertThat(p.getAllProperties(), not(hasItem(p1)));
-//    }
+    @Test
+    public void testFilterByBedroom() {
+        assertThat(p.filterByBedroom(p1.getBedrooms()), hasSize(1));
+        assertThat(p.filterByBedroom(p1.getBedrooms()), not(hasItem(p2)));
+    }
+    @Test
+    public void testGetAllProperties() {
+        assertThat(p.getAllProperties(), hasSize(2));
+        
+    }
+
+    @Test
+    public void testGetBedrooms() {
+        assertThat(p.getBedrooms(), hasSize(2));
+        
+    }
+
+    @Test
+    public void testRemoveProperty() {
+        p.removeProperty(p1);
+        assertThat(p.getAllProperties(), hasSize(1));
+        assertThat(p.getAllProperties(), not(hasItem(p1)));
+    }
     @Test
     public void testSaveProperty() {
 
