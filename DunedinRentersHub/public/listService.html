@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>DRH - List Property</title>
+        <title>DRH - List Service</title>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/style.css">
@@ -20,48 +20,42 @@
             
             <div id="container">
                 <div id="listNew">
-                    <h2 style="text-align: center;">List a Property</h2>
+                    <h2 style="text-align: center;">List a Service</h2>
                     <form action="/action_page.php">
-                        <label for="propertyName">Property name:</label>
+                        <label for="serviceType">Service Type:</label>
                         <br>
-                        <input type="text" name="propertyName">
+                        <select name="serviceType">
+                            <option value="mover">Mover</option>
+                            <option value="cleaner">Cleaner</option>
+                            <option value="storage">Storage</option>
+                        </select>
+                        <br>
+                        <br>
+                        <label for="serviceName">Service name:</label>
+                        <br>
+                        <input type="text" name="serviceName">
                         <br>
                         <label for="address">Address:</label>
                         <br>
                         <input type="text" name="address">
                         <br>
-                        <label for="numberOfRooms">Bedrooms:</label>
+                        <label for="website">Website:</label>
                         <br>
-                        <select name="numberOfRooms">
-                            <option value="1">One room</option>
-                            <option value="2">Two rooms</option>
-                            <option value="3">Three rooms</option>
-                            <option value="4">Four rooms</option>
-                            <option value="5">Five rooms</option>
-                            <option value="6">Six rooms</option>
-                            <option value="7+">Seven or more rooms</option>
-                        </select>
+                        <input type="text" name="website">
                         <br>
-                        <label for="description">Description</label>
+                        <label for="phone">Phone:</label>
                         <br>
-                        <textarea name="description" rows="4" cols="50"></textarea>
+                        <input type="text" name="phone">
+                        <br>
                         <br>
                         <label for="photo">Photo</label>
                         <br>
                         <textarea name="photo" rows="4" cols="50"></textarea>
                         <br>
-                        <label for="status">Status:</label>
-                        <br>
-                        <select name="status">
-                            <option value="readyNow">Ready now</option>
-                            <option value="readyNextYear">Ready for next year</option>
-                            <option value="someonesViewing">Someones viewing</option>
-                            <option value="rented">Rented</option>
-                        </select>
                         <br>
                         <br>
                         <div id="listButton">
-                            <input type="submit" value="List Property" class="bigButton">
+                            <input type="submit" value="List Service" class="bigButton">
                         </div>
                       </form>
                 </div>
