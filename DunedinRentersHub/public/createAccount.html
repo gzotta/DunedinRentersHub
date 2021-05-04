@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>DRH - List Service</title>
+        <title>DRH - Create Account</title>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/style.css">
@@ -20,42 +20,43 @@
             
             <div id="container">
                 <div id="borderedBox">
-                    <h2 style="text-align: center;">List a Service</h2>
+                    <h2 style="text-align: center;">Create Account</h2>
+                    
+                    <div id="userType">
+                        <div id="userTypeRenter" style="background-color: #8600b3;"><h2 style="color: #fff;">Renter</h2></div>
+                        <div id="userTypeLandlord"><h2>Landlord</h2></div>
+                        <div id="userTypeService"><h2>Service</h2></div>
+                    </div>
+                    <br>
+                    
                     <form action="/action_page.php">
-                        <label for="serviceType">Service Type:</label>
+                        <label for="username">Username:</label>
                         <br>
-                        <select name="serviceType">
-                            <option value="mover">Mover</option>
-                            <option value="cleaner">Cleaner</option>
-                            <option value="storage">Storage</option>
-                        </select>
+                        <input type="text" name="username">
                         <br>
                         <br>
-                        <label for="serviceName">Service name:</label>
+                        <label for="dateOfBirth">Date of birth:</label>
                         <br>
-                        <input type="text" name="serviceName">
+                        <input type="date" name="dateOfBirth">
                         <br>
-                        <label for="address">Address:</label>
                         <br>
-                        <input type="text" name="address">
+                        <label for="email">Email:</label>
                         <br>
-                        <label for="website">Website:</label>
+                        <input type="text" name="email">
                         <br>
-                        <input type="text" name="website">
                         <br>
                         <label for="phone">Phone:</label>
                         <br>
                         <input type="text" name="phone">
                         <br>
                         <br>
-                        <label for="photo">Photo</label>
+                        <label for="password">Password:</label>
                         <br>
-                        <textarea name="photo" rows="4" cols="50"></textarea>
-                        <br>
+                        <input type="text" name="password">
                         <br>
                         <br>
                         <div id="submitButton">
-                            <input type="submit" value="List Service" class="bigButton">
+                            <input type="submit" value="Create Account" class="bigButton">
                         </div>
                       </form>
                 </div>

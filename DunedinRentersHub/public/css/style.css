@@ -105,7 +105,40 @@
     overflow: hidden;
 }
 
-#listNew{
+#userType{
+    height: 60px;
+    width: 450px;
+    margin: auto;
+    border: #8600b3 solid 2px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#userTypeRenter{
+    height: 40px;
+    width: 150px;
+    float: left;
+    padding-top: 20px;
+}
+
+#userTypeLandlord{
+    height: 40px;
+    width: 150px;
+    margin: auto;
+    margin-top: -2px;
+    padding-top: 20px;
+    border: #8600b3 solid 2px;
+}
+
+#userTypeService{
+    height: 40px;
+    width: 150px;
+    padding-top: 20px;
+    float: right;
+    margin-top: -60px;
+}
+
+#borderedBox{
     height: 71%;
     width: 40%;
     left: 50%;
@@ -117,7 +150,7 @@
     border-radius: 5px;
 }
 
-#listButton{
+#submitButton{
     margin: auto;
     text-align: center;
 }
