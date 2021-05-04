@@ -105,6 +105,23 @@
     overflow: hidden;
 }
 
+#listProperty{
+    height: 71%;
+    width: 40%;
+    left: 50%;
+    margin-left: -20%;
+    margin-top: 20px;
+    position: absolute;
+    padding: 30px;
+    border: solid #8600b3 2px;
+    border-radius: 5px;
+}
+
+#listPropertyButton{
+    margin: auto;
+    text-align: center;
+}
+
 /********************************** FOOTER **********************************/
 #footer{
     background-color: #8600b3;
@@ -155,6 +172,12 @@ p{
     text-align: justify;
 }
 
+label{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 25px;
+    color: #a6a6a6;
+}
+
 /********************************** EXTRAS **********************************/
 .buttons{
     height: 30px;
@@ -168,11 +191,23 @@ p{
 
 .buttons:hover {
     height: 34px;
+    font-size: 20px;
+    color: #8600b3;
+}
+
+.bigButton{
+    height: 40px;
     border: 2px solid #8600b3;
     border-radius: 5px;
     background-color: #fff;
     font-family: 'Alatsi', sans-serif;
-    font-size: 20px;
+    font-size: 25px;
+    color: #8600b3;
+}
+
+.bigButton:hover {
+    height: 45px;
+    font-size: 30px;
     color: #8600b3;
 }
 
