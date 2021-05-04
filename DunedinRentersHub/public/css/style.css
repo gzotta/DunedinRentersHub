@@ -46,6 +46,15 @@
     margin: 100px 20px;
 }
 
+#flatPreview{
+    height: 350px;
+    border: #8600b3 2px solid;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 80%;
+    margin: 100px 20px;
+}
+
 #listings{
     height: 100%;
     width: 75%;
