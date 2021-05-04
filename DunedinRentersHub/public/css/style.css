@@ -91,12 +91,12 @@
 }
 
 #flatPhotos{
-    height: 200px;
+    height: 300px;
     overflow: hidden;
 }
 
 #flatMap{
-    height: 200px;
+    height: 300px;
     overflow: hidden;
 }
 
@@ -255,6 +255,7 @@ a:link{
 /********************************** NOTES **********************************/
 /*
     header purple: #8600b3;
+    text grey: #bfbfbf
     headers: 'Alatsi', sans-serif;
     paragrpahs: 'Open Sans', sans-serif;
 */
