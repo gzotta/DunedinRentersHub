@@ -84,6 +84,7 @@ public class BookingJdbcDAO {
                 } else {
                     throw new DAOException("Problem getting generated booking ID");
                 }
+                booking.setBookingId(bookingId);
 
                 // ## update the property status ## //
                 property.setStatus("booked");

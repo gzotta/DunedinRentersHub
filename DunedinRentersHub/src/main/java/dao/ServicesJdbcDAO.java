@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -36,7 +37,7 @@ public class ServicesJdbcDAO {
                 // get connection to database
                 Connection dbCon = DbConnection.getConnection(databaseURI);
                 // create the statement
-                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+                PreparedStatement stmt = dbCon.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             // copy the data from the service domain object into the SQL parameters
    
             stmt.setString(1, s.getServiceType());
@@ -46,6 +47,16 @@ public class ServicesJdbcDAO {
             stmt.setString(5, s.getServiceEmail());
 
             stmt.executeUpdate(); // execute the statement
+            
+            //getting generated keys and adding it to domain
+            Integer Id = null;
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                    Id = rs.getInt(1);
+                } else {
+                    throw new DAOException("Problem getting generated services ID");
+                }
+            s.setServiceId(Id);
 
         } catch (SQLException ex) {  // we are forced to catch SQLException
             // don't let the SQLException leak from our DAO encapsulation

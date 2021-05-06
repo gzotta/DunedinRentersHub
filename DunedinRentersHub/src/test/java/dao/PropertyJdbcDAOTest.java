@@ -153,7 +153,7 @@ public class PropertyJdbcDAOTest {
 
     @Test
     public void testAddToWishList() {
-        p.addToWishList(r.getRenter(r1.getUserName()), p.getPropertyById(p1.getPropertyId()));
+        p.addToWishList(r1, p.getPropertyById(p1.getPropertyId()));
         assertThat(r.getRenterWishlist(r.getRenter(r1.getUsername())), hasSize(1));
 
     }

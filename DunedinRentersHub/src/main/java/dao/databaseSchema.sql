@@ -39,7 +39,7 @@ create table Services (
 );
 
 create table Property (
-    propertyId int not null unique,
+    propertyId int auto_increment (1000),
     landlordId int,
     bedrooms varchar (50)not null,
     address varchar(80) not null,
