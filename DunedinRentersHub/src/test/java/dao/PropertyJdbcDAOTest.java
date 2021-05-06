@@ -45,11 +45,11 @@ public class PropertyJdbcDAOTest {
     public void setUp() {
 
         l1 = new Landlord();
-        l1.setLandlordId(12345);
-        l1.setLandlordPassword("password1");
-        l1.setUserName("username1");
-        l1.setLandlordPhone("phone1");
+        //l1.setLandlordId(12345);
         l1.setLandlordEmail("email1@email.com");
+        l1.setLandlordPassword("password1");
+        l1.setLandlordPhone("phone1");
+        l1.setUserName("username1");
 
         l2 = new Landlord();
         l2.setLandlordEmail("email2@email.com");
@@ -72,30 +72,31 @@ public class PropertyJdbcDAOTest {
         p3 = new Property();
 
         p1.setBedrooms(1);
-        p1.setLandlordId(l.getLandlord("username1").getLandlordId());
+        p1.setLandlordId(l1.getLandlordId());
         p1.setAddress("A1");
         p1.setStatus("D1");
-        p1.setPropertyId(12345);
+        //p1.setPropertyId(12345);
 
         p2.setBedrooms(2);
-        p2.setLandlordId(l.getLandlord("username2").getLandlordId());
+        p2.setLandlordId(l2.getLandlordId());
         p2.setAddress("A2");
         p2.setStatus("D2");
-        p2.setPropertyId(4567);
+        //p2.setPropertyId(4567);
 
         p3.setBedrooms(3);
-        p3.setLandlordId(l.getLandlord("username3").getLandlordId());
-        p3.setAddress("A2");
-        p3.setStatus("D2");
-        p3.setPropertyId(7895);
+        p3.setLandlordId(l3.getLandlordId());
+        p3.setAddress("A3");
+        p3.setStatus("D3");
+        //p3.setPropertyId(7895);
 
         p.saveProperty(p1);
         p.saveProperty(p2);
+        //p.saveProperty(p3);
 
         r1 = new Renter();
         r1.setDateOfBirth(new java.sql.Date(1996 - 06 - 06));
-        r1.setEmail("email1");
-        r1.setPhone("666666");
+        r1.setRenterEmail("email1");
+        r1.setRenterPhone("666666");
         r1.setReferences("references1");
         r1.setRenterPassword("thepassword");
         r1.setUserName("renterUsernam1");
@@ -106,7 +107,7 @@ public class PropertyJdbcDAOTest {
 
     @AfterEach
     public void tearDown() {
-        r.removeWishList(r.getRenter(r1.getUserName()));
+        r.removeWishList(r1);
         p.removeProperty(p1);
         p.removeProperty(p2);
         p.removeProperty(p3);
@@ -114,6 +115,7 @@ public class PropertyJdbcDAOTest {
         l.removeLandlord(l2);
         l.removeLandlord(l3);
         r.removeRenter(r1);
+
     }
 
     @Test
@@ -143,18 +145,17 @@ public class PropertyJdbcDAOTest {
 
     @Test
     public void testSaveProperty() {
-
         p.saveProperty(p3);
         assertThat(p.getAllProperties(), hasSize(3));
-        assertThat(p.getPropertyById(12345), samePropertyValuesAs(p1));
-        assertThat(p.getPropertyById(4567), samePropertyValuesAs(p2));
-        assertThat(p.getPropertyById(7895), samePropertyValuesAs(p3));
+        assertThat(p.getPropertyById(p1.getPropertyId()), samePropertyValuesAs(p1));
+        assertThat(p.getPropertyById(p2.getPropertyId()), samePropertyValuesAs(p2));
+        assertThat(p.getPropertyById(p3.getPropertyId()), samePropertyValuesAs(p3));
     }
 
     @Test
     public void testAddToWishList() {
-        p.addToWishList(r1, p.getPropertyById(p1.getPropertyId()));
-        assertThat(r.getRenterWishlist(r.getRenter(r1.getUsername())), hasSize(1));
+        p.addToWishList(r1, p1);
+        assertThat(r.getRenterWishlist(r1), hasSize(1));
 
     }
 
