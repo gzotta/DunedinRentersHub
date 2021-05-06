@@ -3,6 +3,7 @@ package domain;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,62 +19,60 @@ public class Booking {
 
     private Integer bookingId;
     private LocalDateTime date;
-    private Landlord landlord;
-    private Property property;
-    private Renter renter;
+    private String landlordId;
+    private String propertyId;
+    private String renterId;
 
     public Booking() {
+    }
+
+    public Booking(Integer bookingId, LocalDateTime date, String landlordId, String propertyId, String renterId) {
+        this.bookingId = bookingId;
+        this.date = date;
+        this.landlordId = landlordId;
+        this.propertyId = propertyId;
+        this.renterId = renterId;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Booking other = (Booking) obj;
+        if (!Objects.equals(this.landlordId, other.landlordId)) {
+            return false;
+        }
+        if (!Objects.equals(this.propertyId, other.propertyId)) {
+            return false;
+        }
+        if (!Objects.equals(this.renterId, other.renterId)) {
+            return false;
+        }
+        if (!Objects.equals(this.bookingId, other.bookingId)) {
+            return false;
+        }
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        return true;
     }
 
 
     
 
-    public Booking(Integer bookingId, LocalDateTime date, Landlord landlord, Property property, Renter renter) {
-        this.bookingId = bookingId;
-        this.date = date;
-        this.landlord = landlord;
-        this.property = property;
-        this.renter = renter;
-    }
 
-    public Integer getBookingId() {
-        return bookingId;
-    }
-
-    public void setBookingId(Integer bookingId) {
-        this.bookingId = bookingId;
-    }
-
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
-    }
-
-    public Landlord getLandlord() {
-        return landlord;
-    }
-
-    public void setLandlord(Landlord landlord) {
-        this.landlord = landlord;
-    }
-
-    public Property getProperty() {
-        return property;
-    }
-
-    public void setProperty(Property property) {
-        this.property = property;
-    }
-
-    public Renter getRenter() {
-        return renter;
-    }
-
-    public void setRenter(Renter renter) {
-        this.renter = renter;
-    }
  
 }
