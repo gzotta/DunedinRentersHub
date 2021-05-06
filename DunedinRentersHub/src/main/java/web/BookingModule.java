@@ -7,6 +7,7 @@ package web;
 
 import dao.BookingJdbcDAO;
 import domain.Booking;
+import domain.Property;
 import org.jooby.Jooby;
 import org.jooby.Status;
 
@@ -22,7 +23,8 @@ public class BookingModule extends Jooby {
         //Save (POST) a booking.
         post("/api/bookings", (req, rsp) -> {
             Booking booking = req.body().to(Booking.class);
-            bookingDao.save(booking);
+            Property property = req.body().to(Property.class);
+            bookingDao.save(booking, property);
             rsp.status(Status.CREATED);
         });
 

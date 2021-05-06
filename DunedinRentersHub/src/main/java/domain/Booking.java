@@ -19,14 +19,14 @@ public class Booking {
 
     private Integer bookingId;
     private LocalDateTime date;
-    private String landlordId;
-    private String propertyId;
-    private String renterId;
+    private Integer landlordId;
+    private Integer propertyId;
+    private Integer renterId;
 
     public Booking() {
     }
 
-    public Booking(Integer bookingId, LocalDateTime date, String landlordId, String propertyId, String renterId) {
+    public Booking(Integer bookingId, LocalDateTime date, Integer landlordId, Integer propertyId, Integer renterId) {
         this.bookingId = bookingId;
         this.date = date;
         this.landlordId = landlordId;
@@ -34,41 +34,49 @@ public class Booking {
         this.renterId = renterId;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
+
+
+    public Integer getBookingId() {
+        return bookingId;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Booking other = (Booking) obj;
-        if (!Objects.equals(this.landlordId, other.landlordId)) {
-            return false;
-        }
-        if (!Objects.equals(this.propertyId, other.propertyId)) {
-            return false;
-        }
-        if (!Objects.equals(this.renterId, other.renterId)) {
-            return false;
-        }
-        if (!Objects.equals(this.bookingId, other.bookingId)) {
-            return false;
-        }
-        if (!Objects.equals(this.date, other.date)) {
-            return false;
-        }
-        return true;
+    public void setBookingId(Integer bookingId) {
+        this.bookingId = bookingId;
     }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public Integer getLandlordId() {
+        return landlordId;
+    }
+
+    public void setLandlordId(Integer landlordId) {
+        this.landlordId = landlordId;
+    }
+
+    public Integer getPropertyId() {
+        return propertyId;
+    }
+
+    public void setPropertyId(Integer propertyId) {
+        this.propertyId = propertyId;
+    }
+
+    public Integer getRenterId() {
+        return renterId;
+    }
+
+    public void setRenterId(Integer renterId) {
+        this.renterId = renterId;
+    }
+
+
 
 
     
