@@ -1,6 +1,5 @@
 package dao;
 
-
 import domain.Landlord;
 import domain.Property;
 import domain.Renter;
@@ -40,7 +39,7 @@ public class RenterJdbcDAO {
                 // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             // copy the data from the renter domain object into the SQL parameters
-         
+
             stmt.setString(1, r.getRenterPassword());
             stmt.setString(2, r.getUsername());
             stmt.setDate(3, (Date) r.getDateOfBirth());
@@ -97,7 +96,7 @@ public class RenterJdbcDAO {
     //method to return properties filtered by number of bedrooms
     public Collection<Property> getRenterWishlist(Renter r) {
 
-        String sql = "SELECT Poperty.propertyId, Poperty.landlordId, Poperty.bedrooms, Poperty.address, Property.status FROM PROPERTY left outer join WISHLIST ON Property.propertyId = Wishlist.propertyId where Wishlist.RenterId = ?";
+        String sql = "SELECT Property.propertyId, Property.landlordId, Property.bedrooms, Property.address, Property.status FROM PROPERTY left outer join WISHLIST ON Property.propertyId = Wishlist.propertyId where Wishlist.RenterId = ?";
 
         try (
                 // get a connection to the database
@@ -153,8 +152,8 @@ public class RenterJdbcDAO {
             return false;
         }
     }
-    
-     public void removeRenter(Renter r) {
+
+    public void removeRenter(Renter r) {
         String sql = "delete Renter where username = ?";
 
         try (
@@ -172,4 +171,24 @@ public class RenterJdbcDAO {
             throw new DAOException(ex.getMessage(), ex);
         }
     }
+
+    public void removeWishList(Renter r) {
+        String sql = "delete from wishlist where renterid = ?";
+
+        try (
+                // get connection to database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // copy the data from the property domain object into the SQL parameters
+            stmt.setInt(1, r.getRenterId());
+
+            stmt.executeUpdate(); // execute the statement
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+
 }

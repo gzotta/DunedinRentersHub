@@ -7,6 +7,8 @@ package dao;
 
 import domain.Landlord;
 import domain.Property;
+import domain.Renter;
+import java.util.Date;
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,13 +26,17 @@ public class PropertyJdbcDAOTest {
 
     PropertyJdbcDAO p = new PropertyJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/databaseSchema.sql'");
     LandlordJdbcDAO l = new LandlordJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/databaseSchema.sql'");
+    RenterJdbcDAO r = new RenterJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/databaseSchema.sql'");
 
     private Property p1;
     private Property p2;
     private Property p3;
+
     private Landlord l1;
     private Landlord l2;
     private Landlord l3;
+
+    private Renter r1;
 
     public PropertyJdbcDAOTest() {
     }
@@ -86,16 +92,28 @@ public class PropertyJdbcDAOTest {
         p.saveProperty(p1);
         p.saveProperty(p2);
 
+        r1 = new Renter();
+        r1.setDateOfBirth(new java.sql.Date(1996 - 06 - 06));
+        r1.setEmail("email1");
+        r1.setPhone("666666");
+        r1.setReferences("references1");
+        r1.setRenterPassword("thepassword");
+        r1.setUserName("renterUsernam1");
+
+        r.saveRenter(r1);
+
     }
 
     @AfterEach
     public void tearDown() {
+        r.removeWishList(r.getRenter(r1.getUserName()));
         p.removeProperty(p1);
         p.removeProperty(p2);
         p.removeProperty(p3);
         l.removeLandlord(l1);
         l.removeLandlord(l2);
         l.removeLandlord(l3);
+        r.removeRenter(r1);
     }
 
     @Test
@@ -103,16 +121,17 @@ public class PropertyJdbcDAOTest {
         assertThat(p.filterByBedroom(p1.getBedrooms()), hasSize(1));
         assertThat(p.filterByBedroom(p1.getBedrooms()), not(hasItem(p2)));
     }
+
     @Test
     public void testGetAllProperties() {
         assertThat(p.getAllProperties(), hasSize(2));
-        
+
     }
 
     @Test
     public void testGetBedrooms() {
         assertThat(p.getBedrooms(), hasSize(2));
-        
+
     }
 
     @Test
@@ -121,6 +140,7 @@ public class PropertyJdbcDAOTest {
         assertThat(p.getAllProperties(), hasSize(1));
         assertThat(p.getAllProperties(), not(hasItem(p1)));
     }
+
     @Test
     public void testSaveProperty() {
 
@@ -131,7 +151,11 @@ public class PropertyJdbcDAOTest {
         assertThat(p.getPropertyById(7895), samePropertyValuesAs(p3));
     }
 
-//    @Test
-//    public void testAddToWishList() {
-//    }
+    @Test
+    public void testAddToWishList() {
+        p.addToWishList(r.getRenter(r1.getUserName()), p.getPropertyById(p1.getPropertyId()));
+        assertThat(r.getRenterWishlist(r.getRenter(r1.getUsername())), hasSize(1));
+
+    }
+
 }

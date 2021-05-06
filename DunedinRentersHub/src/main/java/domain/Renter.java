@@ -8,6 +8,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  *
@@ -126,4 +127,33 @@ public class Renter {
     public void setReferences(String references) {
         this.references = references;
     }    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.renterId);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Renter other = (Renter) obj;
+        if (!Objects.equals(this.renterId, other.renterId)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    
+    
 }
