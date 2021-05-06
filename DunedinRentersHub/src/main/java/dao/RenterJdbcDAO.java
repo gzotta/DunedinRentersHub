@@ -42,9 +42,9 @@ public class RenterJdbcDAO {
             // copy the data from the renter domain object into the SQL parameters
 
             stmt.setString(1, r.getRenterPassword());
-            stmt.setString(2, r.getUsername());
+            stmt.setString(2, r.getUserName());
             stmt.setDate(3, (Date) r.getDateOfBirth());
-            stmt.setString(4, r.getPhone());
+            stmt.setString(4, r.getRenterPhone());
             stmt.setString(5, r.getRenterEmail());
             stmt.setString(6, r.getReferences());
 
