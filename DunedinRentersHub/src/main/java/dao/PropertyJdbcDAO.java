@@ -82,7 +82,7 @@ public class PropertyJdbcDAO {
         }
     }
 
-    //method to return all properteis
+    //method to return all properties
     public Collection<Property> getAllProperties() {
         String sql = "select * from Property order by propertyId";
 
