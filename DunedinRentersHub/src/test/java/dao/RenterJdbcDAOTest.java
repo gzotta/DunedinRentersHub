@@ -38,23 +38,23 @@ public class RenterJdbcDAOTest {
       r3 = new Renter();
       
       r1.setRenterPassword("Pass1");
-      r1.setUsername("User1");
+      r1.setUserName("User1");
       r1.setDateOfBirth(new Date(2/5/21));
-      r1.setPhone("Phone1");
+      r1.setRenterPhone("Phone1");
       r1.setRenterEmail("Email1");
       r1.setReferences("Refernce1");
       
       r2.setRenterPassword("Pass2");
-      r2.setUsername("User2");
+      r2.setUserName("User2");
       r2.setDateOfBirth(new Date(2/5/21));
-      r2.setPhone("Phone2");
+      r2.setRenterPhone("Phone2");
       r2.setRenterEmail("Email2");
       r2.setReferences("Refernce2");
       
       r3.setRenterPassword("Pass3");
-      r3.setUsername("User3");
+      r3.setUserName("User3");
       r3.setDateOfBirth(new Date(2/5/21));
-      r3.setPhone("Phone3");
+      r3.setRenterPhone("Phone3");
       r3.setRenterEmail("Email3");
       r3.setReferences("Refernce3");
       
