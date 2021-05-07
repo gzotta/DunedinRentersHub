@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.nullValue;
 import org.hamcrest.beans.SamePropertyValuesAs;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -105,7 +106,7 @@ public class BookingJdbcDAOTest {
         booking2.setRenter(renter2);
 
         bookingDao.save(booking1);
-        //bookingDao.save(booking2, property2);
+        //bookingDao.save(booking2);
 
     }
 
@@ -116,10 +117,11 @@ public class BookingJdbcDAOTest {
         bookingDao.removeBooking(booking2);
         renterDao.removeRenter(renter1);
         renterDao.removeRenter(renter2);
-        //landlordDao.removeLandlord(landlord1);
-        //landlordDao.removeLandlord(landlord2);
         propertyDao.removeProperty(property1);
         propertyDao.removeProperty(property2);
+        landlordDao.removeLandlord(landlord1);
+        landlordDao.removeLandlord(landlord2);
+
 
     }
 
@@ -128,8 +130,12 @@ public class BookingJdbcDAOTest {
         bookingDao.save(booking2);
 
         assertThat(bookingDao.getAllBookings(), hasSize(2));
-      
 
     }
 
+
+
+    
+    
+    
 }

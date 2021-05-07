@@ -184,8 +184,8 @@ public class RenterJdbcDAO {
         }
     }
 
-    public void removeWishList(Renter r) {
-        String sql = "delete from wishlist where renterid = ?";
+    public void removeWishList(Renter r, Property p) {
+        String sql = "delete from wishlist where renterid = ? and propertyid = ?";
 
         try (
                 // get connection to database
@@ -194,6 +194,7 @@ public class RenterJdbcDAO {
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             // copy the data from the property domain object into the SQL parameters
             stmt.setInt(1, r.getRenterId());
+            stmt.setInt(2, p.getPropertyId());
 
             stmt.executeUpdate(); // execute the statement
 

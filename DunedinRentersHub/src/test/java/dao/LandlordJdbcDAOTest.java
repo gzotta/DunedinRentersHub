@@ -7,71 +7,75 @@ package dao;
 
 import domain.Landlord;
 import static org.hamcrest.MatcherAssert.assertThat;
+import org.hamcrest.Matchers;
+import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.samePropertyValuesAs;
+import org.hamcrest.beans.SamePropertyValuesAs;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 
 /**
  *
  * @author sarahaverill
  */
 public class LandlordJdbcDAOTest {
-    
-    LandlordJdbcDAO l = new LandlordJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/databaseSchema.sql'");
-   
-   private Landlord l1;
-   private Landlord l2;
-   private Landlord l3;
-    
-    public LandlordJdbcDAOTest() {
-    }
-    
+
+    LandlordJdbcDAO landlordDao = new LandlordJdbcDAO("jdbc:h2:mem:tests;INIT=runscript from 'src/main/java/dao/databaseSchema.sql'");
+
+    private Landlord landlord1;
+    private Landlord landlord2;
+
     @BeforeEach
     public void setUp() {
-     l1 = new Landlord();
-     l2 = new Landlord();
-     l3 = new Landlord();
-     l1.setLandlordPassword("Pass1");
-     l1.setUserName("User1");
-     l1.setLandlordPhone("02102587933");
-     l1.setLandlordEmail("l1@gmail.com");
-     
-     l2.setLandlordPassword("Pass2");
-     l2.setUserName("User2");
-     l2.setLandlordPhone("02702587933");
-     l2.setLandlordEmail("l2@gmail.com");
-     
-     l3.setLandlordPassword("Pass3");
-     l3.setUserName("User3");
-     l3.setLandlordPhone("02302587933");
-     l3.setLandlordEmail("l3@gmail.com");
-     
-     l.saveLandlord(l1);
-     l.saveLandlord(l2);
+        landlord1 = new Landlord();
+        landlord1.setLandlordEmail("landordemail1");
+        landlord1.setLandlordPassword("landlordpassword1");
+        landlord1.setLandlordPhone("0285585589");
+        landlord1.setUserName("landlorusername1");
+
+        landlord2 = new Landlord();
+        landlord2.setLandlordEmail("landordemail2");
+        landlord2.setLandlordPassword("landlordpassword2");
+        landlord2.setLandlordPhone("0284685589");
+        landlord2.setUserName("landlorusername2");
+
+        landlordDao.saveLandlord(landlord1);
+        //landlordDao.saveLandlord(landlord2);
+
     }
-    
+
     @AfterEach
     public void tearDown() {
+        landlordDao.removeLandlord(landlord1);
+        landlordDao.removeLandlord(landlord2);
+
     }
 
     @Test
     public void testSaveLandlord() {
-     l.saveLandlord(l3);
-      l.saveLandlord(l3);
+   
+        landlordDao.saveLandlord(landlord2);
+        assertThat(landlordDao.getLandlord(landlord2.getUserName()), samePropertyValuesAs(landlord2));
+        
 
     }
 
     @Test
     public void testGetLandlord() {
-     l.getLandlord("User1");
-     assertThat( l.getLandlord("User1"), samePropertyValuesAs(l1, "landlordId"));
+        Landlord testGetLandlord = landlordDao.getLandlord(landlord1.getUserName());
+        assertThat(testGetLandlord, samePropertyValuesAs(landlord1));
 
     }
 
     @Test
-    public void testValidateCredentials() {
+    public void testRemoveLandlord() {
+        landlordDao.removeLandlord(landlord1);
+        assertThat(landlordDao.getLandlord(landlord1.getUserName()), nullValue());
     }
-    
+//
+//    @Test
+//    public void testValidateCredentials() {
+//    }
+
 }
