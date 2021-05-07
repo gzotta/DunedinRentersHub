@@ -24,7 +24,7 @@ public class BookingModule extends Jooby {
         post("/api/bookings", (req, rsp) -> {
             Booking booking = req.body().to(Booking.class);
             Property property = req.body().to(Property.class);
-            bookingDao.save(booking, property);
+            bookingDao.save(booking);
             rsp.status(Status.CREATED);
         });
 

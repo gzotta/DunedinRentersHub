@@ -42,7 +42,7 @@ public class BookingJdbcDAO {
     }
 
     //method to save a booking
-    public void save(Booking booking, Property property) {
+    public void save(Booking booking) {
         String sqlSaveBookingStmt = "insert into Booking (date, landlordId, propertyId, renterId) values (?,?,?,?)";
         String sqlUpdatePropertyStmt = "UPDATE Property SET status = ? WHERE propertyId = ?";
 
@@ -61,9 +61,9 @@ public class BookingJdbcDAO {
                 // effectively starts a new transaction.
                 con.setAutoCommit(false);
 
-                Integer renterId = booking.getRenterId();
-                Integer propertyId = booking.getPropertyId();
-                Integer landlordId = booking.getLandlordId();
+                Property property = booking.getProperty();
+                Renter renter = booking.getRenter();
+                Landlord landlord = booking.getLandlord();
 
                 // #### save the Booking ### //
                 // convert booking date into to java.sql.Timestamp
@@ -72,9 +72,9 @@ public class BookingJdbcDAO {
 
                 // save the booking
                 saveBookingStmt.setTimestamp(1, timestamp);
-                saveBookingStmt.setInt(2, landlordId);
-                saveBookingStmt.setInt(3, propertyId);
-                saveBookingStmt.setInt(4, renterId);
+                saveBookingStmt.setInt(2, landlord.getLandlordId());
+                saveBookingStmt.setInt(3, property.getPropertyId());
+                saveBookingStmt.setInt(4, renter.getRenterId());
 
                 saveBookingStmt.executeUpdate(); //execute the statement
 
@@ -147,7 +147,7 @@ public class BookingJdbcDAO {
     }
 
     //method to return all bookings. Just for testing.
-    public Collection<Booking> getAllBookings() {
+    public Collection<Integer> getAllBookings() {
         String sql = "select * from Booking order by bookingId";
 
         try (
@@ -159,28 +159,16 @@ public class BookingJdbcDAO {
             ResultSet rs = stmt.executeQuery();
 
             // Using a List to preserve the order in which the data was returned from the query.
-            List<Booking> bookings = new ArrayList<>();
+            List<Integer> bookings = new ArrayList<>();
 
             // iterate through the query results
             while (rs.next()) {
 
                 // get the data out of the query
-                Integer propertyId = rs.getInt("propertyId");
-                Integer landlordId = rs.getInt("landlordId");
-                Integer renterId = rs.getInt("renterId");
-                Timestamp date = rs.getTimestamp("date");
-             
-
-                // use the data to create a booking object
-                Booking booking = new Booking();
-                booking.setLandlordId(landlordId);
-                booking.setPropertyId(propertyId);
-                booking.setRenterId(renterId);
-                booking.setDate(date.toLocalDateTime());
-                
+                Integer bookingId = rs.getInt("bookingId");
 
                 // and put it in the collection
-                bookings.add(booking);
+                bookings.add(bookingId);
             }
 
             return bookings;

@@ -19,22 +19,20 @@ public class Booking {
 
     private Integer bookingId;
     private LocalDateTime date;
-    private Integer landlordId;
-    private Integer propertyId;
-    private Integer renterId;
+    private Landlord landlord;
+    private Property property;
+    private Renter renter;
 
     public Booking() {
     }
 
-    public Booking(Integer bookingId, LocalDateTime date, Integer landlordId, Integer propertyId, Integer renterId) {
+    public Booking(Integer bookingId, LocalDateTime date, Landlord landlord, Property property, Renter renter) {
         this.bookingId = bookingId;
         this.date = date;
-        this.landlordId = landlordId;
-        this.propertyId = propertyId;
-        this.renterId = renterId;
+        this.landlord = landlord;
+        this.property = property;
+        this.renter = renter;
     }
-
-
 
     public Integer getBookingId() {
         return bookingId;
@@ -52,35 +50,34 @@ public class Booking {
         this.date = date;
     }
 
-    public Integer getLandlordId() {
-        return landlordId;
+    public Landlord getLandlord() {
+        return landlord;
     }
 
-    public void setLandlordId(Integer landlordId) {
-        this.landlordId = landlordId;
+    public void setLandlord(Landlord landlord) {
+        this.landlord = landlord;
     }
 
-    public Integer getPropertyId() {
-        return propertyId;
+    public Property getProperty() {
+        return property;
     }
 
-    public void setPropertyId(Integer propertyId) {
-        this.propertyId = propertyId;
+    public void setProperty(Property property) {
+        this.property = property;
     }
 
-    public Integer getRenterId() {
-        return renterId;
+    public Renter getRenter() {
+        return renter;
     }
 
-    public void setRenterId(Integer renterId) {
-        this.renterId = renterId;
+    public void setRenter(Renter renter) {
+        this.renter = renter;
     }
 
+   
 
 
 
-    
-
-
+  
  
 }

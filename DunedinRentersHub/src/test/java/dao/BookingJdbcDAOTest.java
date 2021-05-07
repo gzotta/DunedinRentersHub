@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
+import org.hamcrest.beans.SamePropertyValuesAs;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -93,17 +94,17 @@ public class BookingJdbcDAOTest {
 
         booking1 = new Booking();
         booking1.setDate(LocalDateTime.now());
-        booking1.setLandlordId(landlord1.getLandlordId());
-        booking1.setPropertyId(property1.getPropertyId());
-        booking1.setRenterId(renter1.getRenterId());
+        booking1.setLandlord(landlord1);
+        booking1.setProperty(property1);
+        booking1.setRenter(renter1);
 
         booking2 = new Booking();
         booking2.setDate(LocalDateTime.now());
-        booking2.setLandlordId(landlord2.getLandlordId());
-        booking2.setPropertyId(property2.getPropertyId());
-        booking2.setRenterId(renter2.getRenterId());
+        booking2.setLandlord(landlord2);
+        booking2.setProperty(property2);
+        booking2.setRenter(renter2);
 
-        bookingDao.save(booking1, property1);
+        bookingDao.save(booking1);
         //bookingDao.save(booking2, property2);
 
     }
@@ -115,8 +116,8 @@ public class BookingJdbcDAOTest {
         bookingDao.removeBooking(booking2);
         renterDao.removeRenter(renter1);
         renterDao.removeRenter(renter2);
-        landlordDao.removeLandlord(landlord1);
-        landlordDao.removeLandlord(landlord2);
+        //landlordDao.removeLandlord(landlord1);
+        //landlordDao.removeLandlord(landlord2);
         propertyDao.removeProperty(property1);
         propertyDao.removeProperty(property2);
 
@@ -124,12 +125,11 @@ public class BookingJdbcDAOTest {
 
     @Test
     public void testSave() {
-        bookingDao.save(booking2, property2);
+        bookingDao.save(booking2);
 
         assertThat(bookingDao.getAllBookings(), hasSize(2));
-        //  assertThat(booking.getBookings(), hasItem(booking1));
-        //  assertThat(booking.getBookings(), hasItem(booking2));
-        //  assertThat(booking.getBookings(), hasItem(booking3));
+      
+
     }
 
 }
