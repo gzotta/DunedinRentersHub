@@ -3,6 +3,7 @@ package domain;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Objects;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,9 +25,6 @@ public class Booking {
 
     public Booking() {
     }
-
-
-    
 
     public Booking(Integer bookingId, LocalDateTime date, Landlord landlord, Property property, Renter renter) {
         this.bookingId = bookingId;
@@ -75,5 +73,11 @@ public class Booking {
     public void setRenter(Renter renter) {
         this.renter = renter;
     }
+
+   
+
+
+
+  
  
 }

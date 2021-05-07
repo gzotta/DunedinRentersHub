@@ -2,11 +2,12 @@ package dao;
 
 import domain.Landlord;
 import domain.Property;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Statement;
 
 /**
  *
@@ -33,7 +34,7 @@ public class LandlordJdbcDAO {
                 // get connection to database
                 Connection dbCon = DbConnection.getConnection(databaseURI);
                 // create the statement
-                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+                PreparedStatement stmt = dbCon.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             // copy the data from the landlord domain object into the SQL parameters
     
             stmt.setString(1, l.getLandlordPassword());
@@ -42,6 +43,16 @@ public class LandlordJdbcDAO {
             stmt.setString(4, l.getLandlordEmail());
 
             stmt.executeUpdate(); // execute the statement
+            
+            //getting generated keys and adding it to domain
+            Integer Id = null;
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                    Id = rs.getInt(1);
+                } else {
+                    throw new DAOException("Problem getting generated landlord ID");
+                }
+            l.setLandlordId(Id);
 
         } catch (SQLException ex) {  // we are forced to catch SQLException
             // don't let the SQLException leak from our DAO encapsulation
@@ -100,4 +111,25 @@ public class LandlordJdbcDAO {
             return false;
         }
     }
+    
+     public void removeLandlord(Landlord l) {
+        String sql = "delete Landlord where username = ?";
+
+        try (
+                // get connection to database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // copy the data from the property domain object into the SQL parameters
+            stmt.setString(1, l.getUserName());
+
+            stmt.executeUpdate(); // execute the statement
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+    
+    
 }
