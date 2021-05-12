@@ -16,8 +16,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.h2.expression.function.ToDateParser;
 
 /**
  *
@@ -26,8 +31,8 @@ import java.util.logging.Logger;
 public class BookingJdbcDAO {
 
     private String databaseURI = DbConnection.getDefaultConnectionUri();
-    
-        // default construcot
+
+    // default construcot
     public BookingJdbcDAO() {
     }
 
@@ -35,7 +40,6 @@ public class BookingJdbcDAO {
     public BookingJdbcDAO(String databaseURI) {
         this.databaseURI = databaseURI;
     }
-    
 
     //method to save a booking
     public void save(Booking booking) {
@@ -57,8 +61,8 @@ public class BookingJdbcDAO {
                 // effectively starts a new transaction.
                 con.setAutoCommit(false);
 
-                Renter renter = booking.getRenter();
                 Property property = booking.getProperty();
+                Renter renter = booking.getRenter();
                 Landlord landlord = booking.getLandlord();
 
                 // #### save the Booking ### //
@@ -84,6 +88,7 @@ public class BookingJdbcDAO {
                 } else {
                     throw new DAOException("Problem getting generated booking ID");
                 }
+                booking.setBookingId(bookingId);
 
                 // ## update the property status ## //
                 property.setStatus("booked");
@@ -121,4 +126,57 @@ public class BookingJdbcDAO {
             }
         }
     }
+
+    public void removeBooking(Booking booking) {
+        String sql = "delete Booking where bookingId = ?";
+
+        try (
+                // get connection to database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // copy the data from the property domain object into the SQL parameters
+            stmt.setInt(1, booking.getBookingId());
+
+            stmt.executeUpdate(); // execute the statement
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+
+    //method to return all bookings. Just for testing.
+    public Collection<Integer> getAllBookings() {
+        String sql = "select * from Booking order by bookingId";
+
+        try (
+                // get a connection to the database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // execute the query
+            ResultSet rs = stmt.executeQuery();
+
+            // Using a List to preserve the order in which the data was returned from the query.
+            List<Integer> bookings = new ArrayList<>();
+
+            // iterate through the query results
+            while (rs.next()) {
+
+                // get the data out of the query
+                Integer bookingId = rs.getInt("bookingId");
+
+                // and put it in the collection
+                bookings.add(bookingId);
+            }
+
+            return bookings;
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+
 }
