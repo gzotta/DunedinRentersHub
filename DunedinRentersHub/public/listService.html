@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>DRH - List Service</title>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="header">
+                <h1>dunedin renter's hub.</h1>
+                <div id="nav">
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                </div>
+            </div>
+            
+            <div id="container">
+                <div id="borderedBox">
+                    <h2 style="text-align: center;">List a Service</h2>
+                    <form action="/action_page.php">
+                        <label for="serviceType">Service Type:</label>
+                        <br>
+                        <select name="serviceType">
+                            <option value="mover">Mover</option>
+                            <option value="cleaner">Cleaner</option>
+                            <option value="storage">Storage</option>
+                        </select>
+                        <br>
+                        <br>
+                        <label for="serviceName">Service name:</label>
+                        <br>
+                        <input type="text" name="serviceName">
+                        <br>
+                        <label for="address">Address:</label>
+                        <br>
+                        <input type="text" name="address">
+                        <br>
+                        <label for="website">Website:</label>
+                        <br>
+                        <input type="text" name="website">
+                        <br>
+                        <label for="phone">Phone:</label>
+                        <br>
+                        <input type="text" name="phone">
+                        <br>
+                        <br>
+                        <label for="photo">Photo</label>
+                        <br>
+                        <textarea name="photo" rows="4" cols="50"></textarea>
+                        <br>
+                        <br>
+                        <br>
+                        <div id="submitButton">
+                            <input type="submit" value="List Service" class="bigButton">
+                        </div>
+                      </form>
+                </div>
+            </div>
+            
+            <div id="footer">
+                <h1 style="font-size: 45px">drh.</h1>
+                <a href="login.html">
+                    <h1 style="position: relative; text-align: right; top:-70px; font-size: 25px;">log in</h1>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

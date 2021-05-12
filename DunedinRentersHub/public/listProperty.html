@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>DRH - List Property</title>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="header">
+                <h1>dunedin renter's hub.</h1>
+                <div id="nav">
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                </div>
+            </div>
+            
+            <div id="container">
+                <div id="borderedBox">
+                    <h2 style="text-align: center;">List a Property</h2>
+                    <form action="/action_page.php">
+                        <label for="propertyName">Property name:</label>
+                        <br>
+                        <input type="text" name="propertyName">
+                        <br>
+                        <label for="address">Address:</label>
+                        <br>
+                        <input type="text" name="address">
+                        <br>
+                        <label for="numberOfRooms">Bedrooms:</label>
+                        <br>
+                        <select name="numberOfRooms">
+                            <option value="1">One room</option>
+                            <option value="2">Two rooms</option>
+                            <option value="3">Three rooms</option>
+                            <option value="4">Four rooms</option>
+                            <option value="5">Five rooms</option>
+                            <option value="6">Six rooms</option>
+                            <option value="7+">Seven or more rooms</option>
+                        </select>
+                        <br>
+                        <label for="description">Description</label>
+                        <br>
+                        <textarea name="description" rows="4" cols="50"></textarea>
+                        <br>
+                        <label for="photo">Photo</label>
+                        <br>
+                        <textarea name="photo" rows="4" cols="50"></textarea>
+                        <br>
+                        <label for="status">Status:</label>
+                        <br>
+                        <select name="status">
+                            <option value="readyNow">Ready now</option>
+                            <option value="readyNextYear">Ready for next year</option>
+                            <option value="someonesViewing">Someones viewing</option>
+                            <option value="rented">Rented</option>
+                        </select>
+                        <br>
+                        <br>
+                        <div id="submitButton">
+                            <input type="submit" value="List Property" class="bigButton">
+                        </div>
+                      </form>
+                </div>
+            </div>
+            
+            <div id="footer">
+                <h1 style="font-size: 45px">drh.</h1>
+                <a href="login.html">
+                    <h1 style="position: relative; text-align: right; top:-70px; font-size: 25px;">log in</h1>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

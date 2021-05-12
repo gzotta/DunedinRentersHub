@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>DRH - Log In</title>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="header">
+                <h1>dunedin renter's hub.</h1>
+                <div id="nav">
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                </div>
+            </div>
+            
+            <div id="container">
+                <div id="borderedBox">
+                    <h2 style="text-align: center;">Log In</h2>
+                    <form action="/action_page.php">
+                        <label for="userType">User type:</label>
+                        <br>
+                        <input type="radio" name="userType" value="renter">
+                        <label for="renter" style="font-size: 20px;">Renter</label><br>
+                        <input type="radio" name="userType" value="landlord">
+                        <label for="landlord" style="font-size: 20px;">Landlord</label><br>
+                        <input type="radio" name="userType" value="service">
+                        <label for="service" style="font-size: 20px;">Service</label>
+                        <br>
+                        <br>
+                        <label for="username">Username:</label>
+                        <br>
+                        <input type="text" name="username">
+                        <br>
+                        <label for="password">Password:</label>
+                        <br>
+                        <input type="text" name="password">
+                        <br>
+                        <br>
+                        <div id="submitButton">
+                            <input type="submit" value="Log In" class="bigButton">
+                        </div>
+                      </form>
+                </div>
+            </div>
+            
+            <div id="footer">
+                <h1 style="font-size: 45px">drh.</h1>
+                <a href="login.html">
+                    <h1 style="position: relative; text-align: right; top:-70px; font-size: 25px;">log in</h1>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

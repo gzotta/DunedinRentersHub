@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>DRH - Services</title>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="header">
+                <h1>dunedin renter's hub.</h1>
+                <div id="nav">
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                </div>
+            </div>
+            
+            <div id="container">
+                <div id="searchBar">
+                    <div id="searchFilter">
+                        <h2>Search for a service</h2>
+                        <form action="/action_page.php">
+                            <select name="serviceType">
+                              <option value="cleaner">Cleaners</option>
+                              <option value="mover">Movers</option>
+                              <option value="storage">Storage</option>
+                            </select>
+                            <br><br>
+                            <input type="submit" value="Search" class="buttons">
+                        </form>
+                    </div>
+                </div>
+                <div id="listings">
+                    <div class="listing">
+                        <div class="listingInfo">
+                            <h3>National Storage</h3>
+                            <h4>Storage</h4>
+                            <h4>Phone us on 03-742-1036</h4>
+                            <form action="https://nationalstorage.nz/">
+                                <input type="submit" value="Go to our website" class="buttons"/>
+                            </form>
+                        </div>
+                        <div class="listingPhoto">
+                            <img src="images/services/nationalStorage.png">
+                        </div>
+                    </div>
+                    <div class="listing">
+                        <div class="listingInfo">
+                            <h3>Green Acres</h3>
+                            <h4>Cleaners</h4>
+                            <h4>Phone us on 0800-024-053</h4>
+                            <form action="https://www.greenacres.co.nz/">
+                                <input type="submit" value="Go to our website" class="buttons"/>
+                            </form>
+                        </div>
+                        <div class="listingPhoto">
+                            <img src="images/services/greenAcres.jpeg">
+                        </div>
+                    </div>
+                    <div class="listing">
+                        <div class="listingInfo">
+                            <h3>Crown Movers</h3>
+                            <h4>Movers</h4>
+                            <h4>Phone us on 0508-227-696</h4>
+                            <form action="https://www.crownrelo.co.nz/">
+                                <input type="submit" value="Go to our website" class="buttons"/>
+                            </form>
+                        </div>
+                        <div class="listingPhoto">
+                            <img src="images/services/crownMovers.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="footer">
+                <h1 style="font-size: 45px">drh.</h1>
+                <a href="login.html">
+                    <h1 style="position: relative; text-align: right; top:-70px; font-size: 25px;">log in</h1>
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
