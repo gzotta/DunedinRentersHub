@@ -21,7 +21,7 @@ public class ServicesModule extends Jooby {
     public ServicesModule(ServicesJdbcDAO servicesDao) {
 
         //Save (POST) a service.
-        post("/api/services", (req, rsp) -> {
+        post("/api/registerService", (req, rsp) -> {
             Services service = req.body().to(Services.class);
             servicesDao.saveService(service);
             rsp.status(Status.CREATED);
