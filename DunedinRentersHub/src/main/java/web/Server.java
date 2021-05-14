@@ -10,9 +10,12 @@ import dao.LandlordJdbcDAO;
 import dao.PropertyJdbcDAO;
 import dao.RenterJdbcDAO;
 import dao.ServicesJdbcDAO;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import org.jooby.Jooby;
 import org.jooby.json.Gzon;
+import web.auth.BasicHttpAuthenticator;
 
 /**
  *
@@ -29,12 +32,15 @@ public class Server extends Jooby {
     public Server() {
         port(8080);
         use(new Gzon());
+        use(new AssetModule());
+        List<String> noAuth = Arrays.asList("/api/registerRenter");//adding BasicHttpAuthenticator to the filter chain.
+        use(new BasicHttpAuthenticator(renterDao, noAuth));//adding BasicHttpAuthenticator to the filter chain.
         use(new BookingModule(bookingDao));
         use(new LandlordModule(landlordDao));
         use(new PropertyModule(propertyDao));
         use(new RenterModule(renterDao));
         use(new ServicesModule(servicesDao));
-        use(new AssetModule());
+        
     }
 
     public static void main(String[] args) throws Exception {

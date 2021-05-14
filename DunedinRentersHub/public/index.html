@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="BookingApp">
     <head>
         <title>Dunedin Renters Hub</title>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/style.css">
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/BookingViews.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -17,20 +21,20 @@
                     <div class="navLine" style="margin-top: 10%"></div>
                 </div>
             </div>
-            
+
             <div id="container">
                 <div id="searchBar">
                     <div id="searchFilter">
                         <h2>Filter by the number of rooms</h2>
                         <form action="/action_page.php">
                             <select name="numberOfRooms">
-                              <option value="1">One room</option>
-                              <option value="2">Two rooms</option>
-                              <option value="3">Three rooms</option>
-                              <option value="4">Four rooms</option>
-                              <option value="5">Five rooms</option>
-                              <option value="6">Six rooms</option>
-                              <option value="7+">Seven or more rooms</option>
+                                <option value="1">One room</option>
+                                <option value="2">Two rooms</option>
+                                <option value="3">Three rooms</option>
+                                <option value="4">Four rooms</option>
+                                <option value="5">Five rooms</option>
+                                <option value="6">Six rooms</option>
+                                <option value="7+">Seven or more rooms</option>
                             </select>
                             <br><br>
                             <input type="submit" value="Search" class="buttons">
@@ -75,14 +79,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div id="footer">
                 <h1 style="font-size: 45px">drh.</h1>
                 <a href="login.html">
                     <h1 style="position: relative; text-align: right; top:-70px; font-size: 25px;">log in</h1>
                 </a>
                 <a href="CreateRAccount.html">
-                   <h1 style="position: relative; text-align: right; top:-109px; right:90px; font-size: 25px;">create account</h1> 
+                    <h1 style="position: relative; text-align: right; top:-109px; right:90px; font-size: 26px;">create account</h1> 
                 </a>
             </div>
         </div>

@@ -12,12 +12,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import web.auth.CredentialsValidator;
 
 /**
  *
  * @author jake
  */
-public class RenterJdbcDAO {
+public class RenterJdbcDAO implements CredentialsValidator  {
 
     private String databaseURI = DbConnection.getDefaultConnectionUri();
 
@@ -32,7 +33,7 @@ public class RenterJdbcDAO {
 
     // method to add renter
     public void saveRenter(Renter r) {
-        String sql = "insert into Renter (renterPassword, userName, dateOfBirth, renterPhone, renterEmail, references) values (?,?,?,?,?,?)";
+        String sql = "insert into Renter (renterPassword, username, dateOfBirth, renterPhone, renterEmail, references) values (?,?,?,?,?,?)";
 
         try (
                 // get connection to database
@@ -41,9 +42,12 @@ public class RenterJdbcDAO {
                 PreparedStatement stmt = dbCon.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
             // copy the data from the renter domain object into the SQL parameters
 
+            
+            java.sql.Date dateSql = new java.sql.Date(r.getDateOfBirth().getTime());
+            
             stmt.setString(1, r.getRenterPassword());
             stmt.setString(2, r.getUserName());
-            stmt.setDate(3, (Date) r.getDateOfBirth());
+            stmt.setDate(3, dateSql);
             stmt.setString(4, r.getRenterPhone());
             stmt.setString(5, r.getRenterEmail());
             stmt.setString(6, r.getReferences());
@@ -86,7 +90,7 @@ public class RenterJdbcDAO {
                 // get the data out of the query
                 int renterId1 = rs.getInt("renterId");
                 String renterPassword = rs.getString("renterPassword");
-                String userName = rs.getString("userName");
+                String userName = rs.getString("username");
                 Date dateOfBirth = rs.getDate("dateOfBirth");
                 String renterPhone = rs.getString("renterPhone");
                 String renterEmail = rs.getString("renterEmail");

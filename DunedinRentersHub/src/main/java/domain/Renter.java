@@ -17,7 +17,7 @@ public class Renter {
 
     private Integer renterId;
     private String renterPassword;
-    private String userName;
+    private String username;
     private Date dateOfBirth;
     private String renterPhone;
     private String renterEmail;
@@ -28,10 +28,10 @@ public class Renter {
     }
 
     //doesn't coontain wishlist as there wouldnt be a wishlist when renter is initially created
-    public Renter(Integer renterId, String renterPassword, String userName, Date dateOfBirth, String renterPhone, String renterEmail, String references) {
+    public Renter(Integer renterId, String renterPassword, String username, Date dateOfBirth, String renterPhone, String renterEmail, String references) {
         this.renterId = renterId;
         this.renterPassword = renterPassword;
-        this.userName = userName;
+        this.username = username;
         this.dateOfBirth = dateOfBirth;
         this.renterPhone = renterPhone;
         this.renterEmail = renterEmail;
@@ -55,11 +55,11 @@ public class Renter {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public Date getDateOfBirth() {
