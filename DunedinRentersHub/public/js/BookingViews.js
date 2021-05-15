@@ -62,7 +62,7 @@ module.factory('renterLoginAPI', function ($resource) {
 
 
 //Register controller
-module.controller('RegisterController', function (registerRenterAPI, renterLoginAPI, $window, $sessionStorage, $http) {
+module.controller('RegisterController', function (registerRenterAPI, registerLandlordAPI, renterLoginAPI, $window, $sessionStorage, $http) {
 
 //This alert is to check if the controller is being used.
     //alert("in controller");
@@ -81,32 +81,55 @@ module.controller('RegisterController', function (registerRenterAPI, renterLogin
                                 }
                         );
                     };
-            //message for users
-            this.loginMessage = "Please login to continue.";
-            // alias 'this' so that we can access it inside callback functions
-            let ctrl = this;
-            //login function
-            this.login = function (username, password) {
 
-                // generate authentication token
-                let authToken = $window.btoa(username + ":" + password);
-                // store token
-                $sessionStorage.authToken = authToken;
-                // add token to the HTTP request headers
-                $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
-                // get customer from web service
-                renterLoginAPI.get({'username': username},
+
+
+            //function for registering a landlord
+            this.registerLandlord = function (landlord) {
+                registerLandlordAPI.save(null, landlord,
                         // success callback
-                                function (renter) {
-                                    // also store the retrieved customer
-                                    $sessionStorage.renter = renter;
-                                    // redirect to home
-                                    $window.location = '.';
+                                function () {
+                                    $window.location = 'login.html';
                                 },
-                                // fail callback
-                                        function () {
-                                            ctrl.loginMessage = 'Login failed. Please try again.';
+                                // error callback
+                                        function (error) {
+                                            console.log(error);
                                         }
                                 );
                             };
-                });
+
+
+
+
+
+
+
+                    //message for users
+                    this.loginMessage = "Please login to continue.";
+                    // alias 'this' so that we can access it inside callback functions
+                    let ctrl = this;
+                    //login function
+                    this.login = function (username, password) {
+
+                        // generate authentication token
+                        let authToken = $window.btoa(username + ":" + password);
+                        // store token
+                        $sessionStorage.authToken = authToken;
+                        // add token to the HTTP request headers
+                        $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
+                        // get customer from web service
+                        renterLoginAPI.get({'username': username},
+                                // success callback
+                                        function (renter) {
+                                            // also store the retrieved customer
+                                            $sessionStorage.renter = renter;
+                                            // redirect to home
+                                            $window.location = '.';
+                                        },
+                                        // fail callback
+                                                function () {
+                                                    ctrl.loginMessage = 'Login failed. Please try again.';
+                                                }
+                                        );
+                                    };
+                        });
