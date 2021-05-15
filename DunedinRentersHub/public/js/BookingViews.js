@@ -4,16 +4,16 @@ var module = angular.module('BookingApp', ['ngResource', 'ngStorage']);
 
 //This is to ensure that the authentication token has been added to Authorization 
 //header for every HTTP request
-module.config(function ($sessionStorageProvider, $httpProvider) {
-    // get the auth token from the session storage
-    let authToken = $sessionStorageProvider.get('authToken');
-
-    // does the auth token actually exist?
-    if (authToken) {
-        // add the token to all HTTP requests
-        $httpProvider.defaults.headers.common.Authorization = 'Basic ' + authToken;
-    }
-});
+//module.config(function ($sessionStorageProvider, $httpProvider) {
+//    // get the auth token from the session storage
+//    let authToken = $sessionStorageProvider.get('authToken');
+//
+//    // does the auth token actually exist?
+//    if (authToken) {
+//        // add the token to all HTTP requests
+//        $httpProvider.defaults.headers.common.Authorization = 'Basic ' + authToken;
+//    }
+//});
 
 
 
@@ -50,9 +50,43 @@ module.factory('registerServiceAPI', function ($resource) {
 module.factory('renterLoginAPI', function ($resource) {
     return $resource("/api/renters/:username");
 });
+
+
+//factory for the landlordLoingAPI
+module.factory('landlordLoginAPI', function ($resource) {
+    return $resource("/api/landlords/:username");
+});
+
+
+//factory for properties
+module.factory('propertiesAPI', function ($resource) {
+    return $resource("/api/properties");
+});
+
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////End of login factories/////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
+//Properties controller
+module.controller('PropertiesController', function (propertiesAPI) {
+
+    //load properties
+    this.properties = propertiesAPI.query();
+    
+    
+    this.getAllProperties = function(){
+        this.properties = propertiesAPI.query();
+    };
+
+
+
+
+
+});
+
+
+
+
 
 
 
@@ -62,7 +96,7 @@ module.factory('renterLoginAPI', function ($resource) {
 
 
 //Register controller
-module.controller('RegisterController', function (registerRenterAPI, registerLandlordAPI, renterLoginAPI, $window, $sessionStorage, $http) {
+module.controller('RegisterRenterController', function (registerRenterAPI, renterLoginAPI, $window, $sessionStorage, $http) {
 
 //This alert is to check if the controller is being used.
     //alert("in controller");
@@ -81,6 +115,52 @@ module.controller('RegisterController', function (registerRenterAPI, registerLan
                                 }
                         );
                     };
+
+
+
+            //message for users
+            this.loginMessage = "Please login to continue.";
+            // alias 'this' so that we can access it inside callback functions
+            let ctrl = this;
+
+
+
+
+            //login function
+            this.login = function (username, password) {
+
+                // generate authentication token
+                let authToken = $window.btoa(username + ":" + password);
+                // store token
+                $sessionStorage.authToken = authToken;
+                // add token to the HTTP request headers
+                $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
+                // get customer from web service
+                renterLoginAPI.get({'username': username},
+                        // success callback
+                                function (renter) {
+                                    // also store the retrieved customer
+                                    $sessionStorage.renter = renter;
+                                    // redirect to home
+                                    $window.location = '.';
+                                },
+                                // fail callback
+                                        function () {
+                                            ctrl.loginMessage = 'Login failed. Please try again.';
+                                        }
+                                );
+                            };
+                });
+
+
+
+
+
+
+
+        //Landlord controller
+        module.controller('RegisterLandlordController', function (registerLandlordAPI, landlordLoginAPI, $window, $sessionStorage, $http) {
+
 
 
 
@@ -108,6 +188,10 @@ module.controller('RegisterController', function (registerRenterAPI, registerLan
                     this.loginMessage = "Please login to continue.";
                     // alias 'this' so that we can access it inside callback functions
                     let ctrl = this;
+
+
+
+
                     //login function
                     this.login = function (username, password) {
 
@@ -118,11 +202,11 @@ module.controller('RegisterController', function (registerRenterAPI, registerLan
                         // add token to the HTTP request headers
                         $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
                         // get customer from web service
-                        renterLoginAPI.get({'username': username},
+                        landlordLoginAPI.get({'username': username},
                                 // success callback
-                                        function (renter) {
+                                        function (landlord) {
                                             // also store the retrieved customer
-                                            $sessionStorage.renter = renter;
+                                            $sessionStorage.landlord = landlord;
                                             // redirect to home
                                             $window.location = '.';
                                         },
@@ -132,4 +216,4 @@ module.controller('RegisterController', function (registerRenterAPI, registerLan
                                                 }
                                         );
                                     };
-                        });
+                        });                      

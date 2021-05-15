@@ -33,8 +33,8 @@ public class Server extends Jooby {
         port(8080);
         use(new Gzon());
         use(new AssetModule());
-        List<String> noAuth = Arrays.asList("/api/registerRenter");//adding BasicHttpAuthenticator to the filter chain.
-        use(new BasicHttpAuthenticator(renterDao, noAuth));//adding BasicHttpAuthenticator to the filter chain.
+        //List<String> noAuth = Arrays.asList("/api/registerRenter");//adding BasicHttpAuthenticator to the filter chain.
+        //use(new BasicHttpAuthenticator(renterDao, noAuth));//adding BasicHttpAuthenticator to the filter chain.
         use(new BookingModule(bookingDao));
         use(new LandlordModule(landlordDao));
         use(new PropertyModule(propertyDao));

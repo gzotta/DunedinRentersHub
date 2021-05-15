@@ -11,7 +11,7 @@
         <script src="js/ngStorage.js"></script>
         <script src="js/BookingViews.js"></script>
     </head>
-    <body ng-controller="RegisterController as regCtrl">
+    <body>
         <div id="wrapper">
             <div id="header">
                 <h1>dunedin renter's hub.</h1>
@@ -29,9 +29,9 @@
                     <form ng-submit="regCtrl.login(username, password)">
                         <label for="userType">User type:</label>
                         <br>
-                        <input type="radio" name="userType" value="renter">
+                        <input type="radio" name="userType" value="renter" ng-controller="RegisterRenterController as regCtrl">
                         <label for="renter" style="font-size: 20px;">Renter</label><br>
-                        <input type="radio" name="userType" value="landlord">
+                        <input type="radio" name="userType" value="landlord" ng-controller="RegisterLandlordController as regCtrl">
                         <label for="landlord" style="font-size: 20px;">Landlord</label><br>
                         <input type="radio" name="userType" value="service">
                         <label for="service" style="font-size: 20px;">Service</label>

@@ -41,7 +41,7 @@
                         </a>
                     </div>
                     <br>
-                    <form ng-controller="RegisterController as regCtrl" ng-submit="regCtrl.registerRenter(renter)">
+                    <form ng-controller="RegisterRenterController as regCtrl" ng-submit="regCtrl.registerRenter(renter)">
                         <label for="username">Username:</label>
                         <br>
                         <input type="text" name="username" ng-model="renter.username" required minlength="4" maxlength="30">

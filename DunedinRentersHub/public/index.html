@@ -41,44 +41,67 @@
                         </form>
                     </div>
                 </div>
-                <div id="listings">
-                    <div class="listing">
-                        <div class="listingInfo">
-                            <h3>Debacle</h3>
-                            <h4>844B Cumberland Street</h4>
-                            <h4>Cutler's Properties</h4>
-                            <button type="button" class="buttons">Add to watchlist</button>
-                        </div>
-                        <div class="listingPhoto">
-                            <img src="images/properties/photos/debacle.jpeg">
-                        </div>
-                    </div>
-                    <div class="listing">
-                        <a href="viewFlat.html">
-                            <div class="listingInfo">
-                                <h3>The Six60 Flat</h3>
-                                <h4>660 Castle Street</h4>
-                                <h4>Central Campus Property Management</h4>
-                                <button type="button" class="buttons">Add to watchlist</button>
-                            </div>
-                            <div class="listingPhoto">
-                                <img src="images/properties/photos/theSix60Flat.jpeg">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="listing">
-                        <div class="listingInfo">
-                            <h3>Thirsty Boys</h3>
-                            <h4>631 Castle Street</h4>
-                            <h4>Cutler's Properties</h4>
-                            <button type="button" class="buttons">Add to watchlist</button>
-                        </div>
-                        <div class="listingPhoto">
-                            <img src="images/properties/photos/thirstyBoys.jpeg">
-                        </div>
-                    </div>
-                </div>
+                <!-- <div id="listings">
+                     <div class="listing">
+                         <div class="listingInfo">
+                             <h3>Debacle</h3>
+                             <h4>844B Cumberland Street</h4>
+                             <h4>Cutler's Properties</h4>
+                             <button type="button" class="buttons">Add to watchlist</button>
+                         </div>
+                         <div class="listingPhoto">
+                             <img src="images/properties/photos/debacle.jpeg">
+                         </div>
+                     </div>
+                     <div class="listing">
+                         <a href="viewFlat.html">
+                             <div class="listingInfo">
+                                 <h3>The Six60 Flat</h3>
+                                 <h4>660 Castle Street</h4>
+                                 <h4>Central Campus Property Management</h4>
+                                 <button type="button" class="buttons">Add to watchlist</button>
+                             </div>
+                             <div class="listingPhoto">
+                                 <img src="images/properties/photos/theSix60Flat.jpeg">
+                             </div>
+                         </a>
+                     </div>
+                     <div class="listing">
+                         <div class="listingInfo">
+                             <h3>Thirsty Boys</h3>
+                             <h4>631 Castle Street</h4>
+                             <h4>Cutler's Properties</h4>
+                             <button type="button" class="buttons">Add to watchlist</button>
+                         </div>
+                         <div class="listingPhoto">
+                             <img src="images/properties/photos/thirstyBoys.jpeg">
+                         </div>
+                     </div>
+                 </div>-->
             </div>
+            <table id = "table1">
+                <thead>
+                    <tr>
+                        <th>Address</th>
+                        <th>Bedrooms</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody ng-controller="PropertiesController as propCtrl">
+                    <tr data-ng-repeat="property in propCtrl.properties">
+
+                        <td>{{property.address}}</td>
+
+                        <td>{{property.bedrooms}}</td>
+
+                        <td>{{property.status}}</td>
+
+                        <td><button type="button" style="position: absolute; right: 5px;" >Book</button></td> 
+                        
+                        <td><button type="button" style="position: absolute; right: 5px;" >Add to Watch list</button></td> 
+                    </tr>
+                </tbody>
+            </table>
 
             <div id="footer">
                 <h1 style="font-size: 45px">drh.</h1>

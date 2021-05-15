@@ -41,7 +41,7 @@
                         </a>
                     </div>
                     <br>
-                    <form ng-controller="RegisterController as regCtrl" ng-submit="regCtrl.registerLandlord(landlord)">
+                    <form ng-controller="RegisterLandlordController as regCtrl" ng-submit="regCtrl.registerLandlord(landlord)">
                         <label for="username">Username:</label>
                         <br>
                         <input type="text" name="username" ng-model="landlord.userName" required minlength="4" maxlength="30">
