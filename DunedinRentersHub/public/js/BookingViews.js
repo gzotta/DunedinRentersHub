@@ -58,28 +58,61 @@ module.factory('landlordLoginAPI', function ($resource) {
 });
 
 
-//factory for properties
-module.factory('propertiesAPI', function ($resource) {
-    return $resource("/api/properties");
-});
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////End of login factories/////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
+
+
+////////////////////////////////////////////////////////////////////////////////
+/////////////////Property Factories////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+//factory for properties
+module.factory('propertiesAPI', function ($resource) {
+    return $resource("/api/properties");
+});
+
+//factory for number of bedrooms
+module.factory('bedroomsAPI', function ($resource) {
+    return $resource("/api/bedrooms");
+});
+
+
+//factory for filter by bedrooms
+module.factory('filterBedroomsAPI', function ($resource) {
+    return $resource("/api/bedrooms/:bedroom");
+});
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+//////////////////end of Property factories/////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 //Properties controller
-module.controller('PropertiesController', function (propertiesAPI) {
+module.controller('PropertiesController', function (propertiesAPI, bedroomsAPI, filterBedroomsAPI ) {
 
     //load properties
     this.properties = propertiesAPI.query();
-    
-    
-    this.getAllProperties = function(){
+
+    //load the bedrooms
+this.bedrooms = bedroomsAPI.query();
+
+    this.getAllProperties = function () {
         this.properties = propertiesAPI.query();
     };
 
 
+    this.selectBedroom = function (selectedBedroom) {
+        this.properties = filterBedroomsAPI.query({"bedroom":selectedBedroom});
 
+    }
 
 
 });

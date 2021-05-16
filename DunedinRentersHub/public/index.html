@@ -11,7 +11,7 @@
         <script src="js/ngStorage.js"></script>
         <script src="js/BookingViews.js"></script>
     </head>
-    <body>
+    <body ng-controller="PropertiesController as propCtrl" >
         <div id="wrapper">
             <div id="header">
                 <h1>dunedin renter's hub.</h1>
@@ -26,19 +26,9 @@
                 <div id="searchBar">
                     <div id="searchFilter">
                         <h2>Filter by the number of rooms</h2>
-                        <form action="/action_page.php">
-                            <select name="numberOfRooms">
-                                <option value="1">One room</option>
-                                <option value="2">Two rooms</option>
-                                <option value="3">Three rooms</option>
-                                <option value="4">Four rooms</option>
-                                <option value="5">Five rooms</option>
-                                <option value="6">Six rooms</option>
-                                <option value="7+">Seven or more rooms</option>
-                            </select>
-                            <br><br>
-                            <input type="submit" value="Search" class="buttons">
-                        </form>
+                        <button id="allB" ng-click="propCtrl.getAllProperties()" >All</button>
+                        <button id="bedrooms" ng-repeat="bedroom in propCtrl.bedrooms" 
+                                ng-click="propCtrl.selectBedroom(bedroom)">{{bedroom}}</button>
                     </div>
                 </div>
                 <!-- <div id="listings">
@@ -87,7 +77,7 @@
                         <th>Status</th>
                     </tr>
                 </thead>
-                <tbody ng-controller="PropertiesController as propCtrl">
+                <tbody>
                     <tr data-ng-repeat="property in propCtrl.properties">
 
                         <td>{{property.address}}</td>
@@ -97,7 +87,7 @@
                         <td>{{property.status}}</td>
 
                         <td><button type="button" style="position: absolute; right: 5px;" >Book</button></td> 
-                        
+
                         <td><button type="button" style="position: absolute; right: 5px;" >Add to Watch list</button></td> 
                     </tr>
                 </tbody>
