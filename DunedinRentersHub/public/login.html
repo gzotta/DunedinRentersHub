@@ -22,16 +22,16 @@
                 </div>
             </div>
 
-            <div id="container" ng-controller="RegisterRenterController as regRCtrl" ng-controller="RegisterLandlordController as regLCtrl">
+            <div id="container">
                 <div id="borderedBox">
                     <h2 style="text-align: center;">Log In</h2>
                     <p>{{regCtrl.loginMessage}}</p>
                     <form >
                         <label for="userType">User type:</label>
                         <br>
-                        <input type="radio" name="userType" value="renter" ng-submit="regCtrlR.login(username, password)" >
+                        <input type="radio" name="userType" value="renter">
                         <label for="renter" style="font-size: 20px;">Renter</label><br>
-                        <input type="radio" name="userType" value="landlord" ng-submit="regCtrlL.login(username, password)">
+                        <input type="radio" name="userType" value="landlord">
                         <label for="landlord" style="font-size: 20px;">Landlord</label><br>
                         <input type="radio" name="userType" value="service">
                         <label for="service" style="font-size: 20px;">Service</label>

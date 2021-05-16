@@ -121,6 +121,10 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
     //alert("in controller");
 
 
+
+
+
+
     //function for registering a renter
     this.registerService = function (service) {
         registerServiceAPI.save(null, service,
