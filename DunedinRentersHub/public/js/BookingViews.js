@@ -130,7 +130,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
         registerServiceAPI.save(null, service,
                 // success callback
                         function () {
-                            $window.location = 'login.html';
+                            $window.location = 'loginS.html';
                         },
                         // error callback
                                 function (error) {
@@ -161,9 +161,9 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                 // get customer from web service
                 servicesLoginAPI.get({'username': username},
                         // success callback
-                                function (renter) {
+                                function (service) {
                                     // also store the retrieved customer
-                                    $sessionStorage.renter = renter;
+                                    $sessionStorage.service = service;
                                     // redirect to home
                                     $window.location = '.';
                                 },
@@ -231,7 +231,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                 registerRenterAPI.save(null, renter,
                         // success callback
                                 function () {
-                                    $window.location = 'login.html';
+                                    $window.location = 'loginR.html';
                                 },
                                 // error callback
                                         function (error) {
@@ -293,7 +293,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                         registerLandlordAPI.save(null, landlord,
                                 // success callback
                                         function () {
-                                            $window.location = 'login.html';
+                                            $window.location = 'loginL.html';
                                         },
                                         // error callback
                                                 function (error) {

@@ -11,7 +11,7 @@
         <script src="js/ngStorage.js"></script>
         <script src="js/BookingViews.js"></script>
     </head>
-    <body>
+    <body ng-controller="RegisterLandlordController as regCtrl">
         <div id="wrapper">
             <div id="header">
                 <h1>dunedin renter's hub.</h1>
@@ -26,17 +26,30 @@
                 <div id="borderedBox">
                     <h2 style="text-align: center;">Log In</h2>
                     <p>{{regCtrl.loginMessage}}</p>
-                    <form >
+                    
                         <label for="userType">User type:</label>
                         <br>
-                        <input type="radio" name="userType" value="renter">
-                        <label for="renter" style="font-size: 20px;">Renter</label><br>
-                        <input type="radio" name="userType" value="landlord">
-                        <label for="landlord" style="font-size: 20px;">Landlord</label><br>
-                        <input type="radio" name="userType" value="service">
-                        <label for="service" style="font-size: 20px;">Service</label>
+
+                        <div id="userType">
+                            <a href="loginR.html">
+                                <div id="userTypeRenter">
+                                    <h2>Renter</h2>
+                                </div>
+                            </a>
+                            <div id="userTypeLandlord" style="background-color: #8600b3;">
+                                <h2 style="color: #fff;">Landlord</h2>
+                            </div>
+                            <a href="loginS.html">
+                                <div id="userTypeService">
+                                    <h2>Service</h2>
+                                </div>
+                            </a>
+                        </div>
+
+
                         <br>
                         <br>
+                        <form form ng-submit="regCtrl.login(username, password)">
                         <label for="username">Username:</label>
                         <br>
                         <input type="text" name="username" ng-model="username" required>>
