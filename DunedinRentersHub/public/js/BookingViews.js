@@ -33,6 +33,8 @@ module.factory('registerLandlordAPI', function ($resource) {
 module.factory('registerServiceAPI', function ($resource) {
     return $resource("/api/registerService");
 });
+
+
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////End of register factories/////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -57,7 +59,10 @@ module.factory('landlordLoginAPI', function ($resource) {
     return $resource("/api/landlords/:username");
 });
 
-
+//factory for the serivcesLoingAPI
+module.factory('servicesLoginAPI', function ($resource) {
+    return $resource("/api/services/:username");
+});
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -94,50 +99,31 @@ module.factory('filterBedroomsAPI', function ($resource) {
 
 
 
-
-//Properties controller
-module.controller('PropertiesController', function (propertiesAPI, bedroomsAPI, filterBedroomsAPI ) {
-
-    //load properties
-    this.properties = propertiesAPI.query();
-
-    //load the bedrooms
-this.bedrooms = bedroomsAPI.query();
-
-    this.getAllProperties = function () {
-        this.properties = propertiesAPI.query();
-    };
+////////////////////////////////////////////////////////////////////////////////
+//////////////////Services factories/////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 
-    this.selectBedroom = function (selectedBedroom) {
-        this.properties = filterBedroomsAPI.query({"bedroom":selectedBedroom});
+////////////////////
 
-    }
-
-
-});
+////////////////////////////////////////////////////////////////////////////////
+//////////////////end of Services factories/////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 
 
 
 
-
-
-
-
-
-
-
-//Register controller
-module.controller('RegisterRenterController', function (registerRenterAPI, renterLoginAPI, $window, $sessionStorage, $http) {
+//Service controller
+module.controller('RegisterServiceController', function (registerServiceAPI, servicesLoginAPI, $window, $sessionStorage, $http) {
 
 //This alert is to check if the controller is being used.
     //alert("in controller");
 
 
     //function for registering a renter
-    this.registerRenter = function (renter) {
-        registerRenterAPI.save(null, renter,
+    this.registerService = function (service) {
+        registerServiceAPI.save(null, service,
                 // success callback
                         function () {
                             $window.location = 'login.html';
@@ -169,7 +155,7 @@ module.controller('RegisterRenterController', function (registerRenterAPI, rente
                 // add token to the HTTP request headers
                 $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
                 // get customer from web service
-                renterLoginAPI.get({'username': username},
+                servicesLoginAPI.get({'username': username},
                         // success callback
                                 function (renter) {
                                     // also store the retrieved customer
@@ -191,15 +177,54 @@ module.controller('RegisterRenterController', function (registerRenterAPI, rente
 
 
 
-        //Landlord controller
-        module.controller('RegisterLandlordController', function (registerLandlordAPI, landlordLoginAPI, $window, $sessionStorage, $http) {
 
 
 
 
-            //function for registering a landlord
-            this.registerLandlord = function (landlord) {
-                registerLandlordAPI.save(null, landlord,
+
+//Properties controller
+        module.controller('PropertiesController', function (propertiesAPI, bedroomsAPI, filterBedroomsAPI) {
+
+            //load properties
+            this.properties = propertiesAPI.query();
+
+            //load the bedrooms
+            this.bedrooms = bedroomsAPI.query();
+
+            this.getAllProperties = function () {
+                this.properties = propertiesAPI.query();
+            };
+
+
+            this.selectBedroom = function (selectedBedroom) {
+                this.properties = filterBedroomsAPI.query({"bedroom": selectedBedroom});
+
+            }
+
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+//Register controller
+        module.controller('RegisterRenterController', function (registerRenterAPI, renterLoginAPI, $window, $sessionStorage, $http) {
+
+//This alert is to check if the controller is being used.
+            //alert("in controller");
+
+
+            //function for registering a renter
+            this.registerRenter = function (renter) {
+                registerRenterAPI.save(null, renter,
                         // success callback
                                 function () {
                                     $window.location = 'login.html';
@@ -210,10 +235,6 @@ module.controller('RegisterRenterController', function (registerRenterAPI, rente
                                         }
                                 );
                             };
-
-
-
-
 
 
 
@@ -235,11 +256,11 @@ module.controller('RegisterRenterController', function (registerRenterAPI, rente
                         // add token to the HTTP request headers
                         $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
                         // get customer from web service
-                        landlordLoginAPI.get({'username': username},
+                        renterLoginAPI.get({'username': username},
                                 // success callback
-                                        function (landlord) {
+                                        function (renter) {
                                             // also store the retrieved customer
-                                            $sessionStorage.landlord = landlord;
+                                            $sessionStorage.renter = renter;
                                             // redirect to home
                                             $window.location = '.';
                                         },
@@ -249,4 +270,68 @@ module.controller('RegisterRenterController', function (registerRenterAPI, rente
                                                 }
                                         );
                                     };
-                        });                      
+                        });
+
+
+
+
+
+
+
+                //Landlord controller
+                module.controller('RegisterLandlordController', function (registerLandlordAPI, landlordLoginAPI, $window, $sessionStorage, $http) {
+
+
+
+
+                    //function for registering a landlord
+                    this.registerLandlord = function (landlord) {
+                        registerLandlordAPI.save(null, landlord,
+                                // success callback
+                                        function () {
+                                            $window.location = 'login.html';
+                                        },
+                                        // error callback
+                                                function (error) {
+                                                    console.log(error);
+                                                }
+                                        );
+                                    };
+
+
+
+
+
+                            //message for users
+                            this.loginMessage = "Please login to continue.";
+                            // alias 'this' so that we can access it inside callback functions
+                            let ctrl = this;
+
+
+
+
+                            //login function
+                            this.login = function (username, password) {
+
+                                // generate authentication token
+                                let authToken = $window.btoa(username + ":" + password);
+                                // store token
+                                $sessionStorage.authToken = authToken;
+                                // add token to the HTTP request headers
+                                $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
+                                // get customer from web service
+                                landlordLoginAPI.get({'username': username},
+                                        // success callback
+                                                function (landlord) {
+                                                    // also store the retrieved customer
+                                                    $sessionStorage.landlord = landlord;
+                                                    // redirect to home
+                                                    $window.location = '.';
+                                                },
+                                                // fail callback
+                                                        function () {
+                                                            ctrl.loginMessage = 'Login failed. Please try again.';
+                                                        }
+                                                );
+                                            };
+                                });                      
