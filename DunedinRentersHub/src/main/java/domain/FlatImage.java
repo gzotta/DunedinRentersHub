@@ -25,6 +25,18 @@ public class FlatImage {
     private byte[] data;
     private String mediaType;
 
+
+    public FlatImage() {
+    }
+
+    public FlatImage(Integer imageId, String description, byte[] data, String mediaType) {
+       this.imageId = imageId;
+        this.description = description;
+        this.data = data;
+        this.mediaType = mediaType;
+    }
+
+
     public Integer getImageId() {
         return imageId;
     }
