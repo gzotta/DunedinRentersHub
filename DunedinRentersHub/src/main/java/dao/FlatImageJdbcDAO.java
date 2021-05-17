@@ -40,8 +40,7 @@ public FlatImageJdbcDAO() {
         stmt.setBytes(2, fi.getData());
         stmt.setString(3, fi.getMediaType());
         
-        stmt.executeUpdate();
-        
+      
         ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
