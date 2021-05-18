@@ -190,7 +190,10 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
         module.controller('PropertiesController', function (propertiesAPI, bedroomsAPI, filterBedroomsAPI, $window, $sessionStorage) {
 
 //This alert is to check if the controller is being used.
-            alert("in controller");
+            //alert("in controller");
+            
+
+            
 
             //load properties
             this.properties = propertiesAPI.query();
@@ -208,26 +211,26 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
             };
 
 
-                this.addProperty = function (property) {
-                    property.lanldlordId = $sessionStorage.landlord.landlordId;
-                    propertiesAPI.save(null, property,
-                            // success callback
-                                    function () {
-                                        $window.location = 'index.html';
-                                    },
-                                    // error callback
-                                            function (error) {
-                                                console.log(error);
-                                            }
-                                    );
-                                };
+            this.addProperty = function (property) {
+                property.landlordId = $sessionStorage.landlord.landlordId;
+                propertiesAPI.save(null, property,
+                        // success callback
+                                function () {
+                                    $window.location = 'index.html';
+                                },
+                                // error callback
+                                        function (error) {
+                                            console.log(error);
+                                        }
+                                );
+                            };
 
 
 
-                    
 
 
-        });
+
+                });
 
 
 
@@ -334,6 +337,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                 module.controller('RegisterLandlordController', function (registerLandlordAPI, landlordLoginAPI, $window, $sessionStorage, $http) {
 
 
+                 
 
 
                     //This function is called from the menu.html 
