@@ -189,6 +189,9 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 //Properties controller
         module.controller('PropertiesController', function (propertiesAPI, bedroomsAPI, filterBedroomsAPI) {
 
+//This alert is to check if the controller is being used.
+            //alert("in controller");
+
             //load properties
             this.properties = propertiesAPI.query();
 
@@ -203,7 +206,24 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
             this.selectBedroom = function (selectedBedroom) {
                 this.properties = filterBedroomsAPI.query({"bedroom": selectedBedroom});
 
-            }
+
+                this.addProperty = function (property) {
+                    property.lanldlordId = $sessionStorage.landlord.landlordId;
+                    propertiesAPI.save(null, property,
+                            // success callback
+                                    function () {
+                                        $window.location = 'index.html';
+                                    },
+                                    // error callback
+                                            function (error) {
+                                                console.log(error);
+                                            }
+                                    );
+                                };
+
+
+
+                    }
 
 
         });
@@ -219,7 +239,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
 
-//Register controller
+//Register Renter controller
         module.controller('RegisterRenterController', function (registerRenterAPI, renterLoginAPI, $window, $sessionStorage, $http) {
 
 //This alert is to check if the controller is being used.

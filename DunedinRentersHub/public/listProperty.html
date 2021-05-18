@@ -27,45 +27,19 @@
             <div id="container">
                 <div id="borderedBox">
                     <h2 style="text-align: center;">List a Property</h2>
-                    <form action="/action_page.php">
-                        <label for="propertyName">Property name:</label>
-                        <br>
-                        <input type="text" name="propertyName">
-                        <br>
+                    <form ng-controller="PropertiesController as Ctrl" ng-submit="Ctrl.addProperty(property)">
                         <label for="address">Address:</label>
                         <br>
-                        <input type="text" name="address">
+                        <input type="text" name="address" ng-model="property.address">
                         <br>
                         <label for="numberOfRooms">Bedrooms:</label>
                         <br>
-                        <select name="numberOfRooms">
-                            <option value="1">One room</option>
-                            <option value="2">Two rooms</option>
-                            <option value="3">Three rooms</option>
-                            <option value="4">Four rooms</option>
-                            <option value="5">Five rooms</option>
-                            <option value="6">Six rooms</option>
-                            <option value="7+">Seven or more rooms</option>
-                        </select>
+                        <input type="number" name="numberOfRooms" ng-model="property.bedrooms">
                         <br>
-                        <label for="description">Description</label>
-                        <br>
-                        <textarea name="description" rows="4" cols="50"></textarea>
-                        <br>
-                        <label for="photo">Photo</label>
-                        <br>
-                        <textarea name="photo" rows="4" cols="50"></textarea>
                         <br>
                         <label for="status">Status:</label>
                         <br>
-                        <select name="status">
-                            <option value="readyNow">Ready now</option>
-                            <option value="readyNextYear">Ready for next year</option>
-                            <option value="someonesViewing">Someones viewing</option>
-                            <option value="rented">Rented</option>
-                        </select>
-                        <br>
-                        <br>
+                        <input type="text" name="status" ng-model="property.status">
                         <div id="submitButton">
                             <input type="submit" value="List Property" class="bigButton">
                         </div>
