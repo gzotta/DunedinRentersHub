@@ -237,7 +237,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                 // has the customer been added to the session?
                 if ($sessionStorage.renter) {
                     this.signedIn = true;
-                    this.welcome = "Welcome " + $sessionStorage.renter.firstName;
+                    this.welcome = "Welcome " + $sessionStorage.renter.username;
                 } else {
                     this.signedIn = false;
                 }
@@ -311,6 +311,32 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
                 //Landlord controller
                 module.controller('RegisterLandlordController', function (registerLandlordAPI, landlordLoginAPI, $window, $sessionStorage, $http) {
+
+
+
+
+                    //This function is called from the menu.html 
+                    this.checkSignIn = function () {
+                        // has the customer been added to the session?
+                        if ($sessionStorage.landlord) {
+                            this.signedIn = true;
+                            this.welcome = "Welcome " + $sessionStorage.landlord.userName;
+                        } else {
+                            this.signedIn = false;
+                        }
+                    };
+
+
+
+                    //signout function
+                    this.signOut = function () {
+                        $sessionStorage.$reset();
+                        $window.location = '.';
+                    };
+
+
+
+
 
 
 

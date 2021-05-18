@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="BookingApp">
     <head>
         <title>DRH - List Property</title>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/style.css">
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/BookingViews.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -17,7 +21,9 @@
                     <div class="navLine" style="margin-top: 10%"></div>
                 </div>
             </div>
-            
+
+            <div id="landlordMenu" ng-include="'lmenu.html'" ></div>
+
             <div id="container">
                 <div id="borderedBox">
                     <h2 style="text-align: center;">List a Property</h2>
@@ -63,10 +69,10 @@
                         <div id="submitButton">
                             <input type="submit" value="List Property" class="bigButton">
                         </div>
-                      </form>
+                    </form>
                 </div>
             </div>
-            
+
             <div id="footer">
                 <h1 style="font-size: 45px">drh.</h1>
                 <a href="loginR.html">
