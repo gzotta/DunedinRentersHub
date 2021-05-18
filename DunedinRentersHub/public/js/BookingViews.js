@@ -161,9 +161,9 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                 // get customer from web service
                 servicesLoginAPI.get({'username': username},
                         // success callback
-                                function (service) {
+                                function (services) {
                                     // also store the retrieved customer
-                                    $sessionStorage.service = service;
+                                    $sessionStorage.services = services;
                                     // redirect to home
                                     $window.location = '.';
                                 },
@@ -226,6 +226,36 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
             //alert("in controller");
 
 
+            //message for users
+            this.loginMessage = "Please login to continue.";
+            // alias 'this' so that we can access it inside callback functions
+            let ctrl = this;
+
+
+            //This function is called from the menu.html 
+            this.checkSignIn = function () {
+                // has the customer been added to the session?
+                if ($sessionStorage.renter) {
+                    this.signedIn = true;
+                    this.welcome = "Welcome " + $sessionStorage.renter.firstName;
+                } else {
+                    this.signedIn = false;
+                }
+            };
+
+
+
+            //signout function
+            this.signOut = function () {
+                $sessionStorage.$reset();
+                $window.location = '.';
+            };
+
+
+
+
+
+
             //function for registering a renter
             this.registerRenter = function (renter) {
                 registerRenterAPI.save(null, renter,
@@ -242,10 +272,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
 
-                    //message for users
-                    this.loginMessage = "Please login to continue.";
-                    // alias 'this' so that we can access it inside callback functions
-                    let ctrl = this;
+
 
 
 

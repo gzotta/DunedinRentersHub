@@ -36,7 +36,7 @@ public class ServicesModule extends Jooby {
         });
         
         
-        //GET a Landlord by username.
+        //GET a services by username.
         get("/api/services/:username", (req) -> {
             String username = req.param("username").value();
             if (servicesDao.getServices(username) == null) {
