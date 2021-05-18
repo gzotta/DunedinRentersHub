@@ -187,10 +187,10 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
 //Properties controller
-        module.controller('PropertiesController', function (propertiesAPI, bedroomsAPI, filterBedroomsAPI) {
+        module.controller('PropertiesController', function (propertiesAPI, bedroomsAPI, filterBedroomsAPI, $window, $sessionStorage) {
 
 //This alert is to check if the controller is being used.
-            //alert("in controller");
+            alert("in controller");
 
             //load properties
             this.properties = propertiesAPI.query();
@@ -205,6 +205,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
             this.selectBedroom = function (selectedBedroom) {
                 this.properties = filterBedroomsAPI.query({"bedroom": selectedBedroom});
+            };
 
 
                 this.addProperty = function (property) {
@@ -223,7 +224,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
 
-                    }
+                    
 
 
         });
