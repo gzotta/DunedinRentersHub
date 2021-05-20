@@ -65,12 +65,12 @@ public class PropertyModule extends Jooby {
         });
 
         //Add (POST) property to wishlist.
-        post("/api/wishlist", (req, rsp) -> {
-            Property property = req.body().to(Property.class);
-            Renter renter = req.body().to(Renter.class);
-            propertyDao.addToWishList(renter, property);
-            rsp.status(Status.CREATED);
-        });
+//        post("/api/wishlist", (req, rsp) -> {
+//            Property property = req.body().to(Property.class);
+//            Renter renter = req.body().to(Renter.class);
+//            propertyDao.addToWishList(renter, property);
+//            rsp.status(Status.CREATED);
+//        });
 
     }
 
