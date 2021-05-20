@@ -276,6 +276,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
             //alert("in controller");
 
             //get a renters wishlist
+            this.wishlist = null;
             //this.wishlist = wishlistAPI.query({"username": $sessionStorage.renter.username});
 
 
@@ -302,6 +303,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
             this.signOut = function () {
                 $sessionStorage.$reset();
                 $window.location = '.';
+                //this.wishlist = null;
             };
 
 
@@ -345,8 +347,11 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                                         function (renter) {
                                             // also store the retrieved customer
                                             $sessionStorage.renter = renter;
+                                            //set wishlist
+                                            //this.wishlist = wishlistAPI.query({"username": renter.username});
                                             // redirect to home
                                             $window.location = '.';
+                                            this.wishlist = wishlistAPI.query({"username": renter.username});
                                         },
                                         // fail callback
                                                 function () {
