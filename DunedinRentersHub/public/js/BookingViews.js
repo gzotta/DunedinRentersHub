@@ -233,30 +233,30 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                                         }
                                 );
 
-            };
-
-
-
-            this.addProperty = function (property) {
-                property.landlordId = $sessionStorage.landlord.landlordId;
-                propertiesAPI.save(null, property,
-                        // success callback
-                                function () {
-                                    $window.location = 'index.html';
-                                },
-                                // error callback
-                                        function (error) {
-                                            console.log(error);
-                                        }
-                                );
                             };
 
 
 
+                    this.addProperty = function (property) {
+                        property.landlordId = $sessionStorage.landlord.landlordId;
+                        propertiesAPI.save(null, property,
+                                // success callback
+                                        function () {
+                                            $window.location = 'index.html';
+                                        },
+                                        // error callback
+                                                function (error) {
+                                                    console.log(error);
+                                                }
+                                        );
+                                    };
 
 
 
-                });
+
+
+
+                        });
 
 
 
@@ -270,115 +270,24 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
 //Register Renter controller
-        module.controller('RegisterRenterController', function (registerRenterAPI, wishlistAPI, renterLoginAPI, $window, $sessionStorage, $http) {
+                module.controller('RegisterRenterController', function (registerRenterAPI, wishlistAPI, renterLoginAPI, $window, $sessionStorage, $http) {
 
 //This alert is to check if the controller is being used.
-            //alert("in controller");
-
-            //get a renters wishlist
-            this.wishlist = null;
-            //this.wishlist = wishlistAPI.query({"username": $sessionStorage.renter.username});
+                    //alert("in controller");
 
 
-            //message for users
-            this.loginMessage = "Please login to continue.";
-            // alias 'this' so that we can access it inside callback functions
-            let ctrl = this;
-
-
-            //This function is called from the menu.html 
-            this.checkSignIn = function () {
-                // has the customer been added to the session?
-                if ($sessionStorage.renter) {
-                    this.signedIn = true;
-                    this.welcome = "Welcome " + $sessionStorage.renter.username;
-                } else {
-                    this.signedIn = false;
-                }
-            };
-
-
-
-            //signout function
-            this.signOut = function () {
-                $sessionStorage.$reset();
-                $window.location = '.';
-                //this.wishlist = null;
-            };
-
-
-
-
-
-
-            //function for registering a renter
-            this.registerRenter = function (renter) {
-                registerRenterAPI.save(null, renter,
-                        // success callback
-                                function () {
-                                    $window.location = 'loginR.html';
-                                },
-                                // error callback
-                                        function (error) {
-                                            console.log(error);
-                                        }
-                                );
-                            };
-
-
-
-
-
-
-
-
-                    //login function
-                    this.login = function (username, password) {
-
-                        // generate authentication token
-                        let authToken = $window.btoa(username + ":" + password);
-                        // store token
-                        $sessionStorage.authToken = authToken;
-                        // add token to the HTTP request headers
-                        $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
-                        // get customer from web service
-                        renterLoginAPI.get({'username': username},
-                                // success callback
-                                        function (renter) {
-                                            // also store the retrieved customer
-                                            $sessionStorage.renter = renter;
-                                            //set wishlist
-                                            //this.wishlist = wishlistAPI.query({"username": renter.username});
-                                            // redirect to home
-                                            $window.location = '.';
-                                        },
-                                        // fail callback
-                                                function () {
-                                                    ctrl.loginMessage = 'Login failed. Please try again.';
-                                                }
-                                        );
-                                    };
-                        });
-
-
-
-
-
-
-
-                //Landlord controller
-                module.controller('RegisterLandlordController', function (registerLandlordAPI, landlordLoginAPI, $window, $sessionStorage, $http) {
-
-
-
+                    //message for users
+                    this.loginMessage = "Please login to continue.";
+                    // alias 'this' so that we can access it inside callback functions
+                    let ctrl = this;
 
 
                     //This function is called from the menu.html 
                     this.checkSignIn = function () {
                         // has the customer been added to the session?
-                        if ($sessionStorage.landlord) {
+                        if ($sessionStorage.renter) {
                             this.signedIn = true;
-                            this.welcome = "Welcome " + $sessionStorage.landlord.userName;
+                            this.welcome = "Welcome " + $sessionStorage.renter.username;
                         } else {
                             this.signedIn = false;
                         }
@@ -397,14 +306,12 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
 
-
-
-                    //function for registering a landlord
-                    this.registerLandlord = function (landlord) {
-                        registerLandlordAPI.save(null, landlord,
+                    //function for registering a renter
+                    this.registerRenter = function (renter) {
+                        registerRenterAPI.save(null, renter,
                                 // success callback
                                         function () {
-                                            $window.location = 'loginL.html';
+                                            $window.location = 'loginR.html';
                                         },
                                         // error callback
                                                 function (error) {
@@ -416,11 +323,6 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
 
-
-                            //message for users
-                            this.loginMessage = "Please login to continue.";
-                            // alias 'this' so that we can access it inside callback functions
-                            let ctrl = this;
 
 
 
@@ -435,11 +337,11 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                                 // add token to the HTTP request headers
                                 $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
                                 // get customer from web service
-                                landlordLoginAPI.get({'username': username},
+                                renterLoginAPI.get({'username': username},
                                         // success callback
-                                                function (landlord) {
+                                                function (renter) {
                                                     // also store the retrieved customer
-                                                    $sessionStorage.landlord = landlord;
+                                                    $sessionStorage.renter = renter;
                                                     // redirect to home
                                                     $window.location = '.';
                                                 },
@@ -449,4 +351,103 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                                                         }
                                                 );
                                             };
-                                });                      
+                                });
+
+
+                        //wishlist controller
+                        module.controller('WishlistController', function (wishlistAPI, registerLandlordAPI, landlordLoginAPI, $window, $sessionStorage, $http) {
+                            this.wishlist = wishlistAPI.query({"username": $sessionStorage.renter.username});
+
+
+                        });
+
+
+
+
+
+
+
+                        //Landlord controller
+                        module.controller('RegisterLandlordController', function (registerLandlordAPI, landlordLoginAPI, $window, $sessionStorage, $http) {
+
+
+
+
+
+                            //This function is called from the menu.html 
+                            this.checkSignIn = function () {
+                                // has the customer been added to the session?
+                                if ($sessionStorage.landlord) {
+                                    this.signedIn = true;
+                                    this.welcome = "Welcome " + $sessionStorage.landlord.userName;
+                                } else {
+                                    this.signedIn = false;
+                                }
+                            };
+
+
+
+                            //signout function
+                            this.signOut = function () {
+                                $sessionStorage.$reset();
+                                $window.location = '.';
+                            };
+
+
+
+
+
+
+
+
+                            //function for registering a landlord
+                            this.registerLandlord = function (landlord) {
+                                registerLandlordAPI.save(null, landlord,
+                                        // success callback
+                                                function () {
+                                                    $window.location = 'loginL.html';
+                                                },
+                                                // error callback
+                                                        function (error) {
+                                                            console.log(error);
+                                                        }
+                                                );
+                                            };
+
+
+
+
+
+                                    //message for users
+                                    this.loginMessage = "Please login to continue.";
+                                    // alias 'this' so that we can access it inside callback functions
+                                    let ctrl = this;
+
+
+
+
+                                    //login function
+                                    this.login = function (username, password) {
+
+                                        // generate authentication token
+                                        let authToken = $window.btoa(username + ":" + password);
+                                        // store token
+                                        $sessionStorage.authToken = authToken;
+                                        // add token to the HTTP request headers
+                                        $http.defaults.headers.common.Authorization = 'Basic ' + authToken;
+                                        // get customer from web service
+                                        landlordLoginAPI.get({'username': username},
+                                                // success callback
+                                                        function (landlord) {
+                                                            // also store the retrieved customer
+                                                            $sessionStorage.landlord = landlord;
+                                                            // redirect to home
+                                                            $window.location = '.';
+                                                        },
+                                                        // fail callback
+                                                                function () {
+                                                                    ctrl.loginMessage = 'Login failed. Please try again.';
+                                                                }
+                                                        );
+                                                    };
+                                        });                      
