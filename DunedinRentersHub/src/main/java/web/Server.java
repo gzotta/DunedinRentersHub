@@ -10,6 +10,7 @@ import dao.LandlordJdbcDAO;
 import dao.PropertyJdbcDAO;
 import dao.RenterJdbcDAO;
 import dao.ServicesJdbcDAO;
+import dao.WishlistJdbcDAO;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -28,6 +29,7 @@ public class Server extends Jooby {
     PropertyJdbcDAO propertyDao = new PropertyJdbcDAO();
     RenterJdbcDAO renterDao = new RenterJdbcDAO();
     ServicesJdbcDAO servicesDao = new ServicesJdbcDAO();
+    WishlistJdbcDAO wishlistDao = new WishlistJdbcDAO();
 
     public Server() {
         port(8080);
@@ -40,6 +42,7 @@ public class Server extends Jooby {
         use(new PropertyModule(propertyDao));
         use(new RenterModule(renterDao));
         use(new ServicesModule(servicesDao));
+        use(new WishlistModule(wishlistDao));
         
     }
 
