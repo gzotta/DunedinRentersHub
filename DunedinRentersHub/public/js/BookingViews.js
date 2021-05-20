@@ -80,6 +80,11 @@ module.factory('propertiesAPI', function ($resource) {
     return $resource("/api/properties");
 });
 
+//factory for add to wishlist
+module.factory('addToWishlistAPI', function ($resource) {
+    return $resource("/api/wishlist");
+});
+
 //factory for number of bedrooms
 module.factory('bedroomsAPI', function ($resource) {
     return $resource("/api/bedrooms");
@@ -191,7 +196,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
 //Properties controller
-        module.controller('PropertiesController', function (propertiesAPI, bedroomsAPI, filterBedroomsAPI, $window, $sessionStorage) {
+        module.controller('PropertiesController', function (propertiesAPI, addToWishlistAPI, bedroomsAPI, filterBedroomsAPI, $window, $sessionStorage) {
 
 //This alert is to check if the controller is being used.
             //alert("in controller");
@@ -213,6 +218,23 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
             this.selectBedroom = function (selectedBedroom) {
                 this.properties = filterBedroomsAPI.query({"bedroom": selectedBedroom});
             };
+
+//method to add property to wishlist
+            this.addToWishlist = function (renter, property) {
+                renter = $sessionStroage.renter;
+                addToWishlistAPI.save(null, renter, property,
+                        // success callback
+                                function () {
+                                    $window.location = 'index.html';
+                                },
+                                // error callback
+                                        function (error) {
+                                            console.log(error);
+                                        }
+                                );
+
+            };
+
 
 
             this.addProperty = function (property) {
