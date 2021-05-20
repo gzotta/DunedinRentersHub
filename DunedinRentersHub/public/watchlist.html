@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html ng-app="BookingApp">
+    <head>
+        <title>Dunedin Renters Hub</title>
+        <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+        <link type="text/css" rel="stylesheet" href="css/style.css">
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/BookingViews.js"></script>
+    </head>
+    <body ng-controller="PropertiesController as propCtrl" >
+        <div id="wrapper">
+            <div id="header">
+                <h1>dunedin renter's hub.</h1>
+                <div id="nav">
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                    <div class="navLine" style="margin-top: 10%"></div>
+                </div>
+            </div>
+            
+            <div id="renterMenu" ng-include="'rmenu.html'" ></div>
+            
+             <div id="landlordMenu" ng-include="'lmenu.html'" ></div>
+            
+            <div id="container">
+                <div id="searchBar">
+                    <div id="searchFilter">
+                        <h2>Filter by the number of rooms</h2>
+                        <button id="allB" ng-click="propCtrl.getAllProperties()" >All</button>
+                        <button id="bedrooms" ng-repeat="bedroom in propCtrl.bedrooms" 
+                                ng-click="propCtrl.selectBedroom(bedroom)">{{bedroom}}</button>
+                    </div>
+                </div>
+                <!-- <div id="listings">
+                     <div class="listing">
+                         <div class="listingInfo">
+                             <h3>Debacle</h3>
+                             <h4>844B Cumberland Street</h4>
+                             <h4>Cutler's Properties</h4>
+                             <button type="button" class="buttons">Add to watchlist</button>
+                         </div>
+                         <div class="listingPhoto">
+                             <img src="images/properties/photos/debacle.jpeg">
+                         </div>
+                     </div>
+                     <div class="listing">
+                         <a href="viewFlat.html">
+                             <div class="listingInfo">
+                                 <h3>The Six60 Flat</h3>
+                                 <h4>660 Castle Street</h4>
+                                 <h4>Central Campus Property Management</h4>
+                                 <button type="button" class="buttons">Add to watchlist</button>
+                             </div>
+                             <div class="listingPhoto">
+                                 <img src="images/properties/photos/theSix60Flat.jpeg">
+                             </div>
+                         </a>
+                     </div>
+                     <div class="listing">
+                         <div class="listingInfo">
+                             <h3>Thirsty Boys</h3>
+                             <h4>631 Castle Street</h4>
+                             <h4>Cutler's Properties</h4>
+                             <button type="button" class="buttons">Add to watchlist</button>
+                         </div>
+                         <div class="listingPhoto">
+                             <img src="images/properties/photos/thirstyBoys.jpeg">
+                         </div>
+                     </div>
+                 </div>-->
+            </div>
+            <table id = "table1">
+                <thead>
+                    <tr>
+                        <th>Address</th>
+                        <th>Bedrooms</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="property in propCtrl.properties">
+
+                        <td>{{property.address}}</td>
+
+                        <td>{{property.bedrooms}}</td>
+
+                        <td>{{property.status}}</td>
+
+                        <td><button type="button">Book</button></td> 
+
+                        <td><button type="button">Add to Watch list</button></td> 
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="footer">
+                <h1 style="font-size: 45px">drh.</h1>
+                <a href="loginR.html">
+                    <h1 style="position: relative; text-align: right; top:-70px; font-size: 25px;">log in</h1>
+                </a>
+                <a href="CreateRAccount.html">
+                    <h1 style="position: relative; text-align: right; top:-109px; right:90px; font-size: 26px;">create account</h1> 
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
