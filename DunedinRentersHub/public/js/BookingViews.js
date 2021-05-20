@@ -3,12 +3,12 @@ class Wishlist {
     constructor() {
     }
 
-    setRenter(renter) {
-        this.renter = renter;
+    setRenterId(renterId) {
+        this.renterId = renterId;
     }
 
-    setProperty(property) {
-        this.property = property;
+    setPropertyId(propertyId) {
+        this.propertyId = propertyId;
     }
 }
 
@@ -242,8 +242,8 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 //method to add property to wishlist
             this.addToWishlist = function (property) {
-                wishlist.setRenter($sessionStorage.renter);
-                wishlist.setProperty(property);
+                wishlist.setRenterId($sessionStorage.renter.renterId);
+                wishlist.setPropertyId(property.propertyId);
 
                 addToWishlistAPI.save(null, wishlist,
                         // success callback
