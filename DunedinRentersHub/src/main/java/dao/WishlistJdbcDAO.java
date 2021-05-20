@@ -38,8 +38,8 @@ public class WishlistJdbcDAO {
                 // create the statement
                 PreparedStatement stmt = dbCon.prepareStatement(sql);) {
             // copy the data from the renter domain object into the SQL parameters
-            stmt.setInt(1, w.getRenter().getRenterId());
-            stmt.setInt(2, w.getProperty().getPropertyId());
+            stmt.setInt(1, w.getRenterId());
+            stmt.setInt(2, w.getPropertyId());
 
             stmt.executeUpdate(); // execute the statement
 
