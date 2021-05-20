@@ -49,9 +49,10 @@ create table Property (
 );
 
 create table Wishlist (
+    wishlistId int auto_increment (1000),
     renterId int,
     propertyId int,
-    constraint Wishlist_PK primary key (renterId, propertyId),
+    constraint Wishlist_PK primary key (wishlistId),
     constraint Wishlist_Renter foreign key (renterId) references Renter,
     constraint Wishlist_Property foreign key (propertyId) references Property
 );
