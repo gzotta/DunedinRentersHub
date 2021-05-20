@@ -1,4 +1,18 @@
 "use strict";
+class Wishlist {
+    constructor() {
+    }
+
+    setRenter(renter) {
+        this.renter = renter;
+    }
+
+    setProperty(property) {
+        this.property = property;
+    }
+}
+
+
 // create a new module, and load the other pluggable modules
 var module = angular.module('BookingApp', ['ngResource', 'ngStorage']);
 
@@ -100,6 +114,13 @@ module.factory('wishlistAPI', function ($resource) {
     return $resource("/api/renters/wishlist/:username");
 });
 
+//factory for wishlist
+module.factory('wishlist', function ($sessionStorage) {
+    let wishlist = new Wishlist();
+
+    return wishlist;
+});
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -196,7 +217,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
 //Properties controller
-        module.controller('PropertiesController', function (propertiesAPI, addToWishlistAPI, bedroomsAPI, filterBedroomsAPI, $window, $sessionStorage) {
+        module.controller('PropertiesController', function (wishlist, propertiesAPI, addToWishlistAPI, bedroomsAPI, filterBedroomsAPI, $window, $sessionStorage) {
 
 //This alert is to check if the controller is being used.
             //alert("in controller");
@@ -220,9 +241,11 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
             };
 
 //method to add property to wishlist
-            this.addToWishlist = function (renter, property) {
-                renter = $sessionStorage.renter;
-                addToWishlistAPI.save(null, renter, property,
+            this.addToWishlist = function (property) {
+                wishlist.setRenter($sessionStorage.renter);
+                wishlist.setProperty(property);
+
+                addToWishlistAPI.save(null, wishlist,
                         // success callback
                                 function () {
                                     $window.location = 'index.html';
