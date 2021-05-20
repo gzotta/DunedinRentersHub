@@ -221,7 +221,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 //method to add property to wishlist
             this.addToWishlist = function (renter, property) {
-                renter = $sessionStroage.renter;
+                renter = $sessionStorage.renter;
                 addToWishlistAPI.save(null, renter, property,
                         // success callback
                                 function () {
@@ -276,7 +276,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
             //alert("in controller");
 
             //get a renters wishlist
-            this.wishlist = wishlistAPI.query({"username": $sessionStorage.renter.username})
+            //this.wishlist = wishlistAPI.query({"username": $sessionStorage.renter.username});
 
 
             //message for users
