@@ -82,7 +82,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-ng-repeat="property in propCtrl.properties">
+                    <tr data-ng-repeat="property in propCtrl.properties" ng-submit="propCtrl.addToWishlist(null, property)">
 
                         <td>{{property.address}}</td>
 
@@ -90,9 +90,9 @@
 
                         <td>{{property.status}}</td>
 
-                        <td><button type="button">Book</button></td> 
+                        <!--<td><button type="button">Book</button></td> -->
 
-                        <td><button type="button">Add to Watch list</button></td> 
+                        <td><input type="submit" value="Add to Watch list"></td> 
                     </tr>
                 </tbody>
             </table>
