@@ -91,6 +91,10 @@ module.factory('filterBedroomsAPI', function ($resource) {
     return $resource("/api/bedrooms/:bedroom");
 });
 
+module.factory('wishlistAPI', function ($resource) {
+    return $resource("/api/renters/wishlist/:username");
+});
+
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -191,9 +195,9 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 //This alert is to check if the controller is being used.
             //alert("in controller");
-            
 
-            
+
+
 
             //load properties
             this.properties = propertiesAPI.query();
@@ -244,10 +248,13 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
 //Register Renter controller
-        module.controller('RegisterRenterController', function (registerRenterAPI, renterLoginAPI, $window, $sessionStorage, $http) {
+        module.controller('RegisterRenterController', function (registerRenterAPI, wishlistAPI, renterLoginAPI, $window, $sessionStorage, $http) {
 
 //This alert is to check if the controller is being used.
             //alert("in controller");
+
+            //get a renters wishlist
+            this.wishlist = wishlistAPI.query({"username": $sessionStorage.renter.username})
 
 
             //message for users
@@ -337,7 +344,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                 module.controller('RegisterLandlordController', function (registerLandlordAPI, landlordLoginAPI, $window, $sessionStorage, $http) {
 
 
-                 
+
 
 
                     //This function is called from the menu.html 
