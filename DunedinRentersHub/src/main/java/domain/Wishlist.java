@@ -11,31 +11,33 @@ package domain;
  */
 public class Wishlist {
 
-    Renter renter;
-    Property property;
+    Integer renterId;
+    Integer propertyId;
 
     public Wishlist() {
     }
 
-    public Wishlist(Renter renter, Property property) {
-        this.renter = renter;
-        this.property = property;
+    public Wishlist(Integer renterId, Integer propertyId) {
+        this.renterId = renterId;
+        this.propertyId = propertyId;
     }
 
-    public Renter getRenter() {
-        return renter;
+    public Integer getRenterId() {
+        return renterId;
     }
 
-    public void setRenter(Renter renter) {
-        this.renter = renter;
+    public void setRenterId(Integer renterId) {
+        this.renterId = renterId;
     }
 
-    public Property getProperty() {
-        return property;
+    public Integer getPropertyId() {
+        return propertyId;
     }
 
-    public void setProperty(Property property) {
-        this.property = property;
+    public void setPropertyId(Integer propertyId) {
+        this.propertyId = propertyId;
     }
+
+    
 
 }
