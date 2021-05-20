@@ -351,7 +351,6 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                                             //this.wishlist = wishlistAPI.query({"username": renter.username});
                                             // redirect to home
                                             $window.location = '.';
-                                            this.wishlist = wishlistAPI.query({"username": renter.username});
                                         },
                                         // fail callback
                                                 function () {
