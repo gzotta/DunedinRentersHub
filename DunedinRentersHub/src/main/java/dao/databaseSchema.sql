@@ -63,6 +63,7 @@ create table Booking (
     landlordId int,
     propertyId int,
     renterId int,
+    address varchar(80) not null,
     constraint Booking_PK primary key (bookingId),
     constraint Booking_Landlord foreign key (landlordId) references Landlord,
     constraint Booking_Property foreign key (propertyId) references Property,
