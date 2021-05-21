@@ -159,6 +159,11 @@ module.factory('booking', function () {
 });
 
 
+module.factory('bookingsAPI', function($resource){
+    return $resource("/api/bookings/:id");
+});
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //////////////////end of Property factories/////////////////////////////////////
@@ -177,7 +182,14 @@ module.factory('booking', function () {
 //////////////////end of Services factories/////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-
+//Bookings controller
+module.controller('BookingsController', function (bookingsAPI, $sessionStorage) {
+    
+    this.bookings = bookingsAPI.query({"id": $sessionStorage.renter.renterId});
+    
+    
+    
+});
 
 
 
@@ -429,7 +441,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                                 saveBookingAPI.save(null, booking,
                                         // success callback
                                                 function () {
-                                                    $window.location = 'index.html';
+                                                    $window.location = 'viewBookings.html';
                                                 },
                                                 // error callback
                                                         function (error) {

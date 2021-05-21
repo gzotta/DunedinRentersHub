@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="BookingApp">
     <head>
         <title>DRH - View Applicants</title>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/style.css">
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/BookingViews.js"></script>
     </head>
-    <body>
+    <body ng-controller="BookingsController as Ctrl">
         <div id="wrapper">
             <div id="header">
                 <h1>dunedin renter's hub.</h1>
@@ -17,42 +21,36 @@
                     <div class="navLine" style="margin-top: 10%"></div>
                 </div>
             </div>
-            
+
+            <div id="renterMenu" ng-include="'rmenu.html'" ></div>
+
             <div id="container">
                 <div id="searchBar">
-                    <a  href="viewFlat.html">
-                        <div id="flatPreview">
-                            <img src="images/properties/photos/theSix60Flat.jpeg">
-                            <br>
-                            <br>
-                            <h2>The Six60 Flat</h2>
-                            <h5>660 Castle Street</h5>
-                        </div>
-                    </a>
+                    <table id = "table1">
+                        <thead>
+                            <tr>
+                                <th>Address</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="booking in Ctrl.bookings" >
+                                <td>{{booking.address}}</td>
+                                <td>{{booking.date}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+
                 </div>
-                <div id="listings">
-                    <div class="listing">
-                        <div class="listingInfo">
-                            <h3>Harlene Hayne</h3>
-                            <h4>21 years old</h4>
-                            <h4>Monday 24.05.21 10am</h4>
-                            <form action="viewProfile.html">
-                                <input type="submit" value="View Applicant" class="buttons" style="float: left;"/>
-                            </form>
-                            <form action="/action_page.php">
-                                <input type="submit" value="Email Applicant" class="buttons" style="float: right;"/>
-                            </form>
-                        </div>
-                        <div class="listingPhoto">
-                            <img src="images/renters/harleneHayne.jpeg">
-                        </div>
-                    </div>
-                </div>
+
             </div>
-            
+
             <div id="footer">
                 <h1 style="font-size: 45px">drh.</h1>
-                <a href="login.html">
+                <a href="loginR.html">
                     <h1 style="position: relative; text-align: right; top:-70px; font-size: 25px;">log in</h1>
                 </a>
             </div>
