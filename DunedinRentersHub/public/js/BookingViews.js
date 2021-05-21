@@ -12,6 +12,31 @@ class Wishlist {
     }
 }
 
+class Booking {
+    constructor(){
+        
+    }
+    
+    setDate(date){
+        this.date = date;
+    }
+    
+    setLandlordId(landlordId){
+        this.landlordId = landlordId;
+    }
+    
+    setPropertyId(propertyId){
+        this.propertyId = propertyId;
+    }
+    
+    setRenterId(renterId){
+        this.renterId = renterId;
+    }
+    
+    setAddress(address){
+        this.address = address;
+    }
+}
 
 // create a new module, and load the other pluggable modules
 var module = angular.module('BookingApp', ['ngResource', 'ngStorage']);
@@ -115,10 +140,22 @@ module.factory('wishlistAPI', function ($resource) {
 });
 
 //factory for wishlist
-module.factory('wishlist', function ($sessionStorage) {
+module.factory('wishlist', function () {
     let wishlist = new Wishlist();
 
     return wishlist;
+});
+
+//factory to save booking
+module.factory('saveBookingAPI', function($resource){
+    return $resource("/api/bookings");
+});
+
+//factory for wishlist
+module.factory('booking', function () {
+    let booking = new Booking();
+
+    return booking;
 });
 
 
@@ -378,11 +415,29 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
                         //wishlist controller
-                        module.controller('WishlistController', function (wishlistAPI, registerLandlordAPI, landlordLoginAPI, $window, $sessionStorage, $http) {
+                        module.controller('WishlistController', function (wishlistAPI, saveBookingAPI,$window, $sessionStorage) {
                             this.wishlist = wishlistAPI.query({"username": $sessionStorage.renter.username});
 
+                            //method to add property to wishlist
+                            this.makeBooking = function (property) {
+                                wishlist.setRenterId($sessionStorage.renter.renterId);
+                                wishlist.setPropertyId(property.propertyId);
 
-                        });
+                                saveBookingAPI.save(null, booking,
+                                        // success callback
+                                                function () {
+                                                    $window.location = 'viewBookings.html';
+                                                },
+                                                // error callback
+                                                        function (error) {
+                                                            console.log(error);
+                                                        }
+                                                );
+
+                                            };
+
+
+                                });
 
 
 
