@@ -49,9 +49,10 @@ create table Property (
 );
 
 create table Wishlist (
+    wishlistId int auto_increment (1000),
     renterId int,
     propertyId int,
-    constraint Wishlist_PK primary key (renterId, propertyId),
+    constraint Wishlist_PK primary key (wishlistId),
     constraint Wishlist_Renter foreign key (renterId) references Renter,
     constraint Wishlist_Property foreign key (propertyId) references Property
 );
@@ -62,6 +63,7 @@ create table Booking (
     landlordId int,
     propertyId int,
     renterId int,
+    address varchar(80) not null,
     constraint Booking_PK primary key (bookingId),
     constraint Booking_Landlord foreign key (landlordId) references Landlord,
     constraint Booking_Property foreign key (propertyId) references Property,

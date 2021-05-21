@@ -1,0 +1,11 @@
+<div id="menu" ng-controller="RegisterLandlordController as Ctrl" ng-init="Ctrl.checkSignIn()">
+    <!link rel="stylesheet" type = "text/css" href="css/navMenButt.css">
+    <div id="welcome">{{Ctrl.welcome}}</div>
+    <button class="button" onclick = "window.location.href = 'listProperty.html';" ng-if="Ctrl.signedIn" style =" color: white; text-decoration: none">List Property</button>
+    <button class="button" onclick = "window.location.href = '#';" ng-if="Ctrl.signedIn" ng-click="Ctrl.signOut()" style =" color: white; text-decoration: none">Sign Out</button>
+</div>
+
+
+
+
+

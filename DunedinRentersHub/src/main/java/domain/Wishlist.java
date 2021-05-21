@@ -10,32 +10,34 @@ package domain;
  * @author maxer
  */
 public class Wishlist {
-    Renter renter;
-    Landlord landlord;
-    
+
+    Integer renterId;
+    Integer propertyId;
+
     public Wishlist() {
-}
-
-    public Wishlist(Renter renter, Landlord landlord) {
-        this.renter = renter;
-        this.landlord = landlord;
     }
 
-    public Renter getRenter() {
-        return renter;
+    public Wishlist(Integer renterId, Integer propertyId) {
+        this.renterId = renterId;
+        this.propertyId = propertyId;
     }
 
-    public void setRenter(Renter renter) {
-        this.renter = renter;
+    public Integer getRenterId() {
+        return renterId;
     }
 
-    public Landlord getLandlord() {
-        return landlord;
+    public void setRenterId(Integer renterId) {
+        this.renterId = renterId;
     }
 
-    public void setLandlord(Landlord landlord) {
-        this.landlord = landlord;
+    public Integer getPropertyId() {
+        return propertyId;
     }
+
+    public void setPropertyId(Integer propertyId) {
+        this.propertyId = propertyId;
+    }
+
     
-    
+
 }

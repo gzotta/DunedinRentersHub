@@ -10,9 +10,13 @@ import dao.LandlordJdbcDAO;
 import dao.PropertyJdbcDAO;
 import dao.RenterJdbcDAO;
 import dao.ServicesJdbcDAO;
+import dao.WishlistJdbcDAO;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import org.jooby.Jooby;
 import org.jooby.json.Gzon;
+import web.auth.BasicHttpAuthenticator;
 
 /**
  *
@@ -25,16 +29,21 @@ public class Server extends Jooby {
     PropertyJdbcDAO propertyDao = new PropertyJdbcDAO();
     RenterJdbcDAO renterDao = new RenterJdbcDAO();
     ServicesJdbcDAO servicesDao = new ServicesJdbcDAO();
+    WishlistJdbcDAO wishlistDao = new WishlistJdbcDAO();
 
     public Server() {
         port(8080);
         use(new Gzon());
+        use(new AssetModule());
+        //List<String> noAuth = Arrays.asList("/api/registerRenter");//adding BasicHttpAuthenticator to the filter chain.
+        //use(new BasicHttpAuthenticator(renterDao, noAuth));//adding BasicHttpAuthenticator to the filter chain.
         use(new BookingModule(bookingDao));
         use(new LandlordModule(landlordDao));
         use(new PropertyModule(propertyDao));
         use(new RenterModule(renterDao));
         use(new ServicesModule(servicesDao));
-        use(new AssetModule());
+        use(new WishlistModule(wishlistDao));
+        
     }
 
     public static void main(String[] args) throws Exception {

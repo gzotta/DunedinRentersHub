@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 
-<html>
+<html ng-app="BookingApp">
     <head>
         <title>DRH - Create Account</title>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/style.css">
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/BookingViews.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -17,7 +21,7 @@
                     <div class="navLine" style="margin-top: 10%"></div>
                 </div>
             </div>
-            
+
             <div id="container">
                 <div id="borderedBox">
                     <h2 style="text-align: center;">Create Account</h2>
@@ -37,42 +41,47 @@
                         </a>
                     </div>
                     <br>
-                    <form action="/action_page.php">
+                    <form ng-controller="RegisterRenterController as regCtrl" ng-submit="regCtrl.registerRenter(renter)">
                         <label for="username">Username:</label>
                         <br>
-                        <input type="text" name="username">
+                        <input type="text" name="username" ng-model="renter.username" required minlength="4" maxlength="30">
                         <br>
                         <br>
                         <label for="dateOfBirth">Date of birth:</label>
                         <br>
-                        <input type="date" name="dateOfBirth">
+                        <input type="date" name="dateOfBirth" ng-model="renter.dateOfBirth">
                         <br>
                         <br>
                         <label for="email">Email:</label>
                         <br>
-                        <input type="text" name="email">
+                        <input type="email" name="email" ng-model="renter.renterEmail">
                         <br>
                         <br>
                         <label for="phone">Phone:</label>
                         <br>
-                        <input type="text" name="phone">
+                        <input type="text" name="phone" ng-model="renter.renterPhone">
                         <br>
                         <br>
                         <label for="password">Password:</label>
                         <br>
-                        <input type="text" name="password">
+                        <input type="password" name="password" ng-model="renter.renterPassword" required minlength="8" maxlength="15">
+                        <br>
+                        <br>
+                        <label for="references">References:</label>
+                        <br>
+                        <input type="text" name="references" ng-model="renter.references">
                         <br>
                         <br>
                         <div id="submitButton">
                             <input type="submit" value="Create Account" class="bigButton">
                         </div>
-                      </form>
+                    </form>
                 </div>
             </div>
-            
+
             <div id="footer">
                 <h1 style="font-size: 45px">drh.</h1>
-                <a href="login.html">
+                <a href="loginR.html">
                     <h1 style="position: relative; text-align: right; top:-70px; font-size: 25px;">log in</h1>
                 </a>
             </div>

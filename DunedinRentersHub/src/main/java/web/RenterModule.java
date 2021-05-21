@@ -39,7 +39,7 @@ public class RenterModule extends Jooby {
         });
 
         //GET a renter wishlist.
-        get("/api/renters/:username", (req) -> {
+        get("/api/renters/wishlist/:username", (req) -> {
             String username = req.param("username").value();
             Renter r = renterDao.getRenter(username);
             return renterDao.getRenterWishlist(r);

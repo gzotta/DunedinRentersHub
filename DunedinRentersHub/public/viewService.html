@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 
-<html>
+<html  ng-app="BookingApp">
     <head>
         <title>DRH - Services</title>
         <meta charset="UTF-8">
         <link href="https://fonts.googleapis.com/css2?family=Alatsi&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="css/style.css">
+        <script src="js/angular.js"></script>
+        <script src="js/angular-resource.js"></script>
+        <script src="js/ngStorage.js"></script>
+        <script src="js/BookingViews.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -17,16 +21,18 @@
                     <div class="navLine" style="margin-top: 10%"></div>
                 </div>
             </div>
-            
+
+            <div id="renterMenu" ng-include="'rmenu.html'" ></div>
+
             <div id="container">
                 <div id="searchBar">
                     <div id="searchFilter">
                         <h2>Search for a service</h2>
                         <form action="/action_page.php">
                             <select name="serviceType">
-                              <option value="cleaner">Cleaners</option>
-                              <option value="mover">Movers</option>
-                              <option value="storage">Storage</option>
+                                <option value="cleaner">Cleaners</option>
+                                <option value="mover">Movers</option>
+                                <option value="storage">Storage</option>
                             </select>
                             <br><br>
                             <input type="submit" value="Search" class="buttons">
@@ -75,10 +81,11 @@
                     </div>
                 </div>
             </div>
-            
+
+
             <div id="footer">
                 <h1 style="font-size: 45px">drh.</h1>
-                <a href="login.html">
+                <a href="loginR.html">
                     <h1 style="position: relative; text-align: right; top:-70px; font-size: 25px;">log in</h1>
                 </a>
             </div>

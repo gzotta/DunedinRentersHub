@@ -11,7 +11,7 @@
         <script src="js/ngStorage.js"></script>
         <script src="js/BookingViews.js"></script>
     </head>
-    <body ng-controller="PropertiesController as propCtrl" >
+    <body ng-controller="WishlistController as Ctrl" >
         <div id="wrapper">
             <div id="header">
                 <h1>dunedin renter's hub.</h1>
@@ -35,43 +35,8 @@
                                 ng-click="propCtrl.selectBedroom(bedroom)">{{bedroom}}</button>
                     </div>
                 </div>
-                <!-- <div id="listings">
-                     <div class="listing">
-                         <div class="listingInfo">
-                             <h3>Debacle</h3>
-                             <h4>844B Cumberland Street</h4>
-                             <h4>Cutler's Properties</h4>
-                             <button type="button" class="buttons">Add to watchlist</button>
-                         </div>
-                         <div class="listingPhoto">
-                             <img src="images/properties/photos/debacle.jpeg">
-                         </div>
-                     </div>
-                     <div class="listing">
-                         <a href="viewFlat.html">
-                             <div class="listingInfo">
-                                 <h3>The Six60 Flat</h3>
-                                 <h4>660 Castle Street</h4>
-                                 <h4>Central Campus Property Management</h4>
-                                 <button type="button" class="buttons">Add to watchlist</button>
-                             </div>
-                             <div class="listingPhoto">
-                                 <img src="images/properties/photos/theSix60Flat.jpeg">
-                             </div>
-                         </a>
-                     </div>
-                     <div class="listing">
-                         <div class="listingInfo">
-                             <h3>Thirsty Boys</h3>
-                             <h4>631 Castle Street</h4>
-                             <h4>Cutler's Properties</h4>
-                             <button type="button" class="buttons">Add to watchlist</button>
-                         </div>
-                         <div class="listingPhoto">
-                             <img src="images/properties/photos/thirstyBoys.jpeg">
-                         </div>
-                     </div>
-                 </div>-->
+                
+                
             </div>
             <table id = "table1">
                 <thead>
@@ -79,21 +44,22 @@
                         <th>Address</th>
                         <th>Bedrooms</th>
                         <th>Status</th>
-                        <th>Add to watchlist</th>
+                        <th>Select Time</th>
+                        <th>Book</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-ng-repeat="property in propCtrl.properties" >
+                    <tr data-ng-repeat="property in Ctrl.wishlist">
 
                         <td>{{property.address}}</td>
 
                         <td>{{property.bedrooms}}</td>
 
                         <td>{{property.status}}</td>
+                        
+                        <td><input type="datetime-local" name="time" ng-model="property.date"></td>
 
-                        <!--<td><button type="button">Book</button></td> -->
-
-                        <td><button ng-click="propCtrl.addToWishlist(property)">Add to Watch list</button></td> 
+                        <td><button ng-click="Ctrl.makeBooking(property)">Book</button></td> 
                     </tr>
                 </tbody>
             </table>

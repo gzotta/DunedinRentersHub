@@ -1,0 +1,10 @@
+<div id="menu" ng-controller="RegisterRenterController as Ctrl" ng-init="Ctrl.checkSignIn()">
+    <!link rel="stylesheet" type = "text/css" href="css/navMenButt.css">
+    <div id="welcome">{{Ctrl.welcome}}</div>
+    <button class="button" onclick = "window.location.href = 'viewService.html';" ng-if="Ctrl.signedIn" style =" color: white; text-decoration: none">Services</button>
+    <button class="button" onclick = "window.location.href = 'watchlist.html';" ng-if="Ctrl.signedIn" style =" color: white; text-decoration: none">Wishlist</button>
+    <button class="button" onclick = "window.location.href = 'viewBookings.html';" ng-if="Ctrl.signedIn" style =" color: white; text-decoration: none">View Bookings</button>
+    <button class="button" onclick = "window.location.href = '#';" ng-if="Ctrl.signedIn" ng-click="Ctrl.signOut()" style =" color: white; text-decoration: none">Sign Out</button>
+</div>
+
+
