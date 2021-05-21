@@ -59,7 +59,7 @@ create table Wishlist (
 
 create table Booking (
     bookingId int auto_increment (1000),
-    date DATE not null,
+    date datetime not null,
     landlordId int,
     propertyId int,
     renterId int,

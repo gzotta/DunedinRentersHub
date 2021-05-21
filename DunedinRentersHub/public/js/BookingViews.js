@@ -441,7 +441,7 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
                                 saveBookingAPI.save(null, booking,
                                         // success callback
                                                 function () {
-                                                    $window.location = 'index.html';
+                                                    $window.location = 'viewBookings.html';
                                                 },
                                                 // error callback
                                                         function (error) {
