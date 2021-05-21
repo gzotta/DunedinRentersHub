@@ -415,18 +415,21 @@ module.controller('RegisterServiceController', function (registerServiceAPI, ser
 
 
                         //wishlist controller
-                        module.controller('WishlistController', function (wishlistAPI, saveBookingAPI,$window, $sessionStorage) {
+                        module.controller('WishlistController', function (booking, wishlistAPI, saveBookingAPI,$window, $sessionStorage) {
                             this.wishlist = wishlistAPI.query({"username": $sessionStorage.renter.username});
 
                             //method to add property to wishlist
                             this.makeBooking = function (property) {
-                                wishlist.setRenterId($sessionStorage.renter.renterId);
-                                wishlist.setPropertyId(property.propertyId);
+                                booking.setDate(property.date);
+                                booking.setLandlordId(property.landlordId);
+                                booking.setPropertyId(property.propertyId);
+                                booking.setRenterId($sessionStorage.renter.renterId);
+                                booking.setAddress(property.address);
 
                                 saveBookingAPI.save(null, booking,
                                         // success callback
                                                 function () {
-                                                    $window.location = 'viewBookings.html';
+                                                    $window.location = 'index.html';
                                                 },
                                                 // error callback
                                                         function (error) {
