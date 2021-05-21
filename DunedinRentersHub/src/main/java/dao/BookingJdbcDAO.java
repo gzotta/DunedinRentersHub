@@ -183,7 +183,7 @@ public class BookingJdbcDAO {
     
     //method to return all bookings for a renter
     public Collection<Booking> getRenterBookings(Integer renterId) {
-        String sql = "select * from Booking order by bookingId where renterId = ?";
+        String sql = "select * from Booking where renterId = ?";
 
         
         try (
