@@ -10,6 +10,7 @@ import domain.Landlord;
 import domain.Property;
 import domain.Renter;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -94,16 +95,16 @@ public class BookingJdbcDAOTest {
         renterDao.saveRenter(renter2);
 
         booking1 = new Booking();
-        booking1.setDate(LocalDateTime.now());
-        booking1.setLandlord(landlord1);
-        booking1.setProperty(property1);
-        booking1.setRenter(renter1);
+        booking1.setDate(Timestamp.valueOf(LocalDateTime.now()));
+        booking1.setLandlordId(landlord1.getLandlordId());
+        booking1.setPropertyId(property1.getPropertyId());
+        booking1.setRenterId(renter1.getRenterId());
 
         booking2 = new Booking();
-        booking2.setDate(LocalDateTime.now());
-        booking2.setLandlord(landlord2);
-        booking2.setProperty(property2);
-        booking2.setRenter(renter2);
+        booking2.setDate(Timestamp.valueOf(LocalDateTime.now()));
+        booking2.setLandlordId(landlord2.getLandlordId());
+        booking2.setPropertyId(property2.getPropertyId());
+        booking2.setRenterId(renter2.getRenterId());
 
         bookingDao.save(booking1);
         //bookingDao.save(booking2);
