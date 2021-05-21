@@ -1,6 +1,7 @@
 package domain;
 
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
@@ -18,20 +19,22 @@ import java.util.Objects;
 public class Booking {
 
     private Integer bookingId;
-    private LocalDateTime date;
-    private Landlord landlord;
-    private Property property;
-    private Renter renter;
+    private Timestamp date;
+    private Integer landlordId;
+    private Integer propertyId;
+    private Integer renterId;
+    private String address;
 
     public Booking() {
     }
 
-    public Booking(Integer bookingId, LocalDateTime date, Landlord landlord, Property property, Renter renter) {
+    public Booking(Integer bookingId, Timestamp date, Integer landlordId, Integer propertyId, Integer renterId, String address) {
         this.bookingId = bookingId;
         this.date = date;
-        this.landlord = landlord;
-        this.property = property;
-        this.renter = renter;
+        this.landlordId = landlordId;
+        this.propertyId = propertyId;
+        this.renterId = renterId;
+        this.address = address;
     }
 
     public Integer getBookingId() {
@@ -42,37 +45,47 @@ public class Booking {
         this.bookingId = bookingId;
     }
 
-    public LocalDateTime getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
-    public Landlord getLandlord() {
-        return landlord;
+    public Integer getLandlordId() {
+        return landlordId;
     }
 
-    public void setLandlord(Landlord landlord) {
-        this.landlord = landlord;
+    public void setLandlordId(Integer landlordId) {
+        this.landlordId = landlordId;
     }
 
-    public Property getProperty() {
-        return property;
+    public Integer getPropertyId() {
+        return propertyId;
     }
 
-    public void setProperty(Property property) {
-        this.property = property;
+    public void setPropertyId(Integer propertyId) {
+        this.propertyId = propertyId;
     }
 
-    public Renter getRenter() {
-        return renter;
+    public Integer getRenterId() {
+        return renterId;
     }
 
-    public void setRenter(Renter renter) {
-        this.renter = renter;
+    public void setRenterId(Integer renterId) {
+        this.renterId = renterId;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    
 
    
 
