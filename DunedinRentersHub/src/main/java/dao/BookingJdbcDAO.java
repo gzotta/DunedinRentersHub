@@ -43,7 +43,7 @@ public class BookingJdbcDAO {
 
     //method to save a booking
     public void save(Booking booking) {
-        String sqlSaveBookingStmt = "insert into Booking (date, landlordId, propertyId, renterId) values (?,?,?,?)";
+        String sqlSaveBookingStmt = "insert into Booking (date, landlordId, propertyId, renterId, address) values (?,?,?,?,?)";
         String sqlUpdatePropertyStmt = "UPDATE Property SET status = ? WHERE propertyId = ?";
 
         Connection con = DbConnection.getConnection(databaseURI);
@@ -61,20 +61,22 @@ public class BookingJdbcDAO {
                 // effectively starts a new transaction.
                 con.setAutoCommit(false);
 
-                Property property = booking.getProperty();
-                Renter renter = booking.getRenter();
-                Landlord landlord = booking.getLandlord();
+//                Property property = booking.getProperty();
+//                Renter renter = booking.getRenter();
+//                Landlord landlord = booking.getLandlord();
 
                 // #### save the Booking ### //
                 // convert booking date into to java.sql.Timestamp
-                LocalDateTime date = booking.getDate();
-                Timestamp timestamp = Timestamp.valueOf(date);
+//                LocalDateTime date = booking.getDate();
+//                Timestamp timestamp = Timestamp.valueOf(date);
 
                 // save the booking
-                saveBookingStmt.setTimestamp(1, timestamp);
-                saveBookingStmt.setInt(2, landlord.getLandlordId());
-                saveBookingStmt.setInt(3, property.getPropertyId());
-                saveBookingStmt.setInt(4, renter.getRenterId());
+                saveBookingStmt.setTimestamp(1, booking.getDate());
+                saveBookingStmt.setInt(2, booking.getLandlordId());
+                saveBookingStmt.setInt(3, booking.getPropertyId());
+                saveBookingStmt.setInt(4, booking.getRenterId());
+                saveBookingStmt.setString(5, booking.getAddress());
+                
 
                 saveBookingStmt.executeUpdate(); //execute the statement
 
@@ -91,10 +93,10 @@ public class BookingJdbcDAO {
                 booking.setBookingId(bookingId);
 
                 // ## update the property status ## //
-                property.setStatus("booked");
+                String status = "booked";
                 // updates the property status using the updatePropertyStmt statement.
-                updatePropertyStmt.setString(1, property.getStatus());
-                updatePropertyStmt.setInt(2, property.getPropertyId());
+                updatePropertyStmt.setString(1, status);
+                updatePropertyStmt.setInt(2, booking.getPropertyId());
 
                 updatePropertyStmt.executeUpdate(); // execute the statement
 
@@ -171,6 +173,55 @@ public class BookingJdbcDAO {
                 bookings.add(bookingId);
             }
 
+            return bookings;
+
+        } catch (SQLException ex) {  // we are forced to catch SQLException
+            // don't let the SQLException leak from our DAO encapsulation
+            throw new DAOException(ex.getMessage(), ex);
+        }
+    }
+    
+    //method to return all bookings for a renter
+    public Collection<Booking> getRenterBookings(Integer renterId) {
+        String sql = "select * from Booking order by bookingId where renterId = ?";
+
+        
+        try (
+                // get connection to database
+                Connection dbCon = DbConnection.getConnection(databaseURI);
+                // create the statement
+                PreparedStatement stmt = dbCon.prepareStatement(sql);) {
+            // copy the data from the property domain object into the SQL parameters
+            stmt.setInt(1, renterId);
+
+            ResultSet rs = stmt.executeQuery();
+            
+            List<Booking> bookings = new ArrayList<>();
+            
+            // iterate through the query results
+            while (rs.next()) {
+
+                // get the data out of the query
+                Integer BookingId = rs.getInt("bookingId");
+                Timestamp date = rs.getTimestamp("date");
+                Integer landlordId = rs.getInt("landlordId");
+                Integer propertyId = rs.getInt("propertyId");
+                Integer renterId1 = rs.getInt("renterId");
+                String address = rs.getString("address");
+
+                // use the data to create a property object
+                Booking b = new Booking();
+                b.setBookingId(BookingId);
+                b.setDate(date);
+                b.setLandlordId(landlordId);
+                b.setPropertyId(propertyId);
+                b.setRenterId(renterId1);
+                b.setAddress(address);
+
+                // and put it in the collection
+                bookings.add(b);
+            }
+            
             return bookings;
 
         } catch (SQLException ex) {  // we are forced to catch SQLException
