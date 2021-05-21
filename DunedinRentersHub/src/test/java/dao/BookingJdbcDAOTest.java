@@ -99,12 +99,14 @@ public class BookingJdbcDAOTest {
         booking1.setLandlordId(landlord1.getLandlordId());
         booking1.setPropertyId(property1.getPropertyId());
         booking1.setRenterId(renter1.getRenterId());
+        booking1.setAddress(property1.getAddress());
 
         booking2 = new Booking();
         booking2.setDate(Timestamp.valueOf(LocalDateTime.now()));
         booking2.setLandlordId(landlord2.getLandlordId());
         booking2.setPropertyId(property2.getPropertyId());
         booking2.setRenterId(renter2.getRenterId());
+        booking2.setAddress(property2.getAddress());
 
         bookingDao.save(booking1);
         //bookingDao.save(booking2);
