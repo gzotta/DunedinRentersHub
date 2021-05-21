@@ -45,6 +45,7 @@
                         <th>Bedrooms</th>
                         <th>Status</th>
                         <th>Select Time</th>
+                        <th>Book</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,9 +57,9 @@
 
                         <td>{{property.status}}</td>
                         
-                        <td><input type="datetime-local" name="time" ></td>
+                        <td><input type="datetime-local" name="time" ng-model="property.date"></td>
 
-                        <td><button type="button">Book</button></td> 
+                        <td><button ng-click="Ctrl.makeBooking(property)">Book</button></td> 
                     </tr>
                 </tbody>
             </table>
